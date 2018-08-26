@@ -2957,7 +2957,7 @@ public function initializeMyrellionRooms():void
 	rooms["2I13"].system = "SYSTEM: SINDATHU";
 	rooms["2I13"].northExit = "2I11";
 	rooms["2I13"].eastExit = "2K13";
-	rooms["2I13"].southExit = "";
+	rooms["2I13"].southExit = "2I15";
 	rooms["2I13"].westExit = "";
 	rooms["2I13"].moveMinutes = 5;
 	rooms["2I13"].runOnEnter = queensRoadTradingPost;
@@ -2965,6 +2965,21 @@ public function initializeMyrellionRooms():void
 	rooms["2I13"].addFlag(GLOBAL.INDOOR);
 	rooms["2I13"].addFlag(GLOBAL.COMMERCE);
 
+	//Tournament field
+	rooms["2I15"] = new RoomClass(this);
+	rooms["2I15"].roomName = "LARGE\nCAVERN";
+	rooms["2I15"].description = "";
+	rooms["2I15"].planet = "PLANET: MYRELLION";
+	rooms["2I15"].system = "SYSTEM: SINDATHU";
+	rooms["2I15"].northExit = "2I13";
+	rooms["2I15"].eastExit = "";
+	rooms["2I15"].southExit = "";
+	rooms["2I15"].westExit = "";
+	rooms["2I15"].moveMinutes = 5;
+	rooms["2I15"].runOnEnter = tournamentIntro;
+	rooms["2I15"].addFlag(GLOBAL.CAVE);
+	rooms["2I15"].addFlag(GLOBAL.INDOOR);
+	
 	//I11 -- Queen's Road North
 	//No random encounters here! 
 	rooms["2I11"] = new RoomClass(this);

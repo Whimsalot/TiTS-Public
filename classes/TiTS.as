@@ -180,7 +180,8 @@
 		include "../includes/masturbation/sukMastr.as";
 		include "../includes/rivalEncounters.as";
 		include "../includes/vendingMachine.as";
-		
+		include "../includes/events/tour.as";
+
 		// Misc Events
 		include "../includes/events/araDiplomacyMission.as";
 		include "../includes/events/atha_lets_fapper.as";
