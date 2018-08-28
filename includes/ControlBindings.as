@@ -314,7 +314,14 @@
 			Cheats.YakuzaUnlock();
 		},
 		true);
-		
+	inputManager.AddBindableControl(
+		"Start Tournament",
+		"Starts a new Tournament.",
+		function():void {
+			tournamentSetUp();
+		},
+		true);
+
 	inputManager.BindCheatSequence("Give ZilRations", 38, 40, 37, 39);
 	inputManager.BindCheatSequence("Room Transport", "idclev");
 	inputManager.BindCheatSequence("Scene Execute", "impulse");
@@ -332,6 +339,7 @@
 	inputManager.BindCheatSequence("Toggle Seasons", "tistheseason");
 	inputManager.BindCheatSequence("Mitzi Unlock", "mitzi");
 	inputManager.BindCheatSequence("Space Yakuza Skip", "anofferyoucantrefuse");
+	inputManager.BindCheatSequence("Start Tournament", "tournament");
 	
 	// Insert the default bindings
 	inputManager.BindKeyToControl(49, "Button 1");             // case 49: pressButton(0);
