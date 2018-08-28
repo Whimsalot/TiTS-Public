@@ -40,44 +40,63 @@ public function tournamentCurrentRound():String
 public function tournamentSetUpUniqueEnemies():void
 {
 	possibleEnemies = new Array();
-	possibleEnemies.push([new CarlsRobot(), "1", "unique robot"]);
-	if (rand(2) == 0) possibleEnemies.push([new HuntressVanae(), "1", "unique huntress"]);
-	if (rand(2) == 0) possibleEnemies.push([new LapinaraFemale(), "1", "unique lapinara"]);
-	if (rand(3) == 0) possibleEnemies.push([new MyrRedCommando(), "1", "unique red myr"]);
-	if (rand(5) == 0) possibleEnemies.push([new WetraxxelBrawler(), "1", "unique wetraxxel"]);
+	//v doenst really matter here, its overwriten later anyway
+	possibleEnemies.push( { v: 0, w: 10, c: new CarlsRobot() } );
+	if (rand(2) == 0) possibleEnemies.push( { v: 1, w: 10, c: new HuntressVanae() } );
+	if (rand(2) == 0) possibleEnemies.push( { v: 2, w: 10, c: new KQ2BlackVoidGrunt() } );
+	if (rand(3) == 0) possibleEnemies.push( { v: 3, w: 10, c: new MyrRedCommando() } );
+	if (rand(5) == 0) possibleEnemies.push( { v: 4, w: 10, c: new WetraxxelBrawler() } );
 }
 
 //push data for the generic enemies into an array
 public function tournamentSetUpGenericEnemies():void
 {
 	genericEnemies = new Array();
-	//class, weight, name
-//	genericEnemies.push(["new BothriocPidemme()", "1", "bothrioc pidemme"]);
-	genericEnemies.push([new BothriocPidemme(), "1", "bothrioc pidemme"]);
-	genericEnemies.push([new NyreanPraetorians(), "1", "nyrean praetorians"]);
-	genericEnemies.push([new MyrGoldBrute(), "1", "remnant brute"]);
-	genericEnemies.push([new MyrGoldRemnant(), "3", "gold remnant"]);
-	genericEnemies.push([new MyrGoldSquad(), "2", "gold squad"]);
-	genericEnemies.push([new GooKnight(), "4", "ganraen knight"]);
-	genericEnemies.push([new CrystalGooT1(), "5", "ganrael ambusher"]);
-	genericEnemies.push([new CrystalGooT2(), "5", "ganrael deadeye"]);
-	genericEnemies.push([new NyreaAlpha(), "10", "nyrea huntress"]);
-	genericEnemies.push([new NyreaBeta(), "7", "nyrea huntress"]);
+
+	// indexnumber, weight, class
+	genericEnemies.push( { v: 0, w: 1, c: new BothriocPidemme() } );
+	genericEnemies.push( { v: 1, w: 1, c: new NyreanPraetorians() } );
+	genericEnemies.push( { v: 2, w: 1, c: new MyrGoldBrute() } );
+	genericEnemies.push( { v: 3, w: 3, c: new MyrGoldRemnant() } );
+	genericEnemies.push( { v: 4, w: 2, c: new MyrGoldSquad() } );
+	genericEnemies.push( { v: 5, w: 3, c: new GooKnight() } );
+	genericEnemies.push( { v: 6, w: 5, c: new CrystalGooT1() } );
+	genericEnemies.push( { v: 7, w: 5, c: new CrystalGooT2() } );
+	genericEnemies.push( { v: 8, w: 7, c: new NyreaAlpha() } );
+	genericEnemies.push( { v: 9, w: 10, c: new NyreaBeta() } );
+	genericEnemies.push( { v: 10, w: 5, c: new FrogGirl() } );
+	genericEnemies.push( { v: 11, w: 6, c: new KorgonneFemale() } );
+	genericEnemies.push( { v: 12, w: 6, c: new KorgonneMale() } );
+	genericEnemies.push( { v: 13, w: 5, c: new LapinaraFemale() } );
+	genericEnemies.push( { v: 14, w: 3, c: new Naleen() } );
+	genericEnemies.push( { v: 15, w: 3, c: new NaleenMale() } );
+	genericEnemies.push( { v: 16, w: 4, c: new RaskvelFemale() } );
+	genericEnemies.push( { v: 17, w: 4, c: new RaskvelMale() } );
+
+	//make sure values match the index
+	for (var i:int = 0; i < genericEnemies.length; i++)
+	{
+		genericEnemies[i].v = i;
+	}
 }
 
 public function tournamentSetUpEnemies():void
 {
 	tournamentSetUpUniqueEnemies();
 
+	var x:int;
 	//draw some names from the hat and fill up the enemy array with them
 	while (possibleEnemies.length < numberOfEnemies)
 	{
-	//	possibleEnemies.push(RandomInCollection(genericEnemies));
-	//	possibleEnemies.push([new NyreaBeta(), "7", "nyrea huntress"]);
-
 		//I know its kinda stupid to remade this list constantly, but otherwise the characters are treated as references - defeat one you have defeated all of that type
 		tournamentSetUpGenericEnemies();
-		possibleEnemies.push(genericEnemies[rand(genericEnemies.length)]);
+		possibleEnemies.push(genericEnemies[weightedRand(genericEnemies)]);
+	}
+
+	//make sure values match the index
+	for (var i:int = 0; i < possibleEnemies.length; i++)
+	{
+		possibleEnemies[i].v = i;
 	}
 }
 
@@ -109,7 +128,7 @@ public function tournamentMainMenu():void
 	{
 		if (i < 15)
 		{
-			output(StringUtil.capitalize(possibleEnemies[i][2]) + "\n");
+			output(StringUtil.capitalize(possibleEnemies[i].c.short) + "\n");
 		}
 	}
 	if (possibleEnemies.length > 15) output("\n<b>and sixteen more.</b>\n");
@@ -133,15 +152,16 @@ public function tournamentNextRound():void
 	
 	//get a new enemy from the array
 	currentEnemy = new Array(possibleEnemies[x]);
+
 	//purge that enemy from the list
 	possibleEnemies.splice(x,1);
 
-	output("\n<b>Your next enemy is " + indefiniteArticle(currentEnemy[0][2]) + ".</b>");
+	output("\n<b>Your next enemy is " + indefiniteArticle(currentEnemy[0].c.short) + ".</b>");
 	
 	//iniate combat
 	CombatManager.newGroundCombat();
 	CombatManager.setFriendlyActors(pc);
-	CombatManager.setHostileActors(currentEnemy[0][0]);
+	CombatManager.setHostileActors(currentEnemy[0].c);
 	CombatManager.victoryScene(tournamentWonRound);
 	CombatManager.lossScene(tournamentDefeat);
 	CombatManager.displayLocation(tournamentCurrentRound().toUpperCase() + " ROUND");
@@ -158,7 +178,6 @@ public function tournamentWonRound():void
 	clearOutput();
 	if (currentRound != 5)
 	{
-
 		output("A winner is you! Proceed to the next round for more mindless fighting.\n\n");
 		CombatManager.genericVictory();
 		currentRound = currentRound + 1;
@@ -173,7 +192,6 @@ public function tournamentWonRound():void
 		CombatManager.genericVictory();
 		clearMenu();
 		addButton(0,"Next",tournamentVictory);
-
 	}
 }
 
@@ -190,7 +208,7 @@ public function tournamentVictory():void
 public function tournamentDefeat():void
 {
 	clearOutput();
-	output("After losing against " + indefiniteArticle(currentEnemy[0][2]) + " in the " + tournamentCurrentRound() + " round, you are removed from the tournament.\n\n<b>Better luck next time.</b>");
+	output("After losing against " + indefiniteArticle(currentEnemy[0].c.short) + " in the " + tournamentCurrentRound() + " round, you are removed from the tournament.\n\n<b>Better luck next time.</b>");
 	CombatManager.genericLoss();
 	IncrementFlag("TOURNAMENT_COUNTER");
 	clearMenu();
@@ -249,20 +267,17 @@ public function tournamentWithdraw():void
 public function tournamentDEBUG():void
 {
 	clearOutput();
-	output(genericEnemies[0][0] + "   " + genericEnemies[0][1] + "   " + genericEnemies[0][2]);
-	output("\n");
-	output(genericEnemies[1][0] + "   " + genericEnemies[1][1] + "   " + genericEnemies[1][2]);
-	output("\n\n");
-	output(possibleEnemies[0][0] + "   " + possibleEnemies[0][1] + "   " + possibleEnemies[0][2]);
-	output("\n");
-	output(possibleEnemies[1][0] + "   " + possibleEnemies[1][1] + "   " + possibleEnemies[1][2]);
-	output("\n\n");
-	output("\n\n");
-	output("\n\n");
 
-	for (var i:int = 0; i < possibleEnemies.length; i++)
+	for (var i:int = 0; i < genericEnemies.length; i++)
 	{
-		output(possibleEnemies[i][0] + "   " + possibleEnemies[i][1] + "   " + possibleEnemies[i][2]);
+		output(genericEnemies[i].v + "   " + genericEnemies[i].w + "   " + genericEnemies[i].c);
 		output("\n");
 	}
+	output("\n\n");
+	for (var j:int = 0; j < possibleEnemies.length; j++)
+	{
+		output(possibleEnemies[j].v + "   " + possibleEnemies[j].w + "   " + possibleEnemies[j].c);
+		output("\n");
+	}
+
 }
