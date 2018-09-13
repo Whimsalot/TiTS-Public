@@ -92,8 +92,7 @@ public function tournamentSetUpGenericEnemies():void
 		{ v: new Naleen(), w: 6 },
 		{ v: new NaleenMale(), w: 6 },
 		{ v: new RaskvelFemale(), w: 14 },
-		{ v: new RaskvelMale(), w: 14 }
-
+//		{ v: new RaskvelMale(), w: 14 }
 	];
 }
 
