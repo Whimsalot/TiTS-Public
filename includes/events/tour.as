@@ -113,7 +113,43 @@ public function tournamentIntro():Boolean
 {
 	output("In the gloom of the glowing fungus, you make out several banches lining the sides of the cave. The area in the middle is covered with fine sand of various colors. The hundreds of footprints on the sand give the distint impression that the cave is used for some kind of ceremonys.");
 	addButton(0,"Tournament",tournamentSetUp,undefined,"Tournament","Get this party started.");
+	addButton(5,"Preliminary",preliminarySetUp,undefined,"Preliminary","Single round against multiple enemies");
 	return false;
+}
+
+public function preliminarySetUp():void
+{
+	tournamentSetUpGenericEnemies();
+	if (flags["NYREAN_TOURNEY_COUNTER"] == undefined) flags["NYREAN_TOURNEY_COUNTER"] = 1;
+	
+	
+	output("Welcome to the preliminary round of the <b>" + flags["NYREAN_TOURNEY_COUNTER"] + ". WORLD MARTIAL ARTS TOURNAMENT</b>");
+	output("\n\nTo qualify, you need to proved your mettle against multiple enemies at the same time.");
+
+	CombatManager.newGroundCombat();
+	CombatManager.setFriendlyActors(pc);
+	CombatManager.setHostileActors(weightedRand(genericEnemies), weightedRand(genericEnemies), weightedRand(genericEnemies));
+	CombatManager.victoryScene(preliminaryVictory);
+	CombatManager.lossScene(preliminaryDefeat);
+	CombatManager.displayLocation("PRELIMINARY");
+	clearMenu();
+	addButton(0, "Fight", CombatManager.beginCombat);
+}
+
+public function preliminaryVictory():void
+{
+	output("Congratulation, you are now ready for the main event.");
+	CombatManager.genericVictory();
+	clearMenu();
+	addButton(0,"Tournament",tournamentSetUp,undefined,"Tournament","Get this party started.\n\n");
+}
+
+public function preliminaryDefeat():void
+{
+	output("How do you expect to win the tourney if you cannot even win this training round?\n\n");
+	CombatManager.genericLoss();
+	clearMenu();
+	addButton(0,"Next",mainGameMenu);
 }
 
 public function tournamentSetUp():void
