@@ -15,6 +15,7 @@
 	import classes.Characters.NaleenMale;
 	import classes.Characters.NyreaAlpha;
 	import classes.Characters.NyreaBeta;
+	import classes.Characters.NyreanChampion;
 	import classes.Characters.NyreanPraetorians;
 	import classes.Characters.RaskvelFemale;
 	import classes.Characters.RaskvelMale;
@@ -35,6 +36,7 @@ public var genericEnemies:Array;
 public var possibleEnemies:Array;
 public var currentEnemy:Array;
 public var npcDuel:Array;
+public var allowHeal:Boolean;
 
 public function tourneyRound():String
 {
@@ -61,8 +63,12 @@ public function tourneyCurrentEnemyName():String
 public function tournamentSetUpUniqueEnemies():void
 {
 	possibleEnemies = [
-		{ v: new CarlsRobot(), w: 1 }
+		//at least one of them should be there
+		{ v: new NyreanChampion(), w: 0 }
 	];
+	if (rand(2) == 0) possibleEnemies.push( { v: new NyreanChampion(), w: 0 } );
+	if (rand(3) == 0) possibleEnemies.push( { v: new NyreanChampion(), w: 0 } );
+
 	if (rand(2) == 0) possibleEnemies.push( { v: new HuntressVanae(), w: 0 } );
 	if (rand(2) == 0) possibleEnemies.push( { v: new KQ2BlackVoidGrunt(), w: 0 } );
 	if (rand(3) == 0) possibleEnemies.push( { v: new MyrRedCommando(), w: 0 } );
@@ -76,23 +82,19 @@ public function tournamentSetUpGenericEnemies():void
 {
 	//high weight = more likely to get kicked by the random generator
 	genericEnemies = [
-		{ v: new BothriocPidemme(), w: 2 },
+		{ v: new NyreanChampion(), w: 1 },
+		{ v: new BothriocPidemme(), w: 1 },
 		{ v: new NyreanPraetorians(), w: 2 },
 		{ v: new MyrGoldBrute(), w: 3 },
 		{ v: new MyrGoldRemnant(), w: 5 },
 		{ v: new GooKnight(), w: 8 },
-		{ v: new CrystalGooT1(), w: 10 },
-		{ v: new CrystalGooT2(), w: 10 },
-		{ v: new NyreaAlpha(), w: 14 },
-		{ v: new NyreaBeta(), w: 20 },
-		{ v: new FrogGirl(), w: 6 },
+		{ v: new NyreaAlpha(), w: 10 },
 		{ v: new ZilFemale(), w: 12 },
 		{ v: new ZilMale(), w: 12 },
-		{ v: new LapinaraFemale(), w: 18 },
-		{ v: new Naleen(), w: 6 },
-		{ v: new NaleenMale(), w: 6 },
-		{ v: new RaskvelFemale(), w: 14 },
-//		{ v: new RaskvelMale(), w: 14 }
+		{ v: new NyreaBeta(), w: 18 },
+		{ v: new CrystalGooT1(), w: 20 },
+		{ v: new CrystalGooT2(), w: 20 },
+		{ v: new LapinaraFemale(), w: 25 },
 	];
 }
 
@@ -113,7 +115,8 @@ public function tournamentIntro():Boolean
 {
 	output("In the gloom of the glowing fungus, you make out several banches lining the sides of the cave. The area in the middle is covered with fine sand of various colors. The hundreds of footprints on the sand give the distint impression that the cave is used for some kind of ceremonys.");
 	addButton(0,"Tournament",tournamentSetUp,undefined,"Tournament","Get this party started.");
-	addButton(5,"Preliminary",preliminarySetUp,undefined,"Preliminary","Single round against multiple enemies");
+	addButton(5,"Preliminary",preliminarySetUp,undefined,"Preliminary","Single round against multiple enemies.");
+	addButton(2,"Champion",championTestFight,undefined,"Champion","Fight against a single champion.");
 	return false;
 }
 
@@ -161,6 +164,36 @@ public function tournamentSetUp():void
 	tournamentMainMenu();
 }
 
+public function tourneyBetweenRounds(option:String):void
+{
+	clearOutput();
+	switch(option)
+	{
+		case "shield":
+			pc.shieldsRaw = pc.shieldsMax();
+			output("You spend a while bringing your shield generator back up to par.");
+			break;
+		case "health":
+//			restHeal()
+			if(pc.HPRaw < pc.HPMax()) pc.HP(Math.round(pc.HPMax() * 0.5));
+			output("You use some bandages to fix your wounds.");
+			break;
+		case "energy":
+			if(pc.energyRaw < pc.energyMax()) pc.energy(Math.round(pc.energyMax() * 0.5));
+			output("You take a quick nap. Just hope you dint oversleep.");
+			break;
+		case "lust":
+			pc.orgasm();
+			output("fapfapfap.");
+			break;
+	}
+	allowHeal = false;
+	CombatManager.abortCombat();
+	processTime(5);
+	clearMenu();
+	addButton(0,"Next",tournamentMainMenu);
+}
+
 public function tournamentMainMenu():void
 {
 	clearOutput();
@@ -186,8 +219,25 @@ public function tournamentMainMenu():void
 	else addDisabledButton(5, "FullEnemyList");
 //	addButton(0,StringUtil.vapitalize(tourneyRound()) + " round",tournamentNextRound);
 //	addButton(1,"Bet money",tournamentMainMenu);
-//	addButton(2,"combatInventoryMenu",combatInventoryMenu);
-	addButton(13,"Inventory",tournamentInventoryMenu);
+	if (currentRound == 1 || !allowHeal)
+	{
+		addDisabledButton(1, "Fix Shield");
+		addDisabledButton(2, "First Aid");
+		addDisabledButton(3, "Take A Break");
+		addDisabledButton(4, "Masturbate");
+	}
+	else {
+		if (pc.shieldsRaw < pc.shieldsMax()) addButton(1,"Fix Shield",tourneyBetweenRounds, "shield");
+		else addDisabledButton(1, "Fix Shield");
+		if(pc.HPRaw < pc.HPMax()) addButton(2,"First Aid",tourneyBetweenRounds, "health");
+		else addDisabledButton(2, "First Aid");
+		if(pc.energyRaw < pc.energyMax()) addButton(3,"Take A Break",tourneyBetweenRounds, "energy");
+		else addDisabledButton(3, "Take A Break");
+		if(pc.lust() > 0) addButton(4, "Masturbate", tourneyBetweenRounds, "lust");
+		else addDisabledButton(4, "Masturbate");
+	}
+//	addButton(12,"combatInventoryMenu",combatInventoryMenu);
+//	addButton(13,"Inventory",tournamentInventoryMenu);
 	addButton(14,"Withdraw",tournamentWithdraw);
 }
 
@@ -243,8 +293,14 @@ public function tournamentLoserBracket():void
 
 public function tournamentNextRound():void
 {
-	var x:int = rand(possibleEnemies.length);
+//	var x:int = rand(possibleEnemies.length);
+//	var x:int = weightedRandIndex(possibleEnemies);
+	var x:int;
 	
+	//that way, the earlier rounds should have the more generic enemies
+	if (possibleEnemies.length <= 8) x = rand(possibleEnemies.length);
+	else x = weightedRandIndex(possibleEnemies);
+
 	//get a new enemy from the array
 	currentEnemy = new Array(possibleEnemies[x]);
 
@@ -275,8 +331,7 @@ public function tournamentWonRound():void
 		output("A winner is you! Proceed to the next round for more mindless fighting.\n\n");
 		CombatManager.genericVictory();
 		currentRound = currentRound + 1;
-//		restHeal()
-		pc.shieldsRaw = pc.shieldsMax();
+		allowHeal = true;
 		clearMenu();
 		addButton(0,"Next",tournamentMainMenu);
 	}
@@ -310,7 +365,7 @@ public function tournamentDefeat():void
 	clearMenu();
 	addButton(0,"Next",mainGameMenu);
 }
-
+/*
 //copy of the normal inventory, leads you back to the tournamentMenu instead of GameMenu
 public function tournamentInventoryMenu():void
 {
@@ -350,7 +405,7 @@ public function tournamentInventoryMenu():void
 	//Set user and target.
 	itemUser = pc;
 }
-
+*/
 public function tournamentWithdraw():void
 {
 	clearOutput();
@@ -360,25 +415,6 @@ public function tournamentWithdraw():void
 	addButton(0,"No",tournamentMainMenu);
 	addButton(1,"Yes",mainGameMenu);
 }
-/*
-public function tournamentDEBUG():void
-{
-	clearOutput();
-
-//	output(npcDuel.length);
-	for (var i:int = 0; i < npcDuel.length; i++)
-	{
-		output(npcDuel[i].v + "   " + npcDuel[i].w);
-		output("\n");
-	}
-	output("\n\n");
-	for (var j:int = 0; j < possibleEnemies.length; j++)
-	{
-		output(possibleEnemies[j].v + "   " + possibleEnemies[j].w);
-		output("\n");
-	}
-
-}	*/
 
 //similiar to the normal weightedRand, but returns the index number of the array instead of v
 public function weightedRandIndex(... args):*
@@ -420,3 +456,37 @@ public function weightedRandIndex(... args):*
 	return args[rand(opts.length)];
 }
 
+/*
+public function tournamentDEBUG():void
+{
+	clearOutput();
+
+//	output(npcDuel.length);
+	for (var i:int = 0; i < npcDuel.length; i++)
+	{
+		output(npcDuel[i].v + "   " + npcDuel[i].w);
+		output("\n");
+	}
+	output("\n\n");
+	for (var j:int = 0; j < possibleEnemies.length; j++)
+	{
+		output(possibleEnemies[j].v + "   " + possibleEnemies[j].w);
+		output("\n");
+	}
+
+}	*/
+
+public function championTestFight():void
+{
+	clearOutput();
+	output("GL & HF");
+
+	CombatManager.newGroundCombat();
+	CombatManager.setFriendlyActors(pc);
+	CombatManager.setHostileActors(new NyreanChampion());
+	CombatManager.victoryScene(preliminaryVictory);
+	CombatManager.lossScene(preliminaryDefeat);
+	CombatManager.displayLocation("CRY SOME MORE");
+	clearMenu();
+	addButton(0, "Fight", CombatManager.beginCombat);
+}

@@ -168,7 +168,8 @@ public function initializeNPCs(justUpdate:Boolean = false):void
 	prepChar(justUpdate, "KANE", Kane);
 	prepChar(justUpdate, "SHIZUYA", Shizuya);
 	prepChar(justUpdate, "ARDIA", Ardia);
-	
+	prepChar(justUpdate, "NYREAN_CHAMPION", NyreanChampion);
+
 	
 	// Check all characters have version information set
 	for (var prop:String in chars)
