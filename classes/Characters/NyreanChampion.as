@@ -5,6 +5,8 @@
 	import classes.Engine.Combat.DamageTypes.TypeCollection;
 	import classes.Items.Melee.Shortsword;
 	import classes.Items.Protection.HammerShield;
+	import classes.Items.Protection.OzoneAegis;
+	import classes.Items.Protection.SalamanderShield;
 	import classes.ItemSlotClass;
 	import classes.kGAMECLASS;
 	import classes.Util.RandomInCollection;
@@ -54,11 +56,11 @@
 			this.tallness = 72;
 			this.scaleColor = "green";
 			
-			this.long = "A squad of elite nyrean huntresses are circling around you, each carrying a long spear and wearing primitive banded armor over her chain bikini-wear. They’re each wearing a long cape around their shoulders, displaying a blood red sigil that looks like some combination of a woman and a tentacle monster. The guardswomen move with trained rigidity, attacking you from one side, then the other, probing your defenses. They don’t let up - somebody’s always jabbing at you with a spear or trying to grab you, making you defend from every direction at once!";
+			this.long = "Oh shit!";
 			
 			this.isPlural = false;
 			
-			this.shield = new HammerShield();
+			this.shield = new (RandomInCollection(HammerShield, OzoneAegis, SalamanderShield))();
 			this.meleeWeapon = new Shortsword();
 			this.meleeWeapon.hasRandomProperties;
 			this.meleeWeapon.baseDamage.kinetic.damageValue = 10.0 + kGAMECLASS.chars["PC"].level;
@@ -255,7 +257,6 @@
 				output("\n");
 				CombatAttacks.SingleMeleeAttackImpl(this, target, true);
 			}
-			// You manage to dodge, block, and parry every attack they send your way! // You block and dodge most of the attacks, but a few still manage to get through, hammering you down. // You try to defend yourself, but most if not all of the strikes get through, battering you brutally.
 		}
 		
 		private function nyreaGroupBackstabby(target:Creature):void
