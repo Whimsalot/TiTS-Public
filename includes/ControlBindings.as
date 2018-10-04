@@ -318,7 +318,7 @@
 		"Start Tournament",
 		"Starts a new Tournament.",
 		function():void {
-			tournamentSetUp();
+			Cheats.StartTournament();
 		},
 		true);
 

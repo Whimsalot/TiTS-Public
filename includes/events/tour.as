@@ -25,7 +25,9 @@
 	import classes.Characters.WetraxxelBrawler;
 	import classes.Characters.ZilFemale;
 	import classes.Characters.ZilMale;
+	import classes.Items.Accessories.TamWolf;
 	import classes.StringUtil;
+	import classes.Engine.Interfaces.*;
 
 // NYREAN_TOURNEY_COUNTER			tracks the numberof tournaments
 // NYREAN_TOURNEY_WIN_COUNTER		tracks how may times the PC won a tournament
@@ -62,6 +64,21 @@ public function tourneyRound():String
 	}
 }
 
+public function tourneymaxRounds():String
+{
+	switch (maxRounds)
+	{
+		case 1: return "one";
+		case 2: return "two";
+		case 3: return "three"
+		case 4: return "four";
+		case 5: return "five";
+		case 6: return "six";
+		case 7: return "seven";
+		default: return "variable not set, plz make a bug report";
+	}
+}
+
 public function tourneyCurrentEnemyName():String
 {
 	if (currentEnemy[0].v.a == "") return currentEnemy[0].v.short;
@@ -76,15 +93,16 @@ public function tournamentSetUpUniqueEnemies():void
 		//at least one of them should be there in all cases
 		{ v: new NyreanChampion(), w: 0 }
 	];
-	if (rand(2) == 0) possibleEnemies.push( { v: new NyreanChampion(), w: 0 } );
-	if (rand(3) == 0) possibleEnemies.push( { v: new NyreanChampion(), w: 0 } );
-
-	if (rand(2) == 0) possibleEnemies.push( { v: new HuntressVanae(), w: 0 } );
-	if (rand(2) == 0) possibleEnemies.push( { v: new KQ2BlackVoidGrunt(), w: 0 } );
-	if (rand(3) == 0) possibleEnemies.push( { v: new MyrRedCommando(), w: 0 } );
-	if (rand(5) == 0) possibleEnemies.push( { v: new WetraxxelBrawler(), w: 0 } );
-	if (rand(5) == 0) possibleEnemies.push( { v: new Queensguard(), w: 0 } );
-	if (rand(5) == 0) possibleEnemies.push( { v: new CommanderSchora(), w: 0 } );
+	if(flags["NYREAN_TOURNEY_COUNTER"] >= 1) {
+		if (rand(2) == 0) possibleEnemies.push( { v: new NyreanChampion(), w: 0 } );
+		if (rand(3) == 0) possibleEnemies.push( { v: new NyreanChampion(), w: 0 } );
+		if (rand(2) == 0) possibleEnemies.push( { v: new HuntressVanae(), w: 0 } );
+		if (rand(2) == 0) possibleEnemies.push( { v: new KQ2BlackVoidGrunt(), w: 0 } );
+		if (rand(3) == 0) possibleEnemies.push( { v: new MyrRedCommando(), w: 0 } );
+		if (rand(5) == 0) possibleEnemies.push( { v: new WetraxxelBrawler(), w: 0 } );
+		if (rand(5) == 0) possibleEnemies.push( { v: new Queensguard(), w: 0 } );
+		if (rand(5) == 0) possibleEnemies.push( { v: new CommanderSchora(), w: 0 } );
+	}
 	if (flags["FEDERATION_QUEST"] >= 3 && rand(2) == 0) possibleEnemies.push( { v: new Marik(), w: 0 } );
 }
 
@@ -107,7 +125,7 @@ public function tournamentSetUpGenericEnemies():void
 		{ v: new NyreaBeta(), w: 18 },
 		{ v: new CrystalGooT1(), w: 20 },
 		{ v: new CrystalGooT2(), w: 20 },
-		{ v: new LapinaraFemale(), w: 25 },
+		{ v: new LapinaraFemale(), w: 25 }
 	];
 }
 
@@ -127,9 +145,17 @@ public function tournamentSetUpEnemies():void
 public function tournamentIntro():Boolean
 {
 	output("In the gloom of the glowing fungus, you make out several banches lining the sides of the cave. The area in the middle is covered with fine sand of various colors. The hundreds of footprints on the sand give the distint impression that the cave is used for some kind of ceremonys.");
-	addButton(0,"Tournament",tournamentSetUp,undefined,"Tournament","Get this party started.");
-	addButton(1,"Tourney",tournamentSetUp,undefined,"Tourney","Slightly short tourney.");
-	addButton(3,"Preliminary",preliminarySetUp,undefined,"Preliminary","Single round against multiple enemies.");
+	if (pc.accessory is SiegwulfeItem || pc.hasTamWolf()) addDisabledButton(0,"Tournament","Tournament","Everyone fights on their own in this tournament. Companions or pets of any kinds are not allowed.");
+	else addButton(0,"Tournament",function():void {
+		flags["NYREAN_TOURNEY_COUNTER"] = 3;
+		tournamentSetUp();
+	},undefined,"Tournament","Tourney 3 - regular tourney.");	
+	addButton(1,"Tournament",function():void {
+		flags["NYREAN_TOURNEY_COUNTER"] = 2;
+		tournamentSetUp();
+	},undefined,"Tournament","Tourney 2 - regular tourney.");	
+	addButton(2,"Tourney",tournamentSetUp,undefined,"Tourney","Tourney 1 - shorter tourney and weaker enemy selection.");
+	addButton(4,"Preliminary",preliminarySetUp,undefined,"Preliminary","Single round against multiple enemies.");
 	addButton(5,"Champion",championTestFight,undefined,"Champion","Fight against a single champion.");
 	return false;
 }
@@ -138,7 +164,6 @@ public function preliminarySetUp():void
 {
 	tournamentSetUpGenericEnemies();
 	if (flags["NYREAN_TOURNEY_COUNTER"] == undefined) flags["NYREAN_TOURNEY_COUNTER"] = 1;
-	
 	
 	output("Welcome to the preliminary round of the <b>" + flags["NYREAN_TOURNEY_COUNTER"] + ". WORLD MARTIAL ARTS TOURNAMENT</b>");
 	output("\n\nTo qualify, you need to proved your mettle against multiple enemies at the same time.");
@@ -155,7 +180,7 @@ public function preliminarySetUp():void
 
 public function preliminaryVictory():void
 {
-	output("Congratulation, you are now ready for the main event.");
+	output("Congratulation, you are now ready for the main event.\n\n");
 	CombatManager.genericVictory();
 	clearMenu();
 	addButton(0,"Tournament",tournamentSetUp,undefined,"Tournament","Get this party started.\n\n");
@@ -171,25 +196,14 @@ public function preliminaryDefeat():void
 
 public function tournamentSetUp():void
 {
-	currentRound = 1;
-	maxRounds = 5;
+	if (flags["NYREAN_TOURNEY_COUNTER"] == undefined) flags["NYREAN_TOURNEY_COUNTER"] = 1;
+	if (flags["NYREAN_TOURNEY_COUNTER"] == 1) maxRounds = 4;
+	else maxRounds = 5;
 	numberOfEnemies = (Math.pow(2, maxRounds) - 1);
+	currentRound = 1;
 	bettingPot = 0;
 	allowBet = true;
 	tournamentSetUpEnemies();
-	if (flags["NYREAN_TOURNEY_COUNTER"] == undefined) flags["NYREAN_TOURNEY_COUNTER"] = 1;
-	tournamentMainMenu();
-}
-
-public function tournamentShortSetUp():void
-{
-	currentRound = 1;
-	maxRounds = 4;
-	numberOfEnemies = (Math.pow(2, maxRounds) - 1);
-	bettingPot = 0;
-	allowBet = true;
-	tournamentSetUpEnemies();
-	if (flags["NYREAN_TOURNEY_COUNTER"] == undefined) flags["NYREAN_TOURNEY_COUNTER"] = 1;
 	tournamentMainMenu();
 }
 
@@ -230,18 +244,18 @@ public function tournamentMainMenu():void
 	clearBust();
 	showName("\n" + tourneyRound().toUpperCase() + " ROUND");
 	output("Welcome to the <b>" + flags["NYREAN_TOURNEY_COUNTER"] + ". WORLD MARTIAL ARTS TOURNAMENT</b>");
-	output("\n\nYou are currently in the " + tourneyRound() + " of five rounds. It seems you have a bit of time left before the next round starts, how do you want to spend it?");
-	output("You could place a quick bet or prepare yourself for the next battle.");
+	output("\n\nYou are currently in the " + tourneyRound() + " of " + tourneymaxRounds() + " rounds. It seems you have a bit of time left before the next round starts, how do you want to spend it?");
+	output("\n\nYou could place a quick bet or prepare yourself for the next battle.");
 
 	pc.shieldsRaw = pc.shieldsMax();
 
 	clearMenu();
 //	tournamentNextRound();
-	addButton(0,"Proceed",tournamentNextRound);
+	addButton(0,"Proceed",tournamentNextRound, undefined, "Proceed", "Onwards to the next round.");
 //	addButton(4,"DEBUG",tournamentDEBUG);
 //	addButton(0,StringUtil.vapitalize(tourneyRound()) + " round",tournamentNextRound);
 	addButton(1,"Bet Credits",tournamentBetMenu);
-	if (pc.credits >= 200 && allowBet) addButton(1, "Bet Credits", tournamentBetMenu, undefined, "Bet Credits", "Place a bet on yourself and get get some extra money if you win the tourney.");
+	if (pc.credits >= 200 && allowBet) addButton(1, "Bet Credits", tournamentBetMenu, undefined, "Bet Credits", "Place a bet on yourself and get get some extra cash if you win the tourney.");
 	else if (!allowBet) addDisabledButton(1, "Bet Credits", "Bet Credits", "You allready placed a bet for this round.");
 	else addDisabledButton(1, "Bet Credits", "Bet Credits", "You don’t think you have enough spare money for this.");
 
@@ -256,51 +270,17 @@ public function tournamentMainMenu():void
 		else {
 //			if (pc.shieldsRaw < pc.shieldsMax()) addButton(5,"Fix Shield",tourneyBetweenRounds, "shield");
 //			else addDisabledButton(5, "Fix Shield");
-			if(pc.HPRaw < pc.HPMax()) addButton(5,"First Aid",tourneyBetweenRounds, "health");
+			if(pc.HPRaw < pc.HPMax()) addButton(5,"First Aid",tourneyBetweenRounds, "health", "First Aid", "Bandage your wounds and gain back some health.");
 			else addDisabledButton(5, "First Aid");
-			if(pc.energyRaw < pc.energyMax()) addButton(6,"Short Rest",tourneyBetweenRounds, "energy");
+			if(pc.energyRaw < pc.energyMax()) addButton(6,"Short Rest",tourneyBetweenRounds, "energy", "Short Rest", "Take a break and gather some energy.");
 			else addDisabledButton(6, "Short Rest");
-			if(pc.lust() > 0) addButton(7, "Masturbate", tourneyBetweenRounds, "lust");
+			if(pc.lust() > 0) addButton(7, "Masturbate", tourneyBetweenRounds, "lust", "Masturbate", "Look for a quite corner and lower your lust a bit.");
 			else addDisabledButton(7, "Masturbate");
 		}
 	}
 //	addButton(12,"combatInventoryMenu",combatInventoryMenu);
 //	addButton(13,"Inventory",tournamentInventoryMenu);
 	addButton(14,"Withdraw",tournamentWithdraw);
-}
-
-public function tournamentBetMenu():void
-{
-	clearOutput();
-	output("<b>EVERYTHING HERE IS WORK IN PROGRESS AND MOST LIKELY WONT HAVE ANY EFFECT!</b>");
-	output("\n\nDo you want to bet credits on your victory in the tourney? The more enemies are left, the better the final payout will be.");
-	output("\n\nIf you lose a fight or withdraw, the money will be forfeited.");
-
-	clearMenu();
-	//cant access this menu if you have less than 100
-	addButton(0,"Bet 100",tournamentBet, 100);
-	if (pc.credits >= 200) addButton(1,"Bet 200",tournamentBet, 200);
-	else addDisabledButton(1, "Bet 200")
-	if (pc.credits >= 500) addButton(2,"Bet 500",tournamentBet, 500);
-	else addDisabledButton(2, "Bet 500")
-	if (pc.credits >= 1000) addButton(3,"Bet 1000",tournamentBet, 1000);
-	else addDisabledButton(3, "Bet 1000")
-	addButton(14,"Back",tournamentMainMenu);
-}
-
-public function tournamentBet(bet:int):void
-{
-	clearOutput();
-	output("With a self-confident smile, you hand " + bet + " credits to the purser and recieve a small receipt in turn. It is made out of crude paper and coved in irrecognizable symbols, but surely she wouldn't try to trick her " + pc.mf("king", "queen") +", would she?");
-	output("Putting the slip in your pocket, you make your way back to the arena.");
-	processTime(5);
-	
-	pc.credits -= bet;
-	bettingPot += bet + Math.round(bet / (10 / (numberOfEnemies + 1)));
-	allowBet = false;
-	
-	clearMenu();
-	addButton(0,"Next",tournamentMainMenu);
 }
 
 public function tournamentFullEnemyList():void
@@ -368,7 +348,7 @@ public function tournamentNextRound():void
 			output("\n" + StringUtil.capitalize(possibleEnemies[i].v.short));
 		}
 	}
-	if (possibleEnemies.length > 15) output("\n\n<b>and sixteen more.</b>\n");
+	if (possibleEnemies.length > 15) output("\n\n<b>and sixteen more.</b>");
 	
 	//that way, the earlier rounds should have the more generic enemies
 	if (possibleEnemies.length <= 8) x = rand(possibleEnemies.length);
@@ -380,7 +360,7 @@ public function tournamentNextRound():void
 	//purge that enemy from the main list
 	possibleEnemies.splice(x,1);
 
-	output("\n\n<b>Your next enemy is " + tourneyCurrentEnemyName() + ".</b>");
+	output("\n\n<b>Your next enemy will be " + tourneyCurrentEnemyName() + ".</b>");
 	
 	//iniate combat
 	CombatManager.newGroundCombat();
@@ -410,7 +390,12 @@ public function tournamentWonRound():void
 		allowHeal = true;
 		allowBet = true;
 		clearMenu();
-		addButton(0,"Next",tournamentMainMenu);
+		addButton(0, "Next", function():void {
+			userInterface.hideNPCStats();
+			userInterface.leftBarDefaults();
+			generateMap();
+			tournamentMainMenu();
+		});
 	}
 	else
 	{
@@ -419,7 +404,12 @@ public function tournamentWonRound():void
 		pc.credits += bettingPot;
 		CombatManager.genericVictory();
 		clearMenu();
-		addButton(0,"Next",tournamentVictory);
+		addButton(0, "Next", function():void {
+			userInterface.hideNPCStats();
+			userInterface.leftBarDefaults();
+			generateMap();
+			tournamentVictory();
+		});
 	}
 }
 
@@ -444,6 +434,54 @@ public function tournamentDefeat():void
 	clearMenu();
 	addButton(0,"Next",mainGameMenu);
 }
+
+public function tournamentWithdraw():void
+{
+	clearOutput();
+	output("Do you really want to withdraw from the tournament?");
+	clearMenu();
+	addButton(0,"No",tournamentMainMenu);
+	addButton(1,"Yes", function():void {
+		CombatManager.abortCombat();
+		IncrementFlag("NYREAN_TOURNEY_COUNTER");
+		mainGameMenu();
+	});
+}
+
+public function tournamentBetMenu():void
+{
+	clearOutput();
+	output("After looking around for a moment, you find the local bookmaker - an old nyrean woman - sitting on a battered wooden desk near the entrance of the cavern.");
+	output("\n\nDo you want to bet credits on your victory in the tourney? The more enemies are left, the better the final payout will be. However, if you lose a fight or withdraw the money will be forfeited.");
+
+	clearMenu();
+	//cant access this menu if you have less than 100
+	addButton(0,"Bet 100",tournamentBet, 100);
+	if (pc.credits >= 200) addButton(1,"Bet 200",tournamentBet, 200);
+	else addDisabledButton(1, "Bet 200")
+	if (pc.credits >= 500) addButton(2,"Bet 500",tournamentBet, 500);
+	else addDisabledButton(2, "Bet 500")
+	if (pc.credits >= 1000) addButton(3,"Bet 1000",tournamentBet, 1000);
+	else addDisabledButton(3, "Bet 1000")
+	addButton(14,"Back",tournamentMainMenu);
+}
+
+public function tournamentBet(bet:int):void
+{
+	clearOutput();
+	output("With a self-confident smile, you hand " + bet + " credits to the bookie and recieve a small receipt from her in turn. It is made out of crude paper and coved in irrecognizable symbols, but surely she wouldn't try to trick her " + pc.mf("king", "queen") +", would she?");
+	output("\n\nPutting the slip in your pocket, you make your way back to the arena.");
+	processTime(5);
+	
+	//todo: lower the payout if the PC has won multiple turneys
+	pc.credits -= bet;
+	bettingPot += bet + Math.round(bet / (10 / (numberOfEnemies + 1)));
+	allowBet = false;
+	
+	clearMenu();
+	addButton(0,"Next",tournamentMainMenu);
+}
+
 /*
 //copy of the normal inventory, leads you back to the tournamentMenu instead of GameMenu
 public function tournamentInventoryMenu():void
@@ -485,15 +523,6 @@ public function tournamentInventoryMenu():void
 	itemUser = pc;
 }
 */
-public function tournamentWithdraw():void
-{
-	clearOutput();
-	output("Do you really want to withdraw from the tournament?");
-	CombatManager.abortCombat();
-	clearMenu();
-	addButton(0,"No",tournamentMainMenu);
-	addButton(1,"Yes",mainGameMenu);
-}
 
 //similiar to the normal weightedRand, but returns the index number of the array instead of v
 public function weightedRandIndex(... args):*
@@ -565,7 +594,7 @@ public function championTestFight():void
 	CombatManager.setHostileActors(new NyreanChampion());
 	CombatManager.victoryScene(preliminaryVictory);
 	CombatManager.lossScene(preliminaryDefeat);
-	CombatManager.displayLocation("CRY SOME MORE");
+	CombatManager.displayLocation("ENEMY TEST");
 	clearMenu();
 	addButton(0, "Fight", CombatManager.beginCombat);
 }

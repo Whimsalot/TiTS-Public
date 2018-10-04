@@ -65,6 +65,11 @@
 			kGAMECLASS.flags["SHUKUCHI_UVETO7_ENCOUNTER"] = 0;
 			kGAMECLASS.flags["SHUKUCHI_EMAIL_TIMER"] = (kGAMECLASS.GetGameTimestamp() - (60 * 24 * 7));
 		}
+		public static function StartTournament():void
+		{
+			kGAMECLASS.flags["NYREAN_TOURNEY_COUNTER"] = 3;
+			kGAMECLASS.tournamentSetUp();
+		}
 		public static function XPToLevel():void
 		{
 			if (kGAMECLASS.pc.short == "uncreated" || kGAMECLASS.pc.short.length == 0)
