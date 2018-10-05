@@ -168,8 +168,21 @@ public function initializeNPCs(justUpdate:Boolean = false):void
 	prepChar(justUpdate, "KANE", Kane);
 	prepChar(justUpdate, "SHIZUYA", Shizuya);
 	prepChar(justUpdate, "ARDIA", Ardia);
+<<<<<<< HEAD
 //	prepChar(justUpdate, "NYREAN_CHAMPION", NyreanChampion);
 
+=======
+	prepChar(justUpdate, "MRFOX", EMMrFox);
+	prepChar(justUpdate, "REDD", EMRedd);
+	prepChar(justUpdate, "PONYLUVER", EMPonyLuver);
+	prepChar(justUpdate, "SEXYYDADDYY", EMSexyyDaddyy);
+	prepChar(justUpdate, "BOUNTIFULBOTANY", EMBountifulBotany);
+	prepChar(justUpdate, "SNEAKYSNEK", EMSneakySnek);
+	prepChar(justUpdate, "RIPPED4YOURPLEASURE", EMRipped4YourPleasure);
+	prepChar(justUpdate, "STORMDRAGON", EMStormDragon);
+	prepChar(justUpdate, "MAIKE", Maike);
+	
+>>>>>>> master
 	
 	// Check all characters have version information set
 	for (var prop:String in chars)
