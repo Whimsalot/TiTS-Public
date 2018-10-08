@@ -6,7 +6,6 @@
 	import classes.Characters.FrogGirl;
 	import classes.Characters.GooKnight;
 	import classes.Characters.HuntressVanae;
-	import classes.Characters.KQ2BlackVoidGrunt;
 	import classes.Characters.LapinaraFemale;
 	import classes.Characters.Marik;
 	import classes.Characters.MyrGoldBrute;
@@ -17,14 +16,14 @@
 	import classes.Characters.NyreaAlpha;
 	import classes.Characters.NyreaBeta;
 	import classes.Characters.NyreanChampion;
-	import classes.Characters.NyreanPraetorians;
-	import classes.Characters.RaskvelFemale;
-	import classes.Characters.RaskvelMale;
 	import classes.Characters.RedMyrPyro;
 	import classes.Characters.Queensguard;
 	import classes.Characters.WetraxxelBrawler;
 	import classes.Characters.ZilFemale;
 	import classes.Characters.ZilMale;
+	import classes.Characters.Abrax;
+	import classes.Characters.Brabax;
+	import classes.Characters.Califax;
 	import classes.Items.Accessories.TamWolf;
 	import classes.StringUtil;
 	import classes.Engine.Interfaces.*;
@@ -91,19 +90,21 @@ public function tournamentSetUpUniqueEnemies():void
 {
 	possibleEnemies = [
 		//at least one of them should be there in all cases
-		{ v: new NyreanChampion(), w: 0 }
+		{ v: new NyreanChampion(), w: 0 },
+		{ v: new Abrax(), w: 0 }
 	];
 	if(flags["NYREAN_TOURNEY_COUNTER"] >= 1) {
 		if (rand(2) == 0) possibleEnemies.push( { v: new NyreanChampion(), w: 0 } );
 		if (rand(3) == 0) possibleEnemies.push( { v: new NyreanChampion(), w: 0 } );
 		if (rand(2) == 0) possibleEnemies.push( { v: new HuntressVanae(), w: 0 } );
-		if (rand(2) == 0) possibleEnemies.push( { v: new KQ2BlackVoidGrunt(), w: 0 } );
 		if (rand(3) == 0) possibleEnemies.push( { v: new MyrRedCommando(), w: 0 } );
 		if (rand(5) == 0) possibleEnemies.push( { v: new WetraxxelBrawler(), w: 0 } );
 		if (rand(5) == 0) possibleEnemies.push( { v: new Queensguard(), w: 0 } );
 		if (rand(5) == 0) possibleEnemies.push( { v: new CommanderSchora(), w: 0 } );
+		if (rand(5) == 0) possibleEnemies.push( { v: new Califax(), w: 0 } );
 	}
 	if (flags["FEDERATION_QUEST"] >= 3 && rand(2) == 0) possibleEnemies.push( { v: new Marik(), w: 0 } );
+	if (rand(2) == 0) possibleEnemies.push( { v: new Brabax(), w: 0 } );
 }
 
 //put data for the generic enemies into a new array
@@ -114,7 +115,6 @@ public function tournamentSetUpGenericEnemies():void
 	genericEnemies = [
 		{ v: new NyreanChampion(), w: 1 },
 		{ v: new BothriocPidemme(), w: 1 },
-		{ v: new NyreanPraetorians(), w: 2 },
 		{ v: new MyrGoldBrute(), w: 3 },
 		{ v: new MyrGoldRemnant(), w: 5 },
 		{ v: new GooKnight(), w: 8 },
@@ -219,7 +219,7 @@ public function tourneyBetweenRounds(option:String):void
 		case "health":
 //			restHeal()
 			pc.HP(Math.round(pc.HPMax() * 0.5));
-			output("You use some bandages to fix your wounds.");
+			output("Considering your " + (pc.HPQ() < 50 ? "gaping " : "") + "wounds, you deicde to look for the local medico or whatever counts as healer around here. You find her (or rather him, considering the nyrean biology) in a small alcove of the cave, togther with some beds made from moss and what appears to be a medical locker looted from a gold myr camp. She seems to expect you, handing you a small pouch with some crystaline goo and herbs. Whatever it is, it seems to work as your injurys seem to improve almost instantly after applying it.");
 			break;
 		case "energy":
 			pc.energy(Math.round(pc.energyMax() * 0.5));
@@ -227,8 +227,11 @@ public function tourneyBetweenRounds(option:String):void
 			break;
 		case "lust":
 //			pc.orgasm();
-			pc.lust(Math.round(pc.lustMax() * (-0.5)));
-			output("fapfapfap.");
+			pc.lust((pc.LQ() * 0.5) - 75);
+			output("You spend some time jerking off in a secluded part of the cavern, trying to calm down your lust.");
+			output("\n\nDEBUG STATS:");
+			output("\nLQ: " + pc.LQ());
+			output("\nValue:" + ((pc.LQ() * 0.5) - 75));
 			break;
 	}
 	allowHeal = false;

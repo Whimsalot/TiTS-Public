@@ -211,6 +211,7 @@
 			this.cockVirgin = false;
 			
 //			this.createPerk("Sneak Attack",0,0,0,0);
+ 			this.createPerk("Appearance Enabled"); 
 			createStatusEffect("Force Fem Gender");
 			this.createStatusEffect("Flee Disabled", 0, 0, 0, 0, true, "", "", false, 0);
 			
