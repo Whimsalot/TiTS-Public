@@ -50,8 +50,8 @@
 			
 			this.short = "nyrean champion";
 			this.originalRace = "nyrea";
-			this.a = "a ";
-			this.capitalA = "A ";
+			this.a = "the ";
+			this.capitalA = "The ";
 			this.tallness = 72;
 			this.scaleColor = "green";
 			
@@ -212,11 +212,12 @@
 			
 //			this.createPerk("Sneak Attack",0,0,0,0);
  			this.createPerk("Appearance Enabled"); 
-			createStatusEffect("Force Fem Gender");
+			this.createStatusEffect("Force Fem Gender");
+//			this.createStatusEffect("Counters Melee");
 			this.createStatusEffect("Flee Disabled", 0, 0, 0, 0, true, "", "", false, 0);
 			
 			isUniqueInFight = true;
-			btnTargetText = "Nyrea";
+			btnTargetText = "N. Champion";
 			
 			tallness = 68 + (rand(12) - 6);
 			
@@ -235,6 +236,19 @@
 			var level:int = kGAMECLASS.chars["PC"].level;
 			if (level < 8) level = 8;
 			return Math.floor(level * multiplier);
+		}
+		
+		public function tourneyQuips(result:String):String
+		{
+			switch (result)
+			{
+				case "winHP": return "<i>“Are all star-walkers this powerful? I heard all the romurs, yet I didnt believe them. Until now.”</i>";
+				case "winLust": return "<i>“I am starting to understand why the Queen has taken such a liking to you. With a body like this...”</i>";
+				case "loseHP": return "<i>“'Star-walker'? Ha, you are nothing more than a shooting star.”</i>";
+				case "loseLust": return "<i>“Well, well, well, I really wonder what Queen Taivra would say if she could see you now.”</i>";
+				default: return "variable not set, plz make a bug report";
+
+			}
 		}
 
 		override public function get bustDisplay():String
@@ -281,6 +295,13 @@
 			CombatAttacks.RangedAttack(this, target);
 		}
 
+		public function meleeCounter(target:Creature):void
+		{
+			output("<b>Counter!</b> Sensing an opportunity for a counter attack, the nyrean woman rushes forward, slashing at you with her sword.");
+			//CombatAttacks.MeleeAttack(this, target);
+			applyDamage(this.meleeDamage(), this, target, "melee");
+		}
+
 		private function powerStrike(target:Creature):void
 		{
 			output("Glaring at you with an intense look in her dark eyes, the nyrean suddenly gripps her oversized sword with both hands, raises it above her head and charges at you with a roaring warcry. ");
@@ -290,8 +311,8 @@
 			}
 			else
 			{
-				output("You desperately try to avoid her attack, but you are to slow. Her razor-sharp sword " + (target.shieldsRaw > 0 ? "goes right through your shield, sending" : "sends") +" you back reeling with the force of her bone-shattering strike.");
-				applyDamage(new TypeCollection({ kinetic: this.meleeWeapon.baseDamage.kinetic.damageValue * 2 }, DamageFlag.BYPASS_SHIELD), this, target, "minimal");
+				output("You desperately try to avoid her attack, but you are to slow. Her razor-sharp sword " + (target.shieldsRaw > 0 ? "is thankfully blocked by your shield, sending" : "sends") +" you back reeling with the force of her bone-shattering strike.");
+				applyDamage(new TypeCollection({ kinetic: this.meleeWeapon.baseDamage.kinetic.damageValue * 3 }, DamageFlag.PENETRATING), this, target, "minimal");
 				if(physique()/2 + rand(20) + 1 >= target.physique()/2 + 10 && !target.hasStatusEffect("Stunned"))
 				{
 					output("\n<b>You’re stunned by the blow!</b>");

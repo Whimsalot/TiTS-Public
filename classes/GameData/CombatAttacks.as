@@ -11,6 +11,7 @@ package classes.GameData
 	import classes.Characters.Kaska;
 	import classes.Characters.NymFoe;
 	import classes.Characters.NaleenHerm;
+	import classes.Characters.NyreanChampion;
 	import classes.Characters.PlayerCharacter;
 	import classes.Characters.RaskvelFemale;
 	import classes.Characters.RaskvelMale;
@@ -2675,6 +2676,14 @@ package classes.GameData
 				if(target.statusEffectv1("Counters Melee") >= 3)
 				{
 					(target as NaleenHerm).meleeCounter(attacker);
+					return true;
+				}
+			}
+			if(target is NyreanChampion && target.RQ >= attacker.RQ)
+			{
+				if(!target.isBlind() && !target.isImmobilized() && rand(3) == 0 )
+				{
+					(target as NyreanChampion).meleeCounter(attacker);
 					return true;
 				}
 			}

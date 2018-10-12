@@ -56,7 +56,7 @@ public function tourneyRound():String
 	{
 		case 1: return "first";
 		case 2: return "second";
-		case 3: return "third"
+		case 3: return "third";
 		case 4: return "fourth";
 		case 5: return "fifth";
 		default: return "variable not set, plz make a bug report";
@@ -69,7 +69,7 @@ public function tourneymaxRounds():String
 	{
 		case 1: return "one";
 		case 2: return "two";
-		case 3: return "three"
+		case 3: return "three";
 		case 4: return "four";
 		case 5: return "five";
 		case 6: return "six";
@@ -78,9 +78,10 @@ public function tourneymaxRounds():String
 	}
 }
 
-public function tourneyCurrentEnemyName():String
+public function tourneyCurrentEnemyName(useThe:Boolean = false):String
 {
 	if (currentEnemy[0].v.a == "") return currentEnemy[0].v.short;
+	if (useThe) return ("the " + currentEnemy[0].v.short);
 	return ("a " + currentEnemy[0].v.short);
 }
 
@@ -219,11 +220,14 @@ public function tourneyBetweenRounds(option:String):void
 		case "health":
 //			restHeal()
 			pc.HP(Math.round(pc.HPMax() * 0.5));
-			output("Considering your " + (pc.HPQ() < 50 ? "gaping " : "") + "wounds, you deicde to look for the local medico or whatever counts as healer around here. You find her (or rather him, considering the nyrean biology) in a small alcove of the cave, togther with some beds made from moss and what appears to be a medical locker looted from a gold myr camp. She seems to expect you, handing you a small pouch with some crystaline goo and herbs. Whatever it is, it seems to work as your injurys seem to improve almost instantly after applying it.");
+			output("Considering your " + (pc.HPQ() < 50 ? "gaping " : "") + "wounds, you decide to look for the local medico or whatever counts as healer around here. You find her (or rather him, considering the nyrean biology) in a small alcove of the cave, together with some bedding made from moss and what appears to be a medical locker looted from a gold myr camp. She seems to be used to wounded visitors as she hands you a small pouch without a second thought. Inside is some sort of grainy goo, fabric scraps and herbs you never seen before. You feel a burning sensation when you apply the herbs and the goo, but it stops nearly instantly as you wrap the rags around your wound. As weird as this first aid kit seems, you can't deny it's effectiveness as your wounds slowly start to heal.");
+			output("\n\nAfter sitting on one of the unused beds for a bit, you get the feeling it is time to head back into the arena.");
 			break;
 		case "energy":
 			pc.energy(Math.round(pc.energyMax() * 0.5));
-			output("You take a quick nap. Just hope you dint oversleep.");
+			output("Exhausted as you are, you take a short break from the proceedings to gather your strength. Sitting down on a stone bench backstage area of the rink, you start observing the remaining fighters, watching them attack, dodge and counter. Slowly, you vision starts to fade into black and before you even realized your fatigue, you have fallen asleep.");
+			output("\n\nSuddenly you hear a voice right besides you, calling your name. Startled by this, you nearly fall of the bench, only to see one of the palace pretorians standing next to you, looking at you with a hint of worry on her face. <i>“My " + pc.mf("king", "queen") +", you should hurry up. The next round is about to start.”</i>");
+			output("\n\nStill a little sluggish, you make your way back into the arena.");
 			break;
 		case "lust":
 //			pc.orgasm();
@@ -388,6 +392,11 @@ public function tournamentWonRound():void
 	if (currentRound != maxRounds)
 	{
 		output("A winner is you! Proceed to the next round for more mindless fighting.\n\n");
+		if (currentEnemy[0].v.short == "nyrean champion")
+		{
+			output("Laying in the dirt, " + tourneyCurrentEnemyName(true) + " looks at you with a sad look on her face. ");
+			output(currentEnemy[0].v.tourneyQuips("winHP") + "\n\n");
+		}
 		CombatManager.genericVictory();
 		currentRound = currentRound + 1;
 		allowHeal = true;
