@@ -242,10 +242,10 @@
 		{
 			switch (result)
 			{
-				case "winHP": return "<i>“Are all star-walkers this powerful? I heard all the romurs, yet I didnt believe them. Until now.”</i>";
-				case "winLust": return "<i>“I am starting to understand why the Queen has taken such a liking to you. With a body like this...”</i>";
-				case "loseHP": return "<i>“'Star-walker'? Ha, you are nothing more than a shooting star.”</i>";
-				case "loseLust": return "<i>“Well, well, well, I really wonder what Queen Taivra would say if she could see you now.”</i>";
+				case "winHP": return "Laying in the dirt, the nyrean woman looks at you with a sad look on her face. <i>“Are all star-walkers this powerful? I heard all the romurs, yet I didnt believe them. Until now.”</i>";
+				case "winLust": return "Laying in the dirt, the nyrean woman looks at you with a sad look on her face. <i>“I am starting to understand why the Queen has taken such a liking to you. With a body like this...”</i>";
+				case "loseHP": return "With a smug look on her face, your enemy walks over to you. <i>“'Star-walker'? Ha, you are nothing more than a shooting star.”</i>";
+				case "loseLust": return "With a smug look on her face, your enemy walks over to you. <i>“Well, well, well, I really wonder what Queen Taivra would say if she could see you now.”</i>";
 				default: return "variable not set, plz make a bug report";
 
 			}

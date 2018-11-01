@@ -2681,7 +2681,7 @@ package classes.GameData
 			}
 			if(target is NyreanChampion && target.RQ >= attacker.RQ)
 			{
-				if(!target.isBlind() && !target.isImmobilized() && rand(3) == 0 )
+				if(!target.isBlind() && !target.isImmobilized() && rand(3) == 0)
 				{
 					(target as NyreanChampion).meleeCounter(attacker);
 					return true;
