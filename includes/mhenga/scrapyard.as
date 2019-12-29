@@ -23,16 +23,19 @@ public function scrapyardMaintenance():void {
 		//Sell/Buy/Leave
 		output("Artie nods at you as you enter the scrap yard hut, smiling peacefully as he closes his eyes and goes back to meditating over a large diode. Geoff is busy working on something in the back.");
 	}
-	shopkeep = geoff;
-	this.addButton(0,"Buy",buyFromGeoff);
-	this.addButton(1,"Sell",sellToArtie);
+	addButton(0,"Buy",buyFromGeoff);
+	addButton(1,"Sell",sellToArtie);
 }
 
 public function sellToArtie():void {
 	author("Nonesuch");
-	userInterface.showBust("ARTIE");
-	userInterface.showName("\nARTIE");
+	shopkeep = geoff;
 	sellItem();
+}
+public function buyItemFromGeoff():void {
+	author("Nonesuch");
+	shopkeep = geoff;
+	buyItem();
 }
 public function buyFromGeoff():void {
 	clearOutput();
@@ -45,7 +48,7 @@ public function buyFromGeoff():void {
 	geoff.keeperBuy = "What would you like to buy?\n";
 	flags["MET_GEOFF"] = 1;
 	this.clearMenu();
-	this.addButton(0,"Buy",buyItem);
+	this.addButton(0,"Buy",buyItemFromGeoff);
 	this.addButton(1,"Talk",talkToGeoff);
 
 	if(flags["SEXED_GEOFF"] == 1) 
@@ -102,7 +105,7 @@ public function talkToGeoff():void {
 	else {
 		//Talk:
 		output("You say you’d just like to shoot the breeze with him. Shrugging amiably, the young mechanic points you to a shipping crate similar to the one his uncle is currently perched upon.");
-		output("\n\nYou spend a pleasant half an hour sat in the back of the scrap hut chatting with Geoff as he continues dismantling pieces of machinery. He’s heard of your father, and is eager to hear any story you can possibly tell him about Steele, hero of the frontier. In return he tells you his own experiences in Esbeth. He says both the proprietor of the Mead Hall and Officer Penny are quite nice once you get to know them, although you get the distinct impression he’s rather intimidated by them both. After you’re done kicking your heels back you let him get back to it and head out of the scrapyard’s clutter.");
+		output("\n\nYou spend a pleasant half an hour seated in the back of the scrap hut chatting with Geoff as he continues dismantling pieces of machinery. He’s heard of your father, and is eager to hear any story you can possibly tell him about Steele, hero of the frontier. In return he tells you his own experiences in Esbeth. He says both the proprietor of the Mead Hall and Officer Penny are quite nice once you get to know them, although you get the distinct impression he’s rather intimidated by them both. After you’re done kicking your heels back you let him get back to it and head out of the scrapyard’s clutter.");
 		processTime(30+rand(4));
 		this.clearMenu();
 		this.addButton(0,"Next",mainGameMenu);

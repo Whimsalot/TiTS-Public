@@ -238,7 +238,7 @@
 						outputB("regrown your");
 						pc.vaginas[x].hymen = true;
 					}
-					outputB(" hymen. <b>You now have a virgin, [pc.pussyColor] vanae pussy!</b>.");
+					outputB(" hymen. <b>You now have a virgin, [pc.pussyColor] vanae pussy!</b>");
 					pc.shiftVagina(x, GLOBAL.TYPE_VANAE);
 					pc.vaginas[x].vaginaColor = getVanaeAccentColor(pc);
 					changes++;
@@ -466,7 +466,7 @@
 		}
 		protected function setSkinColorVanae(pc:Creature):void
 		{
-			var colors:Array = ["pale violet","pale purple","pale blue","pale pink","pale orange","pale green","pale","pale gray","pale gold"];
+			var colors:Array = ["pale violet","pale purple","pale blue","pale pink","pale orange","pale green","pale","pale gold"];
 			pc.skinTone = RandomInCollection(colors);
 		}
 		protected function getVanaeAccentColor(pc:Creature):String

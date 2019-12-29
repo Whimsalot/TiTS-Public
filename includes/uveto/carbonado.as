@@ -708,7 +708,7 @@ public function cfsGoHangoutTimeII():void
 
 	output("\n\n<i>“This is not an effective strategy!”</i> shouts the centaur, a nameplate labeling her ‘Taurina, master tactician.’ She blasts away some approaching droids, but doesn’t notice a larger one approaching behind her. Before it can attack, it is smashed to pieces by the hammer from before.");
 
-	output("\n\n<i>“How many times have I told you to watch your back. Master technician, bah!”</i> the heavyset titan shouts, hefting his weapon. Ironclad bars label him as ‘Ivan Orgoth, The Shaft of Strength.’");
+	output("\n\n<i>“How many times have I told you to watch your back. Master tactician, bah!”</i> the heavyset titan shouts, hefting his weapon. Ironclad bars label him as ‘Ivan Orgoth, The Shaft of Strength.’");
 
 	output("\n\nRobots with wicked looking sharp bits approach from every side, and the three heroes group in a tight cluster. A loud noise alerts them to the hole their ship punched in the larger spacecraft. A vacuum begins that pulls many of the robots into the vastness of space. Taurina grabs her compatriots, her hooves magnetically anchoring her to the floor. She trudges toward an open hallway, managing to get through just before it closes off, and dropping her cargo to the ground. The two men cough and sputter for a few seconds, steadily recovering their bearings.");
 
@@ -1236,7 +1236,7 @@ public function cfsHolidayShoppingII():void
 	{
 		output("<i>“Pff! We don’t need a car, I can get us wherever you want to go, just point me in the right direction,”</i> you say, patting your rump invitingly. The coat wrapped puazi doesn’t respond immediately, but turns away from the taxi with a blush in her cheeks.");
 		output("\n\n<i>“O-oh. That’s not offensive or anything? I was afraid it would be like asking a Veletan if they were pregnant,”</i> she asks, stepping hesitantly in your direction.");
-		output("\n\n<i>“I wouldn’t have offered if it was. Just hop on! It saves money, too,”</i> you insist. Relenting, Gwen lets you help her up onto your back, and you begin trotting off. She guides you down Uvetos main thoroughfare, passing a few people walking in the mostly deserted night streets. Some toss jealous looks in her direction, but by now she’s fully invested in the experience, and the aura from your heat belt probably doesn’t hurt.");
+		output("\n\n<i>“I wouldn’t have offered if it was. Just hop on! It saves money, too,”</i> you insist. Relenting, Gwen lets you help her up onto your back, and you begin trotting off. She guides you down Uveto's main thoroughfare, passing a few people walking in the mostly deserted night streets. Some toss jealous looks in her direction, but by now she’s fully invested in the experience, and the aura from your heat belt probably doesn’t hurt.");
 		output("\n\nEventually, you wind up at a small mall complex. ");
 	}
 	else

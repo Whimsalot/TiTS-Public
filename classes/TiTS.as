@@ -80,6 +80,7 @@
 	import classes.Engine.showImage;
 	import classes.Engine.Utility.*;
 	import classes.Util.IsOneOf;
+	import classes.Util.ShuffleArray;
 	import classes.Engine.Combat.*;
 	import classes.Engine.Interfaces.*;
 	import classes.Engine.Map.*;
@@ -119,6 +120,7 @@
 		include "../includes/LocationStorage.as";
 		include "../includes/MailEntries.as";
 		include "../includes/NPCTemplates.as";
+		include "../includes/Pornos.as";
 		include "../includes/rareDrops.as";
 		include "../includes/rooms.as";
 		include "../includes/roomFunctions.as";
@@ -149,11 +151,13 @@
 		//Followers
 		include "../includes/follower/amber.as";
 		include "../includes/follower/anno.as";
+		include "../includes/follower/ardia.as";
 		include "../includes/follower/azra.as";
 		include "../includes/follower/azraExpeditions.as";
 		include "../includes/follower/azraPlantSamples.as";
 		include "../includes/follower/celise.as";
 		include "../includes/follower/celiseGiga.as";
+		include "../includes/follower/eitan.as";
 		include "../includes/follower/kase.as";
 		include "../includes/follower/mitzi.as";
 		include "../includes/follower/multi_interactions.as";
@@ -202,6 +206,11 @@
 		// Misc Events
 		include "../includes/events/araDiplomacyMission.as";
 		include "../includes/events/atha_lets_fapper.as";
+		include "../includes/events/bianca/bianca.as";
+		include "../includes/events/bianca/biancaTalks.as";
+		include "../includes/events/bianca/biancaHealing.as";
+		include "../includes/events/bianca/biancaStories.as";
+		include "../includes/events/bianca/biancaSex.as";
 		include "../includes/events/bimboPennyAndBadgerQuest/badgerGifts.as";
 		include "../includes/events/erra.as";
 		include "../includes/events/extrameet/extrameet.as";
@@ -217,8 +226,12 @@
 		include "../includes/events/kimberQuest/roomFunctions.as";
 		include "../includes/events/kimberQuest/kimberQuest.as";
 		include "../includes/events/kiroCrewQuest/buttslutinator.as";
+		include "../includes/events/kiroCrewQuest/fuckdollGeneric.as";
+		include "../includes/events/kiroCrewQuest/holoTrap.as";
 		include "../includes/events/kiroCrewQuest/omnisuitExtras.as";
 		include "../includes/events/kiroCrewQuest/orgasmender.as";
+		include "../includes/events/kiroCrewQuest/rooms.as";
+		include "../includes/events/kiroCrewQuest/sexbotMiniboss.as";
 		include "../includes/events/kiro_x_paige_threesomes.as";
 		include "../includes/events/pyriteSatelliteRecovery.as";
 		include "../includes/events/steph_on_demand.as";
@@ -240,6 +253,7 @@
 		include "../includes/travelEvents/fallOfThePhoenix.as";
 		include "../includes/travelEvents/kiro.as";
 		include "../includes/travelEvents/kiroRescue.as";
+		include "../includes/travelEvents/pirateSlyveren.as";
 		include "../includes/travelEvents/shizuya.as";
 		include "../includes/travelEvents/shizuyaGreatMajin.as";
 		include "../includes/travelEvents/shizuyaGreatMajinFunctions.as";
@@ -297,6 +311,7 @@
 		include "../includes/vesperia/luca.as";
 		include "../includes/vesperia/lucaSexAndStuff.as";
 		include "../includes/vesperia/mabbs.as";
+		include "../includes/vesperia/perdita.as";
 		include "../includes/vesperia/rooms.as";
 		include "../includes/vesperia/roomFunctions.as";
 		include "../includes/vesperia/sylvie.as";
@@ -327,6 +342,7 @@
 		include "../includes/mhenga/syri.as";
 		include "../includes/mhenga/tanis.as";
 		include "../includes/mhenga/tharePlantation.as";
+		include "../includes/mhenga/thyvara.as";
 		include "../includes/mhenga/vanae.as";
 		include "../includes/mhenga/venusPitchers.as";
 		include "../includes/mhenga/vko.as";
@@ -334,6 +350,7 @@
 		include "../includes/mhenga/zilMale.as";
 		include "../includes/mhenga/zilFemale.as";
 		include "../includes/mhenga/zilTwins.as";
+		include "../includes/mhenga/zilMaleTreated.as";
 		
 		//Second planet
 		include "../includes/tarkus/anno.as";
@@ -483,6 +500,7 @@
 		include "../includes/zhengShiStation/tivf.as";
 		include "../includes/zhengShiStation/teyaalTheEngineer.as";
 		include "../includes/zhengShiStation/urbolg.as";
+		include "../includes/zhengShiStation/vulriks.as";
 		include "../includes/zhengShiStation/wallSluts.as";
 
 		include "../includes/zhengShiStation/shipTesting.as";
@@ -517,6 +535,7 @@
 		include "../includes/uveto/chrissy.as";
 		include "../includes/uveto/cynthia.as";
 		include "../includes/uveto/drlessau.as";
+		include "../includes/uveto/eitan.as";
 		include "../includes/uveto/freezer.as";
 		include "../includes/uveto/frostwyrm.as";
 		include "../includes/uveto/heidrun.as";
@@ -675,7 +694,7 @@
 
 			trace("TiTS Constructor")
 
-			version = "0.8.012";
+			version = "0.8.029";
 
 			//temporary nonsense variables.
 			temp = 0;
@@ -1808,6 +1827,14 @@
 		public function get vahn():Vahn
 		{
 			return chars["VAHN"];
+		}
+		public function get bianca():Bianca
+		{
+			return chars["BIANCA"];
+		}
+		public function get synphia():Synphia
+		{
+			return chars["SYNPHIA"];
 		}
 
 		public function testShipCombat():void

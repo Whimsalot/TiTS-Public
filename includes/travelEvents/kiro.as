@@ -26,6 +26,7 @@ public function roamingBarEncounter(button:int = 0):void
 		if(flags["ERRA_HEARTBROKEN"] == undefined) NPCs.push(erraBarText);
 		//Cow - chance changes depending on location and is handled in scienceCowAvailable()
 		if(scienceCowAvailable()) NPCs.push(drinkingScienceCowBonus);
+		if(currentLocation == "CANADA5" && perditaAvailable()) NPCs.push(perditaBonus,perditaBonus,perditaBonus,perditaBonus,perditaBonus);
 		//Pick available NPC, run setup func
 		if(NPCs.length > 0)
 		{
@@ -1596,8 +1597,9 @@ public function letsFuckKiro():void
 			else output("awesome");
 			output(" handjob");
 		}
-		else if(pc.hasVagina()) output("touch [pc.oneVagina], dipping a finger right into your lusty delta in front of everyone, her digits stroking, entering, and spreading you, encouraging you to give in to her confident touches.");
-		else output("stroke the bare [pc.skinFurScales], comfortingly caressing your featureless but nonetheless sensitive groin in a way that makes your [pc.asshole] clench in anticipation.");
+		else if(pc.hasVagina()) output("touch [pc.oneVagina], dipping a finger right into your lusty delta in front of everyone, her digits stroking, entering, and spreading you, encouraging you to give in to her confident touches");
+		else output("stroke the bare [pc.skinFurScales], comfortingly caressing your featureless but nonetheless sensitive groin in a way that makes your [pc.asshole] clench in anticipation");
+		output(".");
 		output("\n\n<i>“Mmmm, I was hoping to bump into you. I was saving up a hot, steaming load of cum to plug you with,”</i> Kiro purrs. Her immensely fluffy tail brushes your [pc.leg] as she pulls you away from the bar, hand still in your crotch, still touching and stroking and trying to turn your brain into a soup of lusty mush. <i>“My milker is good, but I want you, [pc.name]. I want to make you pregnant with cum until it backwashes out over my balls and makes me cum again. Then I want to pull out and bathe you in it.”</i> Kiro whimpers a little, and you feel her shaft jump inside its confinement.");
 		output("\n\nShe wrangles you the whole way back to her ship");
 		if(pc.tallness + 5 < kiro.tallness) output(" with ease, your smaller form eventually hefted entirely into her arms so that she can molest you more freely as she moves through the station. Curious looks are the only interference she receives along the way.");
@@ -1672,7 +1674,8 @@ public function kiroSexMenu():void
 	{
 		if(kiroTrust() >= 66)
 		{
-			if(pc.hasCock() && (pc.cockThatFits(kiro.vaginalCapacity(0) + 200) < 0 && pc.biggestCockLength() < 20) && !pc.hasVagina()) addDisabledButton(4,"PussyPump","PussyPump","You need a penis of a specific size or a vagina (in the usual location) to deal with the consequences of pumping up Kiro’s pussy.");
+			if(pc.hasCock() && !pc.hasVagina() && (pc.cockThatFits(kiro.vaginalCapacity(0) + 200) < 0 && pc.biggestCockLength() < 20)) addDisabledButton(4,"PussyPump","PussyPump","You need a penis of a specific size or a vagina (in the usual location) to deal with the consequences of pumping up Kiro’s pussy.");
+			else if(pc.hasCock() && !pc.hasVagina() && pc.cockThatFits(kiro.vaginalCapacity(0) + 200) < 0 && kiroTrust() < 75) addDisabledButton(4,"PussyPump","PussyPump","Kiro doesn’t trust you enough for this yet.");
 			else if(pc.hasGenitals()) addButton(4,"PussyPump",treatedPussPumps,undefined,"PussyPump","Give Kiro’s pussy a thorough pumping up with the SukMastr 2000 you bought. She could spare to give her feminine side a little extra attention.");
 			else addDisabledButton(4,"PussyPump","PussyPump","You need a penis or vagina (in the usual location) to deal with the consequences of pumping up Kiro’s pussy.");
 		}
@@ -2921,7 +2924,7 @@ public function inviteSaenForKiroFilling():void
 	addButton(0,"Next",mainGameMenu);
 }
 
-//Trusted Pussy Pumpings - AKA, Kiro’s <i>“Heart”</i> Grew Three Sizes That Day
+//Trusted Pussy Pumpings - AKA, Kiro’s “Heart” Grew Three Sizes That Day
 //Intro might need adjusted to lead into this at a later time. Not sure how exactly you get to this point.
 //SukMastr 2000
 public function treatedPussPumps():void
@@ -3036,7 +3039,7 @@ public function kiroPussPumpPartII():void
 	if(pc.hasVagina()) addButton(1,"TribThem",tribDemLips,undefined,"TribThem","What better to please a pussy than another hot, wet cunt?");
 	else addDisabledButton(1,"TribThem","TribThem","You need a vagina to trib with Kiro.");
 
-	if(pc.biggestCockLength() >= 20) addButton(2,"GrindFrot",kiroGrindFrot,undefined,"GrindFrot","Grind your plus-sized dick against Kiro’s until both of you pop your corks.");
+	if(pc.hasCock() && pc.biggestCockLength() >= 20) addButton(2,"GrindFrot",kiroGrindFrot,undefined,"GrindFrot","Grind your plus-sized dick against Kiro’s until both of you pop your corks.");
 	else addDisabledButton(2,"GrindFrot","GrindFrot","You need a big dick (at least 20 inches) for this scene.");
 }
 

@@ -108,7 +108,7 @@ public function renameSiegwulfe(fromInv:Boolean = false):void
 	showBust(wulfeBustDisplay());
 	showName("RENAME\nSIEGWULFE");
 	
-	output("<i>“O-oh... you don’t like my name, [pc.master]?”</i> she asks, reaching for her collar. <i>“Here, feel free to change it.”</i>");
+	output("<i>“O-oh... you don’t like my name, " + (siegwulfeIsDom() ? "[wulfe.pcname]" : "[pc.master]") + "?”</i> she asks, reaching for her collar. <i>“Here, feel free to change it.”</i>");
 	
 	clearMenu();
 	addButton(0, "Next", nameSiegwulfe, fromInv);
@@ -167,7 +167,7 @@ public function nameSiegwulfeResult(fromInv:Boolean = false):void
 	{
 		// Tam-wolf
 		case "tam-wolf":
-			output("<i>“Tam... wolf?”</i> she echoes curiously, rubbing her tags between thumb and forefinger. <i>“Are you sure, [pc.master]? I’m not a cat-girl, and I’m </i>much<i> more advanced than a mere Fenris drone!”</i>");
+			output("<i>“Tam... wolf?”</i> she echoes curiously, rubbing her tags between thumb and forefinger. <i>“Are you sure, " + (siegwulfeIsDom() ? "[wulfe.pcname]" : "[pc.master]") + "? I’m not a cat-girl, and I’m </i>much<i> more advanced than a mere Fenris drone!”</i>");
 			output("\n\nOh, hush. It’s a perfectly good name.");
 			break;
 		// Sig
@@ -187,14 +187,14 @@ public function nameSiegwulfeResult(fromInv:Boolean = false):void
 			}
 			else
 			{
-				output("<i>“[wulfe.name],”</i> she echoes happily, rubbing her tags between thumb and forefinger. <i>“A lovely name, [pc.master], thank you so much!”</i> ");
+				output("<i>“[wulfe.name],”</i> she echoes happily, rubbing her tags between thumb and forefinger. <i>“A lovely name, " + (siegwulfeIsDom() ? "[wulfe.pcname]" : "[pc.master]") + ", thank you so much!”</i> ");
 				output("\n\nThe newly-named siegwulfe cocks her head aside and gives you a pleasant little smile.");
 				output("\n\nWell, hopefully the gooey [goo.name] won’t mind you borrowing her name...");
 			}
 			break;
 		// Any Other Name:
 		default:
-			output("<i>“[wulfe.name],”</i> she echoes happily, rubbing her tags between thumb and forefinger. <i>“A lovely name, [pc.master], thank you so much!”</i> ");
+			output("<i>“[wulfe.name],”</i> she echoes happily, rubbing her tags between thumb and forefinger. <i>“A lovely name, " + (siegwulfeIsDom() ? "[wulfe.pcname]" : "[pc.master]") + ", thank you so much!”</i> ");
 			output("\n\nThe newly-named siegwulfe cocks her head aside and gives you a pleasant little smile.");
 			break;
 	}
@@ -223,7 +223,7 @@ public function useDatacoreOnSiegwulfe(fromInv:Boolean = false):void
 	output("\n\nWell, better to get this over with now quickly before you grow attached to the new V. I.. With a " + (pc.isNice() ? "heavy " : "") + "sigh you tell her to deactivate herself.");
 	output("\n\n<i>“I live to serve.”</i> your canine droid says with an content smile as she shuts off. Switching the cores afterwards is a simple affair - you do have a bit of experience at that after all - and mere moments later [wulfe.name]’s CPU is locked firmly into her new chassis.");
 	output("\n\n[wulfe.name]’s eyes briefly flash as she boots up before tuning into the constant crimson red you are used to. Slowly looking around the room, the towering " + (chars["WULFE"].isBimbo() ? "bimbo" : "gynoid") + "-hound seems kinda lost for a moment before focusing her gaze on you, now a " + (chars["WULFE"].isBimbo() ? "lustful" : "playful") + " smirk on her face.");
-	output("\n\n<i>“Hello again, [pc.master].”</i> a familiar voice purrs. <i>“How may I" + (chars["WULFE"].isBimbo() ? ", like," : "") + " serve you today?”</i>");
+	output("\n\n<i>“Hello again, " + (siegwulfeIsDom() ? "[wulfe.pcname]" : "[pc.master]") + ".”</i> a familiar voice purrs. <i>“How may I" + (chars["WULFE"].isBimbo() ? ", like," : "") + " serve you today?”</i>");
 	output("\n\nWell, looks like that little brain transplant worked just fine. Then again, it couldn’t hurt to thoroughly test certain features of your mechanic companion just to be one the safe side....");
 	if (chars["WULFE"].isBimbo()) output(" An in-depth check, so to speak.");
 
@@ -293,7 +293,7 @@ public function siegwulfeOnShipBonus(btnSlot:int = 0, fromInv:Boolean = false, s
 	}
 	
 	addButton(btnSlot, (chars["WULFE"].short), approachSiegwulfe, [true, fromInv], (chars["WULFE"].short), (siegwulfeIsDom() ? "Call for your bimbo-domme Mistress." : ("Check up on your loyal " + (chars["WULFE"].isBimbo() ? "bimbobot" : "Siegwulfe") + ".")));
-	return (showBlurb ?  bonusText: "");
+	return (showBlurb ? bonusText: "");
 }
 
 // Siegwulfe Interactions
@@ -469,7 +469,7 @@ public function doSiegwulfeAction(arg:Array):void
 		// Stay
 		case "stay":
 			output("You ask [wulfe.name] to stay on your ship as a crew member.");
-			output("\n\nThe droid looks at you and nods. <i>“Yes, [pc.master].”</i>");
+			output("\n\nThe droid looks at you and nods. <i>“Yes, " + (siegwulfeIsDom() ? "[wulfe.pcname]" : "[pc.master]") + ".”</i>");
 			output("\n\n(<b>[wulfe.name] has joined your crew!</b>)");
 			output("\n\n");
 			
@@ -717,7 +717,7 @@ public function doSiegwulfeSex(response:String = "none"):void
 			if(pc.isTaur())
 			{
 				output("\n\n<i>“Brace yourself,”</i> you command, patting the wulfe-bot’s hips before cantering back. She gives you an eager look over her shoulder and does just as you ordered, bracing her mechanical feet into the ground as if getting ready to be charged by a raging bull. Which she might as well be, given when you have in mind.");
-				output("\n\nYou take a breath to steady yourself, and a moment to fix your gaze on the broad, swaying flanks surrounding the fuck-droid’s black pussy-lips. A moment later and you’re charging forward, lunging onto [wulfe.name]’s back. Her entire body buckles under your sudden weight, but her cybernetic legs bend rather than break, shuddering as they try to support the both of your. Your forelegs scrabbled against [wulfe.name]’s flanks, clawing at her metallic wolf’s body until you’re adjusted atop her -- and your [pc.cock " + i + "] is rammed ");
+				output("\n\nYou take a breath to steady yourself, and a moment to fix your gaze on the broad, swaying flanks surrounding the fuck-droid’s black pussy-lips. A moment later and you’re charging forward, lunging onto [wulfe.name]’s back. Her entire body buckles under your sudden weight, but her cybernetic legs bend rather than break, shuddering as they try to support the both of you. Your forelegs scrabble against [wulfe.name]’s flanks, clawing at her metallic wolf’s body until you’re adjusted atop her -- and your [pc.cock " + i + "] is rammed ");
 				if(pc.balls > 0) output("balls-");
 				output("deep into her quivering sex.");
 			}
@@ -1761,7 +1761,7 @@ public function siegwulfeCryMistressAndLetSlipTheCocksOfWar():void
 	else if (pc.hasVagina()) output(" pussy " + (pc.isSquirter() ? "squirting" : "leaking") + " without end, barely managing to force the femcum out in a stream down your [pc.thighs].");
 	else output(".");
 
-	output("\n\n[wulfe.name] doesn’t let you go for what feels like an hour but is probably closer to half. Her monster cock snaps out of existence and you suddenly drop to the ground, warm and thick cum immediately splattering from your abused fuckhole. Groaning, you lie there for a few seconds with your eyes closed before you feel a soft kiss on your cheek. Cracking an eyelid, you see [wulfe.name] smiling in your face before she plants another kiss on you. Sat in front of you, she continues to gently kiss you all over your face - on your forehead, on the tip of your nose, your cheeks,");
+	output("\n\n[wulfe.name] doesn’t let you go for what feels like an hour but is probably closer to half. Her monster cock snaps out of existence and you suddenly drop to the ground, warm and thick cum immediately splattering from your abused fuckhole. Groaning, you lie there for a few seconds with your eyes closed before you feel a soft kiss on your cheek. Cracking an eyelid, you see [wulfe.name] smiling in your face before she plants another kiss on you. Seated in front of you, she continues to gently kiss you all over your face - on your forehead, on the tip of your nose, your cheeks,");
 	if (pc.hasHair()) output(" hair,");
 	output(" and last of all your [pc.lips].");
 	output("\n\nShe possessively bites down on your bottom lip, eyes hooded, then slides her tongue between your lips and locks it with your own. So enthralling and passionate is her embrace that you don’t even notice her slowly lifting you up, bringing you back to your feet and safely holding you up while she rubs your " + (pc.isTaur() ? "lower back" : "butt") + ", massaging your sore muscles.");

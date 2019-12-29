@@ -1571,7 +1571,7 @@ public function initUvetoRooms():void
 	rooms["UVIP N10"].planet = "PLANET: UVETO VII";
 	rooms["UVIP N10"].system = "SYSTEM: SIRETTA";
 	rooms["UVIP N10"].eastExit = "UVIP P10";
-	rooms["UVIP N10"].southExit = "UVIP N12";
+	//rooms["UVIP N10"].southExit = "UVIP N12";
 	rooms["UVIP N10"].westExit = "UVIP L10";
 	rooms["UVIP N10"].moveMinutes = 6;
 	rooms["UVIP N10"].addFlag(GLOBAL.ICYTUNDRA);
@@ -3532,7 +3532,7 @@ public function initUvetoRoomsII():void
 
 	rooms["KORGII V24"] = new RoomClass(this);
 	rooms["KORGII V24"].roomName = "NORTHEAST\nSTOREROOM";
-	rooms["KORGII V24"].description = "Spending time inside this storeroom is a nice break from the otherwise claustrophobic interior of the rest of the hold. The ceiling is at least twenty or thirty feet high. For a moment, you wonder how the diminutive korgonne managed to hollow out this chamber. The mental image of a tower of craftsmen stacked upon each other’s shoulders, stumbling around while trying to chisel out the ceiling nearly sends you into a fit of giggles.\n\nA wide archway to the north provides access to a roomy access tunnel. The storeroom itself continues on for quite a ways to the south and the west. With all the piled up boxes, Korg’ii Hold could supply itself for some time in the event of a siege or famine.\n\nA small doorway stands on the east wall. Alien runes above it designate the place as something called “Kiona's Kiosk”.";
+	rooms["KORGII V24"].description = "Spending time inside this storeroom is a nice break from the otherwise claustrophobic interior of the rest of the hold. The ceiling is at least twenty or thirty feet high. For a moment, you wonder how the diminutive korgonne managed to hollow out this chamber. The mental image of a tower of craftsmen stacked upon each other’s shoulders, stumbling around while trying to chisel out the ceiling nearly sends you into a fit of giggles.\n\nA wide archway to the north provides access to a roomy access tunnel. The storeroom itself continues on for quite a ways to the south and the west. With all the piled up boxes, Korg’ii Hold could supply itself for some time in the event of a siege or famine.\n\nA small doorway stands on the east wall. Alien runes above it designate the place as something called “Kiona’s Kiosk”.";
 	rooms["KORGII V24"].planet = "PLANET: UVETO VII";
 	rooms["KORGII V24"].system = "SYSTEM: SIRETTA";
 	rooms["KORGII V24"].moveMinutes = 2;
@@ -3549,7 +3549,7 @@ public function initUvetoRoomsII():void
 	
 	//Kiona's Kiosk
 	rooms["KORGII X24"] = new RoomClass(this);
-	rooms["KORGII X24"].roomName = "KIONA'S\nKIOSK";
+	rooms["KORGII X24"].roomName = "KIONA’S\nKIOSK";
 	rooms["KORGII X24"].description = "";
 	rooms["KORGII X24"].planet = "PLANET: UVETO VII";
 	rooms["KORGII X24"].system = "SYSTEM: SIRETTA";
@@ -3714,6 +3714,7 @@ public function initUvetoRoomsII():void
 	rooms["KORGII R43"].inText = "Up";
 	rooms["KORGII R43"].addFlag(GLOBAL.INDOOR);
 	rooms["KORGII R43"].addFlag(GLOBAL.PUBLIC);
+	rooms["KORGII R43"].runOnEnter = korgiiMineGuardsBonus;
 	//rooms["KORGII R43"].runOnEnter = korgiD12Bonus;
 
 	rooms["KORGII R41"] = new RoomClass(this);
@@ -3806,6 +3807,7 @@ public function initUvetoRoomsII():void
 	rooms["KORGII X43"].inText = "Up";
 	rooms["KORGII X43"].addFlag(GLOBAL.INDOOR);
 	rooms["KORGII X43"].addFlag(GLOBAL.PUBLIC);
+	rooms["KORGII X43"].runOnEnter = korgiiMineGuardsBonus;
 	//rooms["KORGII X43"].runOnEnter = korgiD12Bonus;
 
 	rooms["KORGII X41"] = new RoomClass(this);
@@ -3950,6 +3952,7 @@ public function initUvetoRoomsII():void
 	rooms["KORGII R33"].inText = "Up";
 	rooms["KORGII R33"].addFlag(GLOBAL.INDOOR);
 	rooms["KORGII R33"].addFlag(GLOBAL.PUBLIC);
+	rooms["KORGII R33"].runOnEnter = korgiiMineGuardsBonus;
 	//rooms["KORGII R33"].runOnEnter = korgiD12Bonus;
 
 	rooms["KORGII X35"] = new RoomClass(this);
@@ -4004,6 +4007,7 @@ public function initUvetoRoomsII():void
 	rooms["KORGII X33"].inText = "Up";
 	rooms["KORGII X33"].addFlag(GLOBAL.INDOOR);
 	rooms["KORGII X33"].addFlag(GLOBAL.PUBLIC);
+	rooms["KORGII X33"].runOnEnter = korgiiMineGuardsBonus;
 	//rooms["KORGII X33"].runOnEnter = korgiD12Bonus;
 
 	//One-off encounter
@@ -4074,4 +4078,15 @@ public function initUvetoRoomsII():void
 	rooms["WILLOWS ROOM"].inText = "Up";
 	rooms["WILLOWS ROOM"].addFlag(GLOBAL.INDOOR);
 	rooms["WILLOWS ROOM"].addFlag(GLOBAL.PRIVATE);
+
+	rooms["MILODAN TRIBE"] = new RoomClass(this);
+	rooms["MILODAN TRIBE"].roomName = "\nEITAN'S TRIBE";
+	rooms["MILODAN TRIBE"].description = "If you are reading this, something has gone terribly wrong.";
+	rooms["MILODAN TRIBE"].planet = "PLANET: UVETO VII";
+	rooms["MILODAN TRIBE"].system = "SYSTEM: SIRETTA";
+	rooms["MILODAN TRIBE"].southExit = "UVGR O34";
+	rooms["MILODAN TRIBE"].moveMinutes = 3;
+	rooms["MILODAN TRIBE"].addFlag(GLOBAL.FROZENTUNDRA);
+	rooms["MILODAN TRIBE"].addFlag(GLOBAL.OBJECTIVE);
+	rooms["MILODAN TRIBE"].runOnEnter = eitansTribe;
 }

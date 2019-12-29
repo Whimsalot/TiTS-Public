@@ -1,4 +1,4 @@
-﻿import classes.BreastRowClass;
+﻿﻿import classes.BreastRowClass;
 import classes.Characters.PlayerCharacter;
 import classes.Creature;
 import classes.GameData.EventContainer;
@@ -41,10 +41,10 @@ public function infiniteItems():Boolean
 
 public function processEventBuffer():String
 {
-	var output:String = ("<b><u>" + possessive(pc.short) + " log:</u></b>\n");
-	//if (samePageLog) output = ("<u>" + possessive(pc.short) + " log:</u>\n");
+	var output:String = "";
 	if (timestampedEventBuffer.length > 0)
 	{
+		output += ("<b><u>" + possessive(pc.short) + " log:</u></b>\n");
 		timestampedEventBuffer.sortOn("timestamp", Array.NUMERIC);
 		
 		for (var i:int = 0; i < timestampedEventBuffer.length; i++)
@@ -67,10 +67,14 @@ public function processEventBuffer():String
 			output +=("\\\[<span class='" + tEvent.style + "'><b>D: " + d + " T: " + (h < 10 ? ("0" + h) : h) + ":" + (m < 10 ? ("0" + m) : m) + "</b></span>\\\] " + tEvent.msg + (i+1 < timestampedEventBuffer.length ? "\n\n":"\n"));
 			//Old: output("\n\n\\\[<span class='" + tEvent.style + "'><b>D: " + d + " T: " + (h < 10 ? ("0" + h) : h) + ":" + (m < 10 ? ("0" + m) : m) + "</b></span>\\\] " + tEvent.msg);
 		}
-		
-		timestampedEventBuffer = [];
+		//Old: timestampedEventBuffer = [];
 	}
 	return output;
+}
+
+public function clearEventBuffer():void
+{
+	timestampedEventBuffer = [];
 }
 
 public static const NAV_NORTH_DISABLE:uint 	= 1;
@@ -112,7 +116,7 @@ public function disableExploreEvents():Boolean
 	// Pirate Base (Bomb Timer)
 	if (flags["KQ2_NUKE_STARTED"] >= 0 && flags["KQ2_NUKE_EXPLODED"] == undefined) return true;
 	// Kashima Duration
-	if (flags["KASHIMA_STATE"] > 0 && flags["KASHIMA_STATE"] < 2) return true;
+	if (flags["KASHIMA_STATE"] >= 0 && flags["KASHIMA_STATE"] < 2) return true;
 	// Federation Quest
 	if (flags["FEDERATION_QUEST"] > 0 && flags["FEDERATION_QUEST_AMBUSH"] != undefined && flags["FEDERATION_QUEST"] < 3) return true;
 	// Syri Quest
@@ -216,14 +220,20 @@ public function mainGameMenu(minutesMoved:Number = 0):void
 	clearOutput();
 	//Display shit that happened during time passage.
 	var eventBuffer:String = processEventBuffer();
-	if (eventBuffer != ("<b><u>" + possessive(pc.short) + " log:</u></b>\n"))
+	if (eventBuffer != "")
 	{
-		if (samePageLog) output("" + eventBuffer + "<b><u>End log.</u></b>\n\n");
+		if (samePageLog)
+		{
+			output(eventBuffer + "<b><u>End log.</u></b>\n\n");
+			//If clearOutput is called while this flag is active, the output was cleared without the player seeing the event buffer. clearOutput's functionality changes to append the event buffer to the cleared output.
+			flags["EVENT_BUFFER_OVERRIDE"] = true;
+		}
 		else
 		{
 			clearBust();
 			output("" + eventBuffer + "");
 			clearMenu();
+			clearEventBuffer();
 			addButton(0, "Next", mainGameMenu);
 			return;
 		}
@@ -259,6 +269,7 @@ public function mainGameMenu(minutesMoved:Number = 0):void
 		{
 			if(pattonIsHere()) pattonAppearance();
 		}
+		if(flags["BIANCA_LOCATION"] == currentLocation) biancaBonus();
 	}
 	
 	// Time passing effects
@@ -375,6 +386,10 @@ public function mainGameMenu(minutesMoved:Number = 0):void
 	
 	// Dynamic room functions after enter
 	if (rooms[currentLocation].runAfterEnter != null) rooms[currentLocation].runAfterEnter();
+	
+	//If we made it to here without clearOutput being called, the player has seen the event buffer
+	flags["EVENT_BUFFER_OVERRIDE"] = true;
+	clearEventBuffer();
 	
 	flags["NAV_DISABLED"] = undefined; // Clear disabled directions.
 	
@@ -787,6 +802,8 @@ public const CREW_MITZI:int = 20;
 public const CREW_DANE:int = 21;
 public const CREW_KIRO:int = 22;
 public const CREW_OLYMPIA:int = 23;
+public const CREW_EITAN: int = 24;
+public const CREW_ARDIA: int = 25;
 
 public function crewRecruited(allcrew:Boolean = false):Array
 {
@@ -795,10 +812,12 @@ public function crewRecruited(allcrew:Boolean = false):Array
 	// Actual crew members
 	if (amberRecruited()) crewMembers.push(CREW_AMBER);
 	if (annoRecruited()) crewMembers.push(CREW_ANNO);
+	if (ardiaRecruited()) crewMembers.push(CREW_ARDIA);
 	if (azraRecruited()) crewMembers.push(CREW_AZRA);
 	if (bessIsFollower()) crewMembers.push(CREW_BESS);
 	if (celiseIsFollower()) crewMembers.push(CREW_CELISE);
 	if (daneRecruited()) crewMembers.push(CREW_DANE);
+	if (eitanRecruited()) crewMembers.push(CREW_EITAN);
 	if (kaseIsRecruited()) crewMembers.push(CREW_KASE);
 	if (kiroRecruited()) crewMembers.push(CREW_KIRO);
 	if (mitziRecruited()) crewMembers.push(CREW_MITZI);
@@ -832,10 +851,12 @@ public function crewOnboard(allcrew:Boolean = false):Array
 	// Actual crew members
 	if (amberIsCrew()) crewMembers.push(CREW_AMBER);
 	if (annoIsCrew()) crewMembers.push(CREW_ANNO);
+	if (ardiaIsCrew()) crewMembers.push(CREW_ARDIA);
 	if (azraIsCrew()) crewMembers.push(CREW_AZRA);
 	if (bessIsCrew()) crewMembers.push(CREW_BESS);
 	if (celiseIsCrew()) crewMembers.push(CREW_CELISE);
 	if (daneIsCrew()) crewMembers.push(CREW_DANE);
+	if (eitanIsCrew()) crewMembers.push(CREW_EITAN);
 	if (kaseIsCrew()) crewMembers.push(CREW_KASE);
 	if (kiroIsCrew()) crewMembers.push(CREW_KIRO);
 	if (mitziIsCrew()) crewMembers.push(CREW_MITZI);
@@ -951,6 +972,7 @@ public function getCrewOnShip():Array
 {
 	var c:Array = [];
 	if (annoIsCrew()) c.push(anno);
+	if (ardiaIsCrew()) c.push(ardia);
 	if (syriIsCrew()) c.push(syri);
 	if (azraIsCrew()) c.push(azra);
 	if (bessIsCrew()) c.push(bess);
@@ -977,6 +999,7 @@ public function getGunnersOnShipNames():Array
 	//if (bessIsCrew()) crewMembers.push(chars["BESS"].short);
 	//if (celiseIsCrew()) crewMembers.push("Celise");
 	if (daneIsCrew()) crewMembers.push("Dane");
+	//if (eitanIsCrew()) crewMembers.push("Eitan");
 	if (kaseIsCrew()) crewMembers.push("Kase");
 	if (kiroIsCrew()) crewMembers.push("Kiro");
 	if (mitziIsCrew()) crewMembers.push("Mitzi");
@@ -1001,10 +1024,12 @@ public function getCrewOnShipNames(allcrew:Boolean = false, customName:Boolean =
 	
 	if (amberIsCrew()) crewMembers.push("Amber");
 	if (annoIsCrew()) crewMembers.push("Anno");
+	if (ardiaIsCrew()) crewMembers.push("Ardia");
 	if (azraIsCrew()) crewMembers.push("Azra");
 	if (bessIsCrew()) crewMembers.push(customName ? chars["BESS"].short : chars["BESS"].mf("Ben-14","Bess-13"));
 	if (celiseIsCrew()) crewMembers.push("Celise");
 	if (daneIsCrew()) crewMembers.push("Dane");
+	if (eitanIsCrew()) crewMembers.push("Eitan");
 	if (kaseIsCrew()) crewMembers.push("Kase");
 	if (kiroIsCrew()) crewMembers.push("Kiro");
 	if (mitziIsCrew()) crewMembers.push("Mitzi");
@@ -1051,11 +1076,13 @@ public function getFollowerBustDisplay(followerName:String = ""):String
 	{
 		case "Amber": return dryadBustDisplay(); break;
 		case "Anno": return annoBustDisplay(); break;
+		case "Ardia": return ardiaBustDisplay(); break;
 		case "Azra": return azraBustString(); break;
 		case "Ben-14":
 		case "Bess-13": return bessBustDisplay(); break;
 		case "Celise": return celiseBustDisplay(); break;
 		case "Dane": return daneBustDisplay(); break;
+		case "Eitan": return eitanBustDisplay(); break;
 		case "Kase": return kaseBustDisplay(); break;
 		case "Kiro": return kiroBustDisplay(); break;
 		case "Mitzi": return mitziBustString(); break;
@@ -1082,6 +1109,7 @@ public function isFollowerMale(followerName:String = ""):Boolean
 	{
 		case "Bess-13":
 		case "Dane":
+		case "Eitan":
 		case "Kase": return true; break;
 	}
 	return false;
@@ -1101,6 +1129,7 @@ public function getSleepingPartnerBustDisplay():String
 	{
 		case "AMBER": return dryadBustDisplay(); break;
 		case "ANNO": return annoBustDisplay(); break;
+		case "ARDIA": return ardiaBustDisplay(); break;
 		case "AZRA": return azraBustString(); break;
 		case "BESS": return bessBustDisplay(); break;
 		case "CELISE": return celiseBustDisplay(); break;
@@ -1174,6 +1203,15 @@ public function crew(counter:Boolean = false, allcrew:Boolean = false):Number {
 			btnSlot = crewButtonAdjustments(btnSlot);
 		}
 	}
+	if (ardiaIsCrew())
+	{
+		count++;
+		if (!counter)
+		{
+			crewMessages += ardiaCrewBlurbs(btnSlot, InCollection(CREW_ARDIA, crewMembers));
+			btnSlot = crewButtonAdjustments(btnSlot);
+		}
+	}
 	if (azraIsCrew())
 	{
 		count++;
@@ -1198,6 +1236,15 @@ public function crew(counter:Boolean = false, allcrew:Boolean = false):Number {
 		//count++;
 		if(!counter) {
 			crewMessages += celiseShipBonusText(btnSlot, InCollection(CREW_CELISE, crewMembers));
+			btnSlot = crewButtonAdjustments(btnSlot);
+		}
+	}
+	if (eitanIsCrew())
+	{
+		count++;
+		if (!counter)
+		{
+			crewMessages += eitanCrewBlurbs(btnSlot, InCollection(CREW_EITAN, crewMembers));
 			btnSlot = crewButtonAdjustments(btnSlot);
 		}
 	}
@@ -1469,11 +1516,16 @@ public function wait(minPass:int = 0):void
 	else if(hrPass == 1) output(" one hour");
 	else output(" " + num2Text(hrPass) + " hours");
 	output(".");
-	
+
 	var waitMult:Number = 0.20 * (minPass / 240);
+	if(pc.hasStatusEffect("Using Doctor's Bag"))
+	{
+		waitMult *= 1.1 + 0.05*pc.statusEffectv1("Using Doctor's Bag");
+		pc.removeStatusEffect("Using Doctor's Bag");
+	}
 	if(pc.HPRaw < pc.HPMax()) pc.HP(Math.round(pc.HPMax() * waitMult));
 	if(pc.energyRaw < pc.energyMax()) pc.energy(Math.round(pc.energyMax() * waitMult));
-	
+
 	if(pc.HPRaw < pc.HPMax() || pc.energyRaw < pc.energyMax()) output(" While doing this doesn’t keep you well rested, it manages to pass the time.");
 	
 	processTime(minPass);
@@ -1558,13 +1610,18 @@ public function restHeal():void
 		bonusMult += 0.5;
 		soreMult += 1;
 	}
+	if(pc.hasStatusEffect("Using Doctor's Bag"))
+	{
+		bonusMult += 0.3
+		pc.removeStatusEffect("Using Doctor's Bag");
+	}
 	if(pc.accessory is MaikesCollar)
 	{
 		bonusMult = 0;
 		AddLogEvent("The slave collar’s punishing shocks keep your rest from doing much.");
 	}
 	else if(pc.hasStatusEffect("Dzaan Withdrawal")) bonusMult = 0.5;
-	
+
 	if(bonusMult != 0)
 	{
 		if(pc.HPRaw < pc.HPMax()) {
@@ -1730,6 +1787,13 @@ public function sleep(outputs:Boolean = true, bufferXP:Boolean = true):void {
 						interrupt = ramisSleep();
 					}
 					break;
+				case "ARDIA":
+					if (ardiaIsCrew())
+					{
+						ardiaSleep();
+						interrupt = true;
+					}
+					break;
 				// No partner selected.
 				default:
 					// SERA IMPREGNATIONS
@@ -1789,6 +1853,7 @@ public function sleep(outputs:Boolean = true, bufferXP:Boolean = true):void {
 		if (flags["KASE_SLEEPWITH_DOMORNING"] == 1) wakeEvents = [kaseCrewWake];
 		if (flags["RAMIS_SLEEPWITH_DOMORNING"] == 1) wakeEvents = [ramisSleepWake];
 		if (flags["PAIGE_WAKEY_FLAGS"] != undefined) wakeEvents = [paigeWakeyWakey];
+		if (flags["ARDIA_SLEEPWITH_DOMORNING"] == 1) wakeEvents = [ardiaWantsToDoMorningThings];
 		if (pc.hasStatusEffect("PENNY_WAKEUP_CUED"))
 		{
 			pc.removeStatusEffect("PENNY_WAKEUP_CUED");
@@ -2063,6 +2128,11 @@ public function insideShipEvents():Boolean
 		amberAndMitziFun();
 		return true;
 	}
+	if (flags["DZAAN_CURE_ARRIVAL"] < GetGameTimestamp() && ardiaIsCrew() && annoIsCrew())
+	{
+		annoHasYourDzaanDrugs();
+		return true;
+	}
 
 	return false;
 }
@@ -2163,7 +2233,7 @@ public function shipMenu():Boolean
 			addDisabledButton(5,"Fly","Fly","Maybe you should stay close while Paige is in surgery.");
 		}
 	}
-	
+
 	return false;
 }
 
@@ -2392,8 +2462,15 @@ public function flyTo(arg:String):void
 		else if(InCollection(arg,["Tarkus","Myrellion","MyrellionDeepCaves","Mhen'ga","ZhengShi","Uveto"]) && rand(10) == 0)
 		{
 			prepShipfite();
+			if(InCollection(arg,["ZhengShi","Uveto","Myrellion","MyrellionDeepCaves"]) && rand(2) == 0 && !pc.hasStatusEffect("SnekOnboard"))
+			{
+				encounterSlyverenPirate();
+			}
+			else
+			{
+				encounterPyrotechZ7();
+			}
 			flags["SUPRESS TRAVEL EVENTS"] = 1;
-			encounterPyrotechZ7();
 			return;
 		}
 		
@@ -2544,6 +2621,8 @@ public function prepShipfite():void
 {
 	//setNavDisabled(NAV_OUT_DISABLE);
 	shipLocation = "SPACE";
+	generateMap();
+	showLocationName();
 }
 
 public function leaveShipOK():Boolean
@@ -2593,6 +2672,12 @@ public function landingEventCheck(arg:String = ""):Boolean
 			getAPetVarmint();
 			return true;
 		}
+	}
+	if(pc.hasStatusEffect("SnekOnboard"))
+	{
+		currentLocation = "SHIP INTERIOR";
+		snekWifeDropoffScene();
+		return true;
 	}
 	return false;
 }
@@ -3257,7 +3342,8 @@ public function move(arg:String, goToMainMenu:Boolean = true):void
 	{
 		var toSpace:Boolean = (arg.indexOf("SPACE") != -1 || (rooms[arg].hasFlag(GLOBAL.OUTDOOR) && rooms[arg].hasFlag(GLOBAL.LOW_GRAVITY)));
 		//Procs in safe areas only, like Reaha's milk stand:
-		if(!rooms[arg].hasFlag(GLOBAL.HAZARD) && !toSpace && !disableExploreEvents())
+		//Dont proc on the Zheng Shi, cause slavers and such
+		if(!rooms[arg].hasFlag(GLOBAL.HAZARD) && !toSpace && !disableExploreEvents() && !rooms[arg].planet == "ZHENG SHI STATION")
 		{
 			if(reahaIsCrew() && !reahaAddicted() && rand(5) == 0) eventQueue.push(reahaMilkStand);
 		}
@@ -3368,7 +3454,7 @@ public function variableRoomUpdateCheck():void
 	if (zilCallgirlAtNursery())
 	{
 		rooms["ANON'S BOARD HALL"].removeFlag(GLOBAL.OBJECTIVE);
-		if (hours >= 8 && hours <= 16) rooms["RESIDENTIAL DECK ZHENIYA"].removeFlag(GLOBAL.NPC);
+		if ((hours >= 8 && hours <= 16) || pc.hasStatusEffect("Zheniya Birth Recover")) rooms["RESIDENTIAL DECK ZHENIYA"].removeFlag(GLOBAL.NPC);
 		else rooms["RESIDENTIAL DECK ZHENIYA"].addFlag(GLOBAL.NPC);
 	}
 	else if(flags["SAENDRA_XPACK1_STATUS"] >= 8)
@@ -3470,6 +3556,8 @@ public function variableRoomUpdateCheck():void
 		if(flags["SATELLITE_QUEST"] == 1 || flags["SATELLITE_QUEST"] == -1) rooms["ESBETH'S NORTH PATH"].addFlag(GLOBAL.NPC);
 		else if(pennyRecruited() && !pennyIsCrew()) rooms["ESBETH'S NORTH PATH"].addFlag(GLOBAL.NPC);
 		else rooms["ESBETH'S NORTH PATH"].removeFlag(GLOBAL.NPC);
+		if(biancaPlanet() == "mhen'ga") rooms["ESBETH'S NORTH PATH"].addFlag(GLOBAL.FIRST_AID);
+		else rooms["ESBETH'S NORTH PATH"].removeFlag(GLOBAL.FIRST_AID);
 	}
 	//Yakuza things
 	if (flags["SHUKUCHI_TAVROS_ENCOUNTER"] != undefined && flags["SHUKUCHI_MHENGA_ENCOUNTER"] == undefined) rooms["NORTHWEST ESBETH"].addFlag(GLOBAL.NPC);
@@ -3496,7 +3584,7 @@ public function variableRoomUpdateCheck():void
 	}
 	//Filling Burt's back end
 	//Kally not at work or incesty zil
-	if ((hours < 6 || hours >= 17) || zilTwinsAtBar())
+	if ((hours < 6 || hours >= 17) || zilTwinsAtBar() || thyvaraInBurts())
 		rooms["BURT'S BACK END"].addFlag(GLOBAL.NPC);
 	else rooms["BURT'S BACK END"].removeFlag(GLOBAL.NPC);
 	//Hungry Hungry Rahn
@@ -3685,6 +3773,9 @@ public function variableRoomUpdateCheck():void
 	// Lane is away
 	if (flags["LANE_DISABLED"] == undefined) rooms["LANESSHOP"].addFlag(GLOBAL.NPC);
 	else rooms["LANESSHOP"].removeFlag(GLOBAL.NPC);
+	//Bianca doan medicine
+	if (biancaPlanet() == "tarkus") rooms["211"].addFlag(GLOBAL.FIRST_AID);
+	else rooms["211"].removeFlag(GLOBAL.FIRST_AID);
 	
 	
 	/* NEW TEXAS */
@@ -3881,7 +3972,10 @@ public function variableRoomUpdateCheck():void
 	//Breedwell
 	if (quaelleSexTimer(1, 6) || quaelleIsImmobile()) rooms["BREEDWELL_QUAELLE_APT"].addFlag(GLOBAL.NPC);
 	else rooms["BREEDWELL_QUAELLE_APT"].removeFlag(GLOBAL.NPC);
-	
+
+	if (biancaPlanet() == "myrellion") rooms["604"].addFlag(GLOBAL.FIRST_AID);
+	else rooms["604"].removeFlag(GLOBAL.FIRST_AID);
+
 	/* ZHENG SHI */
 
 	if(flags["MAIKE_SLAVES_RELEASED"] != undefined) {
@@ -3929,6 +4023,10 @@ public function variableRoomUpdateCheck():void
 	// Dr. Teyaal
 	if(flags["TEYAAL_DEFEATED"] == 2) rooms["ZSF AD20"].removeFlag(GLOBAL.NPC);
 	else rooms["ZSF AD20"].addFlag(GLOBAL.NPC);
+
+	// Ardia Leaving
+	if (ardiaInZhengShi()) rooms["ZSF I22"].addFlag(GLOBAL.NPC);
+	else rooms["ZSF I22"].removeFlag(GLOBAL.NPC);
 
 	/* UVETO */
 	
@@ -4017,6 +4115,9 @@ public function variableRoomUpdateCheck():void
 	else rooms["UVIP T44"].southExit = undefined;
 	//Ula and main hold daddy swapping.
 	ulaRoomUpdater();
+	//War Alpha tribe freed
+	if (wargiiMilodanTribeFreed()) rooms["UVGR O34"].northExit = "MILODAN TRIBE";
+	else rooms["UVGR O34"].northExit = "";
 	
 	/* VESPERIA / CANADIA STATION */
 	/*
@@ -4034,7 +4135,8 @@ public function variableRoomUpdateCheck():void
 	else rooms["CANADA3"].removeFlag(GLOBAL.NPC);
 
 	/* MISC */
-	
+	// Kiroquest:
+	kiroQuestRoomUpdate();
 	// Kiro's Airlock
 	kirosShipAirlockUpdate();
 	// Phoenix Location
@@ -4125,7 +4227,7 @@ public function processTime(deltaT:uint, doOut:Boolean = true):void
 	processReahaEvents(deltaT, doOut, totalDays);
 	processGobblesEvents(deltaT, doOut);
 	processIrelliaEvents(deltaT, doOut);
-	processOmniSuitEvents(deltaT, doOut); // Dependant on Libido changes, might need to be refactored to support jumping between states directly
+	processOmniSuitEvents(deltaT, doOut); // Dependent on Libido changes, might need to be refactored to support jumping between states directly
 	processCarryTrainingEvents(deltaT, doOut);
 	processNessaEvents(deltaT, doOut);
 	processCuntTailEggs(deltaT, doOut);
@@ -4142,6 +4244,7 @@ public function processTime(deltaT:uint, doOut:Boolean = true):void
 	processLucaTimeStuff(deltaT, doOut, totalDays);
 	processBreedwellPremiumBreederEvents(deltaT, doOut, totalDays);
 	processMirrinPregnancy(deltaT, nextTimestamp);
+	processBianca(totalDays, nextTimestamp);
 	
 	// Per-day events
 	if (totalDays >= 1)
@@ -4172,6 +4275,7 @@ public function processTime(deltaT:uint, doOut:Boolean = true):void
 		processCasinoEvents();
 		processRoxyPregEvents(deltaT, doOut, totalDays);
 		processBizzyCamgirlPayments(deltaT, doOut, totalDays);
+		processPerditaPayments(deltaT, doOut, totalDays);
 	}
 	
 	var totalHours:uint = Math.floor((minutes + deltaT) / 60);

@@ -348,6 +348,13 @@
 		},
 		true);
 	inputManager.AddBindableControl(
+		"Bianca Spawn",
+		"Places Bianca wherever player is, if in compatible tile.",
+		function():void {
+			Cheats.BringMeAFox();
+		},
+		true);
+	inputManager.AddBindableControl(
 		"Nym-Foe Targets TiTS",
 		"Toggle whether or not Nym-Foe will target the breasts when she injects silicone.",
 		function():void {
@@ -362,10 +369,24 @@
 		},
 		true);
 	inputManager.AddBindableControl(
-		"SJW Mode",
+		"Sexdoll Encounter",
+		"Trigger an encounter with a WIP enemy from Kiro's Recruitment quest.",
+		function():void {
+			Cheats.SexdollEncounter();
+		},
+		true);
+	inputManager.AddBindableControl(
+		"Politically Correct Mode",
 		"Toggle whether certain offensive words are used.",
 		function():void {
 			Cheats.SJWMode();
+		},
+		true);
+	inputManager.AddBindableControl(
+		"Ardia DM7+ Sex Choice",
+		"Toggle whether Ardia chooses sex scenes at high dominance. May result in unintended behaviour.",
+		function():void {
+			Cheats.ArdiaLetsYouChoose();
 		},
 		true);
 		
@@ -373,9 +394,9 @@
 	inputManager.BindCheatSequence("Room Transport", "idclev");
 	inputManager.BindCheatSequence("Scene Execute", "impulse");
 	inputManager.BindCheatSequence("XP to Level", "motherlode");
-	inputManager.BindCheatSequence("SJW Mode","sjw");
+	inputManager.BindCheatSequence("Politically Correct Mode","poison");
 	inputManager.BindCheatSequence("100K Credits", "anotherbrickinthewall");
-	inputManager.BindCheatSequence("Infinte Item Use", "furfag");
+	inputManager.BindCheatSequence("Infinte Item Use", "urta");
 	inputManager.BindCheatSequence("Infinite Crew Space", "clowncar");
 	inputManager.BindCheatSequence("Toggle Debug", "fuckyou");
 	inputManager.BindCheatSequence("Force Default Treatment", "treatment");
@@ -390,8 +411,11 @@
 	inputManager.BindCheatSequence("Toggle Seasons", "tistheseason");
 	inputManager.BindCheatSequence("Mitzi Unlock", "mitzi");
 	inputManager.BindCheatSequence("Space Yakuza Skip", "anofferyoucantrefuse");
+	inputManager.BindCheatSequence("Bianca Spawn", "healthdelivery");
 	inputManager.BindCheatSequence("Nym-Foe Targets TiTS", "beshineforever");
 	inputManager.BindCheatSequence("Classic Lapinara", "laplove");
+	inputManager.BindCheatSequence("Sexdoll Encounter", "doll");
+	inputManager.BindCheatSequence("Ardia DM7+ Sex Choice", "ardiaschoice");
 	
 	// Insert the default bindings
 	inputManager.BindKeyToControl(49, "Button 1");             // case 49: pressButton(0);

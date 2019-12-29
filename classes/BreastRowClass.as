@@ -3,6 +3,7 @@
 	import classes.DataManager.Serialization.UnversionedSaveable;
 	import classes.ItemSlotClass;
 	import classes.Items.Miscellaneous.EmptySlot;
+	import classes.Items.Piercings.*;
 	public class BreastRowClass extends UnversionedSaveable
 	{
 		//constructor
@@ -91,6 +92,7 @@
 			{
 				if(areolaFlags[i] == GLOBAL.FLAG_HEART_SHAPED) areolaFlags.splice(i, 1);
 				if(areolaFlags[i] == GLOBAL.FLAG_STAR_SHAPED) areolaFlags.splice(i, 1);
+				if(areolaFlags[i] == GLOBAL.FLAG_FLOWER_SHAPED) areolaFlags.splice(i, 1);
 				i--;
 			}
 		}
