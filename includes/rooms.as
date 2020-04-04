@@ -42,6 +42,8 @@ public function buildRooms():void
 	initWargiiRooms();
 	initKimberRooms();
 	initKQRooms();
+	initDhaalRooms();
+	initSteeleBiomedicalRooms();
 	
 	mapper = new Mapper(rooms);
 }

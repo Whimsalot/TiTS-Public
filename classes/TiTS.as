@@ -129,6 +129,7 @@
 		//Holiday shit
 		include "../includes/holidayEvents/2018XmasEvents.as";
 		include "../includes/holidayEvents/2018Krissy.as";
+		include "../includes/holidayEvents/biancaVDay.as";
 		include "../includes/holidayEvents/candyRahn.as";
 		include "../includes/holidayEvents/chupacabro.as";
 		include "../includes/holidayEvents/freedomBeef.as";
@@ -159,6 +160,8 @@
 		include "../includes/follower/celiseGiga.as";
 		include "../includes/follower/eitan.as";
 		include "../includes/follower/kase.as";
+		include "../includes/follower/kiro.as";
+		include "../includes/follower/kiroBimbo.as";
 		include "../includes/follower/mitzi.as";
 		include "../includes/follower/multi_interactions.as";
 		include "../includes/follower/olympiaAndSidewinder.as";
@@ -228,10 +231,14 @@
 		include "../includes/events/kiroCrewQuest/buttslutinator.as";
 		include "../includes/events/kiroCrewQuest/fuckdollGeneric.as";
 		include "../includes/events/kiroCrewQuest/holoTrap.as";
+		include "../includes/events/kiroCrewQuest/illustriaPo.as";
 		include "../includes/events/kiroCrewQuest/omnisuitExtras.as";
 		include "../includes/events/kiroCrewQuest/orgasmender.as";
 		include "../includes/events/kiroCrewQuest/rooms.as";
 		include "../includes/events/kiroCrewQuest/sexbotMiniboss.as";
+		include "../includes/events/kiroCrewQuest/taursuit.as";
+		include "../includes/events/kiroCrewQuest/twinSlutBots.as";
+		include "../includes/events/kiroCrewQuest/victoryEvent.as";
 		include "../includes/events/kiro_x_paige_threesomes.as";
 		include "../includes/events/pyriteSatelliteRecovery.as";
 		include "../includes/events/steph_on_demand.as";
@@ -372,6 +379,7 @@
 		include "../includes/tarkus/grayGooArmor.as";
 		include "../includes/tarkus/lane.as";
 		include "../includes/tarkus/lapinara.as";
+		include "../includes/tarkus/lumi.as";
 		include "../includes/tarkus/mindwashVisor.as";
 		include "../includes/tarkus/raskvelFemaleFight.as";
 		include "../includes/tarkus/raskvelMaleFight.as";
@@ -504,6 +512,12 @@
 		include "../includes/zhengShiStation/wallSluts.as";
 
 		include "../includes/zhengShiStation/shipTesting.as";
+
+		// Dhaal
+		include "../includes/dhaal/capsuleHotel.as";
+		include "../includes/dhaal/milkBar.as";
+		include "../includes/dhaal/milkThief.as";
+		include "../includes/dhaal/rooms.as";
 		
 		// Breedwell
 		include "../includes/breedwell/breedwell.as";
@@ -551,6 +565,7 @@
 		include "../includes/uveto/lureling.as";
 		include "../includes/uveto/majaTamedTamelings.as";
 		include "../includes/uveto/milodanFertilityPriestess.as";
+		include "../includes/uveto/milodanFutazon.as";
 		include "../includes/uveto/milodanMaleHostile.as";
 		include "../includes/uveto/natalie.as";
 		include "../includes/uveto/nayna.as";
@@ -579,6 +594,14 @@
 		include "../includes/uveto/walt.as";
 		include "../includes/uveto/willow.as";
 		include "../includes/uveto/xotchiExpansion.as";
+		
+		//uveto steele biomedical deepsea research facility
+		include "../includes/uveto/steeleBiomedical/janeriaCore.as";
+		include "../includes/uveto/steeleBiomedical/janeriaSpawn.as";
+		include "../includes/uveto/steeleBiomedical/rooms.as";
+		include "../includes/uveto/steeleBiomedical/roomFunctions.as";
+		include "../includes/uveto/steeleBiomedical/steeleBioDeepseaLab.as";
+		include "../includes/uveto/steeleBiomedical/typhon.as";
 		
 		include "../includes/chargendata.as";
 		include "../includes/SSTDs/cooties.as";
@@ -694,7 +717,7 @@
 
 			trace("TiTS Constructor")
 
-			version = "0.8.029";
+			version = "0.8.065";
 
 			//temporary nonsense variables.
 			temp = 0;
@@ -746,6 +769,9 @@
 			
 			inputManager = new InputManager(stage, false);
 			setupInputControls();
+			
+			// Pre-load character/ship data
+			initializeNPCs();
 			
 			initStephEps();
 			

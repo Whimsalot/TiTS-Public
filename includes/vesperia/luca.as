@@ -431,7 +431,7 @@ public function thePirateQueenScenario(exhibition:Boolean):void
 	output("\n\nWith that done you wipe away any cum on your lips and check out your figure. Your belly is still slim and yet you feel so full. Weird. You proceed onwards towards your goal.");
 	output("\n\nMoving through the ship you find yourself caught between a forked hallway and the heavy footsteps of patrolling guards. The left hall leads to ‘Testing Center 34-N.’ The right hall leads to ‘Nutrient Stalls 12-N.’ You can’t let yourself get caught by the guards and there isn’t an immediate alternative, so which hallway do you take?");
 	processTime(55 + rand(11));
-	pc.lust(30);
+	pc.changeLust(30);
 	clearMenu();
 	// Left Hallway follows A path and Right Hallway follows B path.
 	//[Left Hallway] [Right Hallway] [Bail]
@@ -497,7 +497,7 @@ public function part3ADoorDildo(exhibition:Boolean):void
 	output("\n\nEventually your oral orgasm subsides and you slide off of the dildo. The door opens up and you shakily walk through it.\n\nYou have to complete your mission.");
 	processTime(55 + rand(11));
 	pc.orgasm();
-	pc.lust(20);
+	pc.(20);
 	clearMenu();
 	// Next Scene
 	// Go to Part 3 - The Bad End
@@ -532,7 +532,7 @@ public function nutrientStallsWheee(exhibition:Boolean):void
 	output("\n\nAs you catch your breath you wonder just how much cum you drank. No matter how much you ingested, it wasn’t enough. Your body craves more, but your stomach must be bloated by now. Upon examination however, your belly is nice and flat; kind of empty when you think about it.");
 	processTime(55 + rand(11));
 	// Next Scene
-	pc.lust(100);
+	pc.changeLust(100);
 	clearMenu();
 	// Next Scene
 	//[Next] or [Bail]
@@ -733,7 +733,7 @@ public function simmCaged3A(exhibition:Boolean):void
 	output("\n\nThe guard releases her hold on your skull and you fall backwards onto your butt. She chuckles and walks away. You blissfully start sucking a finger in and out of your mouth. Tasting what little cum you didn’t swallow, you start rolling it around with your tongue.");
 	output("\n\nThe guard eventually returns with a plate of cold fruit and warm meat. She hand feeds each piece to you like a pet, one bite at a time. Once or twice you catch a finger between your lips, sucking on them as she pulls her hand away. When you’re finished you lie down full of food and semen and try to get a real night’s worth of sleep.");
 	processTime(55 + rand(11));
-	pc.lust(100);
+	pc.changeLust(100);
 	// Next Scene
 	//[Next] [Bail]
 	//Tooltip Next: Proceed with the simulation.
@@ -896,7 +896,7 @@ public function badEndBedBitch(exhibition:Boolean):void
 	output("\n\nHer cock milks your prostate for all it has. Each time you slam back down more of your spooge is forced out of your cute little phallus. You become lost in pleasure as Hippolyta drills into your rear end. Although she fondles your body carefully, it is clear that you are her personal cock sleeve, <i>now and forever.</i>");
 	output("\n\nHer first orgasm distends your stomach as you ride atop her lap through it all. Each thrust and pulse of warm cum into your rectum causes your dick to spray more of your own alabaster goo. When she’s finished she turns you around and starts again.");
 	output("\n\nFor the rest of that day and night Hippolyta had her way with you and the tribe. Her lust seemed insatiable, she would fuck one hole after another. But in the end she would become frustrated as no one else could get her off as much as you. She always returned to you to take the edge off and experience a proper orgasm. By the end of the night you were completely filled and covered with her seed.");
-	output("\n\nUp until that point, you had forgotten about your crew. At least until you saw them in orgasmic bliss, relieving members of the tribe. They looked like they were having so much fun that you asked your chieftain if she would fuck you in front of them. As the months pass, you become dependant on Hippolyta and her cock. Eventually she just started carrying you around mounted on her dick. <i>You couldn’t care less about being an explorer, this life suits you so much more.</i>");
+	output("\n\nUp until that point, you had forgotten about your crew. At least until you saw them in orgasmic bliss, relieving members of the tribe. They looked like they were having so much fun that you asked your chieftain if she would fuck you in front of them. As the months pass, you become dependent on Hippolyta and her cock. Eventually she just started carrying you around mounted on her dick. <i>You couldn’t care less about being an explorer, this life suits you so much more.</i>");
 	// End Scene
 	// Simulation End Text
 	// Return PC to lobby

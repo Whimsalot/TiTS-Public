@@ -403,7 +403,7 @@ private function bodyPartCleanup(partName:String = "none", deltaT:uint = 0):void
 	{
 		if((altCheck || heightQ < lvlRatio[0]) && pc.hasStatusEffect("Bulky Belly"))
 		{
-			AddLogEvent("Shifting your weight around seems a lot easier now. <b>Your [pc.belly] is no longer slowing you down!</b>", "good", deltaT);
+			AddLogEvent("Shifting your weight around seems a lot easier now.  <b>Your [pc.belly] is no longer slowing you down!</b>", "good", deltaT);
 			pc.removeStatusEffect("Bulky Belly");
 		}
 		if((altCheck || weightQ < perRatio[3] || heightQ < lvlRatio[3]) && pc.hasStatusEffect("Endowment Immobilized")) 
@@ -1081,7 +1081,7 @@ public function lactationUpdateHourTick(totalHours:int):void
 		msg = ParseText("Like a switch has been flipped inside you, you feel your body’s [pc.milk]-factories power down. <b>You’ve stopped lactating entirely.</b>");
 		if(pc.milkFullness >= 75) 
 		{
-			msg += ParseText(" The swelling from your over-filled [pc.fullChest] goes down as well, leaving you with [pc.breastCupSize]s.");
+			msg += ParseText(" The swelling from your over-filled [pc.fullChest] goes down as well" + (pc.hasBreasts() ? ", leaving you with [pc.breastCupSize]s" : "") + ".");
 			pc.milkFullness = 75;
 		}
 		AddLogEvent(msg, "passive", 60 * numChanges);
@@ -1258,7 +1258,7 @@ public function priapismBlurbs():void
 				else msgList.push("Flahne whistles at you and waves on her way by. <i>“Looking good, sugar!”</i>");
 			}
 			// Mhenga Penny Cumslut Public
-			if(flags["PENNY_IS_A_CUMSLUT"] != undefined && flags["PENNY_HIDING_CUMSLUTTERY"] == undefined) msgList.push("Less people spend time checking out your ever-present than you would expect. Then again, ever since you taught Penny how to be a cum-slut, the settlement has gotten used to seeing a lot more dick.");
+			if(pennyIsCumSlut() && flags["PENNY_HIDING_CUMSLUTTERY"] == undefined) msgList.push("Less people spend time checking out your ever-present than you would expect. Then again, ever since you taught Penny how to be a cum-slut, the settlement has gotten used to seeing a lot more dick.");
 		}
 		// Tarkus
 		if(pcLocation == "Tarkus")
@@ -1634,104 +1634,9 @@ public function getFinedForPriapism(bMale:Boolean = false):void
 public function clothingSizeUpdates(deltaT:uint = 0):void
 {
 	// Special stretchy clothes changes!
-	stretchBonusSexinessCheck(pc, deltaT);
+	//stretchBonusSexinessCheck(pc, deltaT);
+	if(pc.lowerUndergarment is GabilaniPanties)
+	{
+		(pc.lowerUndergarment as GabilaniPanties).stretchUpdateCheck(pc,true);
+	}
 }
-
-// For stretchy clothing on breasts/hips/butts
-public function stretchBonusSexinessCheck(target:Creature, deltaT:uint):void
-{
-	var msg: String = "";
-	
-	if(target.lowerUndergarment.hasFlag(GLOBAL.ITEM_FLAG_STRETCHY))
-	{
-		if(msg != "") msg += "\n\n";
-		msg += stretchBonusSexiness(target, target.lowerUndergarment, true, true);
-	}
-	if(target.upperUndergarment.hasFlag(GLOBAL.ITEM_FLAG_STRETCHY))
-	{
-		if(msg != "") msg += "\n\n";
-		msg += stretchBonusSexiness(target, target.upperUndergarment, true, true);
-	}
-	if(target.armor.hasFlag(GLOBAL.ITEM_FLAG_STRETCHY))
-	{
-		if(msg != "") msg += "\n\n";
-		msg += stretchBonusSexiness(target, target.armor, true, true);
-	}
-	
-	if(msg != "") AddLogEvent(msg, "passive", deltaT);
-}
-public function stretchBonusSexiness(target:Creature, item:ItemSlotClass, equipOn:Boolean = false, outputText:Boolean = false):String
-{
-	var msg: String = "";
-	var bonus:Number = 0;
-	var bigness:Number = 0;
-	
-	if(equipOn)
-	{
-		switch(item.type)
-		{
-			case GLOBAL.LOWER_UNDERGARMENT:
-				bigness = Math.max(target.hipRating(), target.buttRating());
-				break;
-			case GLOBAL.UPPER_UNDERGARMENT:
-				if(!item.hasFlag(GLOBAL.ITEM_FLAG_EXPOSE_FULL) && !item.hasFlag(GLOBAL.ITEM_FLAG_EXPOSE_CHEST)) bigness = target.biggestTitSize();
-				break;
-			default:
-				bigness = Math.max(target.hipRating(), target.buttRating(), ((!item.hasFlag(GLOBAL.ITEM_FLAG_EXPOSE_FULL) && !item.hasFlag(GLOBAL.ITEM_FLAG_EXPOSE_CHEST)) ? target.biggestTitSize() : 0));
-				break;
-		}
-		
-		if (bigness < 5) bonus += 0;
-		else if (bigness < 10) bonus += 1;
-		else if (bigness < 15) bonus += 2;
-		else if (bigness < 20) bonus += 3;
-		else bonus += 4;
-	}
-	
-	var baseSexiness:Number = 0; // Base sexiness of the item
-	var transparencyBonus:Number = 0; // The value of bonus before the item becomes transparent
-	// Library of base sexinesses here, please.
-	if(item is GabilaniPanties) { baseSexiness = 2; transparencyBonus = 3; }
-	
-	var oldSexiness:Number = item.sexiness;
-	var newSexiness:Number = (baseSexiness + bonus);
-	var wasTransparent:Boolean = item.hasFlag(GLOBAL.ITEM_FLAG_TRANSPARENT);
-	if(oldSexiness != newSexiness)
-	{
-		// Log changes
-		if(outputText)
-		{
-			if(target is PlayerCharacter)
-			{
-				// Just in case...
-				if(item is EmptySlot) { /* Nada */ }
-				// Generic change texts
-				else
-				{
-					// More sexy
-					if(oldSexiness < newSexiness)
-					{
-						msg += "The pliant material of your " + item.longName + " stretches, <b>";
-						if(transparencyBonus > 0 && bonus >= transparencyBonus && !wasTransparent) msg += "becoming transparent and ";
-						msg += "improving the clothing’s sexiness level!</b>";
-					}
-					// Less sexy
-					else
-					{
-						msg += "The elasticity of your " + item.longName + " relaxes, <b>";
-						if(transparencyBonus > 0 && bonus < transparencyBonus && wasTransparent) msg += "becoming opaque and ";
-						msg += "dropping the clothing’s sexiness level.</b>";
-					}
-				}
-			}
-		}
-		// Actual changes
-		target.createStatusEffect("Stretchy Sexiness", bonus);
-		item.onEquip(target);
-		target.removeStatusEffect("Stretchy Sexiness");
-	}
-	
-	return msg;
-}
-
-

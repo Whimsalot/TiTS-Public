@@ -157,14 +157,14 @@
 		private function randomise():void
 		{
 			sexualPreferences.setRandomPrefs(3 + rand(3),-1);
-			sexualPreferences.setPref(GLOBAL.SEXPREF_CUMMY, sexualPreferences.getRandomLikeFactor());
-			sexualPreferences.setPref(GLOBAL.SEXPREF_HERMAPHRODITE, sexualPreferences.getRandomLikeFactor());
-			sexualPreferences.setPref(GLOBAL.SEXPREF_BIG_MALEBITS, sexualPreferences.getRandomLikeFactor());
-			sexualPreferences.setPref(GLOBAL.SEXPREF_VAGINAL_WETNESS, sexualPreferences.getRandomLikeFactor());
-			sexualPreferences.setPref(GLOBAL.SEXPREF_LACTATION, sexualPreferences.getRandomLikeFactor());
-			sexualPreferences.setPref(GLOBAL.SEXPREF_LONG_HAIR, sexualPreferences.getRandomLikeFactor());
-			sexualPreferences.setPref(GLOBAL.SEXPREF_FEMININE, sexualPreferences.getRandomLikeFactor());
-			sexualPreferences.setPref(GLOBAL.SEXPREF_MASCULINE, sexualPreferences.getRandomLikeFactor());
+			sexualPreferences.setPref(GLOBAL.SEXPREF_CUMMY, sexualPreferences.getRandomLikesFactor());
+			sexualPreferences.setPref(GLOBAL.SEXPREF_HERMAPHRODITE, sexualPreferences.getRandomLikesFactor());
+			sexualPreferences.setPref(GLOBAL.SEXPREF_BIG_MALEBITS, sexualPreferences.getRandomLikesFactor());
+			sexualPreferences.setPref(GLOBAL.SEXPREF_VAGINAL_WETNESS, sexualPreferences.getRandomLikesFactor());
+			sexualPreferences.setPref(GLOBAL.SEXPREF_LACTATION, sexualPreferences.getRandomLikesFactor());
+			sexualPreferences.setPref(GLOBAL.SEXPREF_LONG_HAIR, sexualPreferences.getRandomLikesFactor());
+			sexualPreferences.setPref(GLOBAL.SEXPREF_FEMININE, sexualPreferences.getRandomLikesFactor());
+			sexualPreferences.setPref(GLOBAL.SEXPREF_MASCULINE, sexualPreferences.getRandomLikesFactor());
 
 			sexualPreferences.setPref(GLOBAL.SEXPREF_SMALL_MALEBITS, sexualPreferences.getRandomDislikeFactor());
 			sexualPreferences.setPref(GLOBAL.SEXPREF_NARROW_HIPS, sexualPreferences.getRandomDislikeFactor());
@@ -703,7 +703,7 @@
 			//v2
 			else if(rand(2) == 0) output("<i>“Ummm,”</i> the sexpot rambles, <i>“do you think you’d mind crawling over here and just giving in to my... uh...”</i> She blushes. <i>“..." + (kGAMECLASS.silly ? "my bulgie wulgie?":"my cock.") + "”</i> She whines, high pitched and needy. <i>“I’m so fucking hard for you, " + (target.mf("stud","slut")) + ". Just give in already.”</i> Biting her lip, she caresses her breasts absently. <i>“I’ll make it all worth it, but you’ve gotta like, let me.”</i>");
 			//v3
-			else output("\n\n<i>“Do we have to keep this up?”</i> The naked seductress gyrates with overwhelming erotic energy, swiveling her hips like she’s fucking the air and getting fucked at the same time. <i>“Stop r-r-resisting and just let me fuck you already. Any hole. Any organ.”</i> She sucks on her fingers for a moment. <i>“I’ll do it. I’ll fuck you sidewise. I’ll fuck you in zero G. I’ll make you moan so loud and so long you lose your voice.”</i> Her hips twitch violently enough to eject a rope of glowing cum. <i>“I’ll rut your holes till you’re more comfortable crawling around presenting than walking. F-fuck!”</i>");
+			else output("<i>“Do we have to keep this up?”</i> The naked seductress gyrates with overwhelming erotic energy, swiveling her hips like she’s fucking the air and getting fucked at the same time. <i>“Stop r-r-resisting and just let me fuck you already. Any hole. Any organ.”</i> She sucks on her fingers for a moment. <i>“I’ll do it. I’ll fuck you sidewise. I’ll fuck you in zero G. I’ll make you moan so loud and so long you lose your voice.”</i> Her hips twitch violently enough to eject a rope of glowing cum. <i>“I’ll rut your holes till you’re more comfortable crawling around presenting than walking. F-fuck!”</i>");
 			//Resist
 			if(target.willpower()/2 + rand(20) + 1 >= 25) output("\n\nNo matter how whorish her exhortations, you resist.");
 			//Fail

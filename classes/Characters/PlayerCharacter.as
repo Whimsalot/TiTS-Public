@@ -10,6 +10,7 @@ package classes.Characters
 	import classes.Items.Transformatives.SheepTF;
 	import classes.Items.Melee.Rock;
 	import classes.Items.Miscellaneous.EmptySlot;
+	import classes.Items.Tents.HLTent;
 	import classes.RoomClass;
 	import classes.StorageClass;
 	import classes.kGAMECLASS;
@@ -33,7 +34,7 @@ package classes.Characters
 			this.version = _latestVersion;
 			this._neverSerialize = false;
 			this._isLoading = false;
-			
+			tent = new HLTent();
 			isUniqueInFight = true;
 		}
 		
@@ -41,6 +42,8 @@ package classes.Characters
 		public var unspentStatPoints:int = 0;
 		public var unclaimedClassPerks:int = 0;
 		public var unclaimedGenericPerks:int = 0;
+
+		public var tent:ItemSlotClass = new EmptySlot();
 		
 		public function levelUpAvailable():Boolean
 		{
@@ -880,7 +883,19 @@ package classes.Characters
 				removeStatusEffect("Vaginally-Filled");
 				removeStatusEffect("Pussy Pumped");
 			}
-			
+			//Ice Cold & Warm Blooded
+			if(hasPerk("Ice Cold") && libido() >= 50)
+			{
+				removePerk("Ice Cold");
+				createPerk("Warm Blooded",0,0,0,0,"You're too libidinous to be 'Ice Cold' any longer.");
+				AddLogEvent("You're too libidinous to remain 'Ice Cold'. Reduce libido to become 'Ice Cold' once more.\n\n(<b>Perk Changed: 'Ice Cold' is now 'Warm Blooded'.</b>)", "passive", deltaT);
+			}
+			else if(hasPerk("Warm Blooded") && libido() < 50)
+			{
+				createPerk("Ice Cold",0,0,0,0,"Slows lust gain over time and improves low libido teasing.");
+				removePerk("Warm Blooded");
+				AddLogEvent("With your libido under control once more, you're 'Ice Cold' again!\n\n(<b>Perk Changed: 'Warm Blooded' is now 'Ice Cold'.</b>)", "passive", deltaT);
+			}			
 			// Daily changes
 			if (totalDays >= 1)
 			{

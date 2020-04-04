@@ -104,7 +104,7 @@ public function initUvetoRooms():void
 	/* Store? */
 	rooms["UVS B11"] = new RoomClass(this);
 	rooms["UVS B11"].roomName = "THE LAST\nCHANCE";
-	rooms["UVS B11"].description = "You’re inside a small, brightly lit merchant stall. The walls are a warm, inviting off-pink and plastered with posters advertising various survival gear companies. Ausar heavy metal is playing over the speakers, tuned down to be barely audible over the rumble of a heater bolted to the wall. Racks of equipment, ranging from shield belts and personal heaters to ropes and pitons and jetpacks hang on the walls. Several vials are arranged on the counter, advertising various ausar-related gene mods on their labels.";
+	rooms["UVS B11"].description = "You’re inside a small, brightly lit merchant stall. The walls are a warm, inviting off-pink and plastered with posters advertising various survival gear companies. Ausar heavy metal is playing from within the stall, tuned down to be barely audible over the rumble of a heater bolted to the wall. Racks of equipment, ranging from shield belts and personal heaters to ropes and pitons and jetpacks hang on the walls. Several vials are arranged on the counter, advertising various ausar-related gene mods on their labels.";
 	rooms["UVS B11"].planet = "UVETO STATION";
 	rooms["UVS B11"].system = "SYSTEM: SIRETTA";
 	rooms["UVS B11"].northExit = "UVS B9";
@@ -418,14 +418,30 @@ public function initUvetoRooms():void
 	/* Research Station Access */
 	rooms["UVI J36"] = new RoomClass(this);
 	rooms["UVI J36"].roomName = "RESEARCH\nACCESS";
-	rooms["UVI J36"].description = "9999 GARDE PLS";
+	rooms["UVI J36"].description = "";
 	rooms["UVI J36"].planet = "PLANET: UVETO VII";
 	rooms["UVI J36"].system = "SYSTEM: SIRETTA";
 	rooms["UVI J36"].northExit = "UVI J34";
+	rooms["UVI J36"].southExit = "UVI RES LIFT";
 	rooms["UVI J36"].moveMinutes = 1;
-	rooms["UVI J36"].runOnEnter = healingConsentacleTankBonus;
+	rooms["UVI J36"].runOnEnter = steeleBioElevatorEntranceBonus;
 	rooms["UVI J36"].addFlag(GLOBAL.INDOOR);
 	rooms["UVI J36"].addFlag(GLOBAL.PUBLIC);
+	
+	/* Research Station Lift */
+	rooms["UVI RES LIFT"] = new RoomClass(this);
+	rooms["UVI RES LIFT"].roomName = "RESEARCH\nLIFT";
+	rooms["UVI RES LIFT"].description = "The elevator platform is massive, probably even capable of holding your dad's Casstech. It’s sealed within a transparent steel bubble, serving as a secondary airlock in case the shaft floods.";
+	rooms["UVI RES LIFT"].planet = "PLANET: UVETO VII";
+	rooms["UVI RES LIFT"].system = "SYSTEM: SIRETTA";
+	rooms["UVI RES LIFT"].northExit = "UVI J36";
+	rooms["UVI RES LIFT"].outExit = "SBRF LIFT";
+	rooms["UVI RES LIFT"].outText = "Down";
+	rooms["UVI RES LIFT"].moveMinutes = 1;
+	rooms["UVI RES LIFT"].runOnEnter = steeleBioElevatorTopBonus;
+	rooms["UVI RES LIFT"].addFlag(GLOBAL.INDOOR);
+	rooms["UVI RES LIFT"].addFlag(GLOBAL.PUBLIC);
+	rooms["UVI RES LIFT"].addFlag(GLOBAL.LIFTDOWN);
 
 	/* Entrance */
 	rooms["UVI L34"] = new RoomClass(this);
@@ -4080,7 +4096,7 @@ public function initUvetoRoomsII():void
 	rooms["WILLOWS ROOM"].addFlag(GLOBAL.PRIVATE);
 
 	rooms["MILODAN TRIBE"] = new RoomClass(this);
-	rooms["MILODAN TRIBE"].roomName = "\nEITAN'S TRIBE";
+	rooms["MILODAN TRIBE"].roomName = "\nEITAN’S TRIBE";
 	rooms["MILODAN TRIBE"].description = "If you are reading this, something has gone terribly wrong.";
 	rooms["MILODAN TRIBE"].planet = "PLANET: UVETO VII";
 	rooms["MILODAN TRIBE"].system = "SYSTEM: SIRETTA";

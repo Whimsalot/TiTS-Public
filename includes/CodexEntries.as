@@ -4,13 +4,13 @@
 
 public function configureCodex():void
 {
-	// Complex path tree entries DO work, but until we actually NEED to organise the data
+	// Complex path tree entries DO work, but until we actually NEED to organize the data
 	// (and I implement some kind of path folding), I don't think we should actually USE them more than say 1 deep (because the way addEntry works
 	// requires at least a "root" path of some sort
 	// At the very least, the "tree" view down the side of the UI supports scrolling, so its not a HUGE issue and it
 	// can wait until we're at a point it needs to be fixed.
 	
-	// Other types of entries -- these are categorised under separate headings
+	// Other types of entries -- these are categorized under separate headings
 	//CodexManager.addCodexEntry(CodexManager.CODEX_TYPE_PERSON, "Test People", "Arty", testPersonEntryA);
 	//CodexManager.addCodexEntry(CodexManager.CODEX_TYPE_EVENT, "Test Events", "Buttsunder", testEventEntryA);
 	//CodexManager.addCodexEntry(CodexManager.CODEX_TYPE_LOCATION, "Some/Complex/Path/To", "Tentatool", testLocationEntryA);
@@ -54,6 +54,7 @@ public function configureCodex():void
 	CodexManager.addCodexEntry(CodexManager.CODEX_TYPE_RACE, "Core Worlds", "Varmints", varmintCodex);
 	CodexManager.addCodexEntry(CodexManager.CODEX_TYPE_RACE, "Core Worlds", "Vildarii", vildariiCodexEntry);
 	CodexManager.addCodexEntry(CodexManager.CODEX_TYPE_RACE, "Core Worlds", "Vulkrimi", vulkrimiCodexEntry);
+	CodexManager.addCodexEntry(CodexManager.CODEX_TYPE_RACE, "Core Worlds", "Vulpatra", vulpatraCodexEntry);
 	CodexManager.addCodexEntry(CodexManager.CODEX_TYPE_RACE, "Core Worlds", "Xhelarfog", xhelarfogCodexEntry);
 	
 	CodexManager.addCodexEntry(CodexManager.CODEX_TYPE_RACE_MHENGA, "Mhen'ga", "Cunt Snakes", cuntSnakeCodexEntry);
@@ -79,9 +80,12 @@ public function configureCodex():void
 	CodexManager.addCodexEntry(CodexManager.CODEX_TYPE_RACE_MYRELLION, "Myrellion", "Myr Fungus", myrFungusCodex);
 	CodexManager.addCodexEntry(CodexManager.CODEX_TYPE_RACE_MYRELLION, "Myrellion", "Nyrea", nyreaCodexEntry);
 	CodexManager.addCodexEntry(CodexManager.CODEX_TYPE_RACE_MYRELLION, "Myrellion", "Red Myr", redMyrmedionCodexEntry);
+
+	CodexManager.addCodexEntry(CodexManager.CODEX_TYPE_RACE_DHAAL, "Dhaal", "Zaika", zaikaCodexEntry);
 	
 	CodexManager.addCodexEntry(CodexManager.CODEX_TYPE_RACE_UVETO, "Uveto", "Essyras", essyraCodexEntry);
 	CodexManager.addCodexEntry(CodexManager.CODEX_TYPE_RACE_UVETO, "Uveto", "Frostwyrm", frostwyrmCodexEntry);
+	CodexManager.addCodexEntry(CodexManager.CODEX_TYPE_RACE_UVETO, "Uveto", "Janeria", janeriaCodexEntry);
 	CodexManager.addCodexEntry(CodexManager.CODEX_TYPE_RACE_UVETO, "Uveto", "Korgonne", korgonneCodexEntry);
 	CodexManager.addCodexEntry(CodexManager.CODEX_TYPE_RACE_UVETO, "Uveto", "Lurelings", lurelingsCodexEntry);
 	CodexManager.addCodexEntry(CodexManager.CODEX_TYPE_RACE_UVETO, "Uveto", "Milodan", milodanCodexEntry);
@@ -98,7 +102,7 @@ public function configureCodex():void
 	CodexManager.addCodexEntry(CodexManager.CODEX_TYPE_ORGANIZATION, "Corporations", "BI/G", bellIsleGrunmannCodex);
 	CodexManager.addCodexEntry(CodexManager.CODEX_TYPE_ORGANIZATION, "Corporations", "Camarilla", camarillaCodex);
 	//CodexManager.addCodexEntry(CodexManager.CODEX_TYPE_ORGANIZATION, "Corporations", "Envyoidics", envyoidicsCodex, true);
-	CodexManager.addCodexEntry(CodexManager.CODEX_TYPE_ORGANIZATION, "Corporations", "Humphard Inc.", humphardIncCodex);
+	//CodexManager.addCodexEntry(CodexManager.CODEX_TYPE_ORGANIZATION, "Corporations", "Humphard Inc.", humphardIncCodex);
 	CodexManager.addCodexEntry(CodexManager.CODEX_TYPE_ORGANIZATION, "Corporations", "J’ejune", jejuneCodex, true);
 	CodexManager.addCodexEntry(CodexManager.CODEX_TYPE_ORGANIZATION, "Corporations", "JoyCo", joyCoCodex, true);
 	CodexManager.addCodexEntry(CodexManager.CODEX_TYPE_ORGANIZATION, "Corporations", "KihaCorp", kihaCorpCodex, true);
@@ -396,7 +400,7 @@ public function kuitanCodexEntry():void
 	outputCodex("The kui-tan are a humanoid species native to Arcysus’s single orbiting moon, Jitafore, who visually call to mind the mythical ‘tanuki’ of Japanese lore. Their bodies are typical of most intelligent humanoids - two legs, a torso, two arms, and a single head atop the torso. Kui-tan faces are strikingly similar to galactic norms, except that nose and jaws grow together and extend into a short but expressive muzzle, containing prominent canines but altogether omnivorous teeth. A single pair of ears, just pointy enough at the top to be oval-shaped rather than circular, sit atop the head with limited mobility.");
 	outputCodex("\n\nThough they have five-fingered hands at the ends of their human-like arms, their plantigrade legs end in paw-like, four-toed feet. A single tail sprouts from every kui-tan’s rear, starting at a narrow base and swelling out immensely the closer one comes to the tip. These tails can be almost as long as a kui-tan is tall and as thick around as one’s waist. However, the bulk of a kui-tan’s tail is actually very dense, firmly packed fur, making it surprisingly light despite its bulky shape.");
 	outputCodex("\n\nKui-tan grow thick, dense fur that often makes them looking quite pudgy if left ungroomed. Most kui-tan do their best to keep it cut short and form-hugging, both to keep cool and for appearances’ sake. Their fur colors are generally browns with patches of black around the eyes, on the tips of the ears, in rings around the length of the tail, and in the shape of black socks over their feet and thighs. This fur grays in old age. It is not unheard of for kui-tan to dye themselves to suit personal preferences and tastes.");
-	outputCodex("\n\nAll kui-tan bear tapered penises thanks to their lack of a female sex. The tips have vaguely heart-shaped crowns formed by two rounded bulges on the underside of the glans at a tip at the tip. During kui-tan mating, the unique shape stimulates the cervix to dilate, allowing the father direct access to a fertile womb. A trio of knots, spaced along the length, swells upon orgasm, locking the lucky father in place. The erect length of a typical kui-tan falls somewhere between six and ten inches and not more than two inches in width, though reports of kui-tan with outsized genitals from mods are common; the race seems to have strong reactions to such items.");
+	outputCodex("\n\nAll kui-tan bear tapered penises thanks to their lack of a female sex. The tips have vaguely heart-shaped crowns formed by two rounded bulges on the underside of the glans at the tip. During kui-tan mating, the unique shape stimulates the cervix to dilate, allowing the father direct access to a fertile womb. A trio of knots, spaced along the length, swells upon orgasm, locking the lucky father in place. The erect length of a typical kui-tan falls somewhere between six and ten inches and not more than two inches in width, though reports of kui-tan with outsized genitals from mods are common; the race seems to have strong reactions to such items.");
 	outputCodex("\n\nThe most unique parts of a kui-tan’s reproductive system are their testes. Their masculine reproductive systems constantly produce sperm and seminal fluid, and their unique gonads are capable of storing it all, swelling up as they do so. A kui-tan who goes without release long enough may find himself immobilized by his own beachball-sized genitalia. Once drained, they’ll usually be about the size of apples.");
 	outputCodex("\n\nKui-tan cannot reach such obscene states in short order. It would take a few weeks for most to immobilize themselves. No matter how large (or sensitive!) their prostates, they simply cannot immobilize themselves without a long period of abstinence. Of course, aroused kui-tan produce semen many times faster than normal, and large intakes of food and water can further stimulation such production. Actually ingesting another’s seed is even worse, setting off what some kui-tan have taken to calling a ‘cum-cascade’.");
 	outputCodex("\n\nHermaphrodite kui-tan have vaginas designed to clamp tightly, but orientated for fitting girthy pricks over lengthy ones, as they must cope with the series of knots that a given partner will produce. The vagina is often easily hidden due to the testicles obscuring obvious sight, and most commonly kui-tan prefer to be penetrated from behind, vaginally or anally.");
@@ -1263,7 +1267,7 @@ public function slyverenCodex():void
 	clearOutputCodex();
 	showBust("SLAVEBREAKER_1","SLAVEBREAKER_2");
 	outputCodex(header("Slyverens"));
-	outputCodex("<i>Snake-woman as voracious for protein as they are engineered for beauty.</i>\n\n");
+	outputCodex("<i>Snake-woman as voracious for protein as they are engineered for beauty.</i>");
 	outputCodex("\n\n<b>Name:</b> Slyverens (Singular: Slyveren)");
 	outputCodex("\n<b>Sex:</b> Hermaphrodites with female characteristics.");
 	outputCodex("\n<b>Height:</b> 5\' to 7\' tall. Tallest unaugmented specimen recorded at 8\' 7\".");
@@ -1288,7 +1292,7 @@ public function slyverenCodex():void
 	outputCodex("\n\nTime has only given the slyverens more opportunities for self-improvement. In modernity, they boast a numbing coating on their fangs, additionally salivary glands along the inside edge of their lower lip, hyper-sensitivity to pheromones, and an aptitude toward psychic ability that left terrans in the dust two generations ago. Fully 50% of their population is considered to have some degree of psychic talent, with projections estimating race-wide telepathic capability in 100 years.");
 	outputCodex("\n\n");
 	outputCodex(blockHeader("Reproduction"));
-	outputCodex("\n\nSlyverens do not reproduce utilizing penises, like most races. Instead, a slyveren woman will produce a fist-sized egg once a year. When mating, she press her vagina to her lover’s, and specialized muscles will eject the ovum into her mate’s channel. Hard-wired reflexes kick in at this point and draw the egg all the way into womb, pushing the second slyveren’s egg out to trade places with the first’s. This exchange triggers the release of semen from a combination ovary/gonad gland until fertilization occurs.");
+	outputCodex("Slyverens do not reproduce utilizing penises, like most races. Instead, a slyveren woman will produce a fist-sized egg once a year. When mating, she press her vagina to her lover’s, and specialized muscles will eject the ovum into her mate’s channel. Hard-wired reflexes kick in at this point and draw the egg all the way into womb, pushing the second slyveren’s egg out to trade places with the first’s. This exchange triggers the release of semen from a combination ovary/gonad gland until fertilization occurs.");
 	outputCodex("\n\nA full incubation term lasts five months, after which the egg will be roughly melon-sized. Hatching takes four to five months, much longer than the \\\[REDACTED\\\]s they originated from. Slyveren younglings emerge tiny but capable of basic locomotion. Milk, an adaptation stolen from other races, provides sustenance for them well into adolescence. It is only after maturation that they switch to the licentious food-source that has given rise to their fame - and only after lactation stops does a slyveren mother’s body begin to produce eggs once more.");
 	outputCodex("\n\nUnfertilized eggs are expelled from the body after a few months. The more debased among high society consider them to be an exquisite delicacy.");
 	outputCodex("\n\n");
@@ -1609,6 +1613,44 @@ public function vulkrimiCodexEntry():void
 	outputCodex("\n\n");
 	CodexManager.viewedEntry("Vulkrimi");
 }
+
+//Vulpatra Codex
+public function vulpatraCodexEntry():void
+{
+	clearOutputCodex();
+	showBust("KQ_SEXDOLL_VULPATRA");
+	outputCodex(header("Vulpatra"));
+	outputCodex("<i>Don’t call their antennas dustballs...</i>");
+	outputCodex("\n\n<b>Name:</b> Vulpatra (Singular & Plural)");
+	outputCodex("\n<b>Lifespan:</b> 60 years.");
+	outputCodex("\n<b>Sexes:</b> Male & female with numerous mod-created intersex individuals.");
+	outputCodex("\n<b>Height:</b> 3’2” to 4’3” commonly. Exceptional specimens recorded as small as 2’5”</i> and as tall as 5’.");
+	outputCodex("\n<b>Weight:</b> 45 to 120 lbs.");
+	outputCodex("\n<b>Eyes:</b> Green, purple, and red most commonly with a terran-like circular pupil.");
+	outputCodex("\n<b>Skin:</b> Covered in full body fur except the nipples and genitalia. Fur is typically pigmented amber or olive green.");
+	outputCodex("\n<b>Ears:</b> Roughly head-sized, fox-like ears with a number of unique attributes discussed below.");
+	outputCodex("\n<b>Face:</b> Vulpine-like with a singular <i>“puffball”</i>-tipped antenna.");
+	outputCodex("\n<b>Tail:</b> Large (proportionally) and very fluffy, often tipped with lighter colored fur.\n\n");
+
+	outputCodex(blockHeader("Appearance"));
+	outputCodex("On the surface, Vulpatra may appear to share many characteristics with terran canines or foxes - large ears, long puffy tails, full body fur, and even cute little pads on their fingers and toes for shock absorption and grip. The similarities end there, however. Vulpatran ears are huge, complex affairs with a spongy inner lining and an extremely low friction coefficient, useful for their primary survival strategy.");
+	outputCodex("\n\nVulpatran faces have short, squat muzzles filled with omnivorous teeth and topped by a sensitive, button nose. Their tongues extend only a few inches beyond their lips, useful for taste and little else. Their most iconic feature is the fluffy, puffball-topped antenna that sprouts from the center of every vulpatra’s forehead. This highly decorative organ is also highly functional, as detailed in <i>“Psychic Abilities & Feeding”</i>.\n\n");
+	outputCodex(blockHeader("Psychic Abilities & Feeding"));
+	outputCodex("Vulpatra are one of the few species to join the UGC with naturally-occurring psychic powers. Their <i>“puffball”</i> is actually a highly sophisticated psychic amplifier. Nearly every living vulpatra is capable of short-ranged telepathy as a result, capable of communicating thoughts across distances of up to five feet and more advanced feats (mind reading, sensory manipulation, etc) with direct contact. Some extremely rare, powerful vulpatra are even capable of manipulating another’s thoughts directly with puffball-to-head contact.");
+	outputCodex("\n\nScientists theorize these attributes developed in response to the vulpatra’s status as a prey species on their homeworld. Telepathy allows for constant soundless communication in times of danger and even limited dialogue with non-verbal or foreign creatures - like the apex creatures of their homeworld, the Pworfu.");
+	outputCodex("\n\nPworfu are large, powerful creatures that reproduce using the wombs of other sentients. The vulpatra, all-too-often forced to play host for these less intelligent creatures, developed a unique defense: fuckable ears that drain into the stomach. By using their telepathic abilities, waist-high stature, and extremely visible, stretchy earpussies, they’re often able to manipulate bigger, stronger individuals into leaving them with a meal instead of an alien pregnancy. To assist in this, their ear linings actually inflate in times of passion or stress, rapidly engorging until they’ve flushed reddish pink and bulged beyond the curved interior.");
+	outputCodex("\n\nThey do not require reproductively-sourced meals to survive, as rahn or galotians might. Vulpatra can feast quite comfortably on fruits, vegetables, and the occasional cut of meat. A typically vulpatra diet consists of 80% plant material, 10% meat, and 10% foreign reproductive matter. Since joining other species in the UGC core, they’ve adapted well to galactic life and proven themselves more than capable of surviving on a pure, ejaculate-based diet, usually with the assistance of a virile kui-tan. Others function just fine without a single droplet of cum.");
+	outputCodex("\n\nA superstition has appeared recently, suggesting that a vulpatra’s psychic ability is tied to the amount of cum devoured. Supporting propaganda on the extranet typically includes pictures of cum-swollen vulpatra surrounded by kneeling, vacant-eyed kui-tan. There is no scientific data to support this assertion, yet the rumor tenaciously endures all the same.\n\n");
+	outputCodex(blockHeader("Reproduction"));
+	outputCodex("Reproduction amongst vulpatra is a simple affair. The male inserts his penis (usually no more than four inches long) into the female’s lower vaginal orifice. Like a canine, the male will eventually <i>“knot”</i> himself into place and release a steady trickle of seed over the following hour. The female usually finds this quite pleasurable thanks to seed-detecting nerve-clusters around the cervix which provide what the vulpatra describe as <i>“one long, slow, rolling, orgasm.”</i>");
+	outputCodex("\n\nVulpatran kits are born in litters of 1 to 3 after a four month pregnancy. They mature over the course of ten years, developing rapidly after six months of near-helplessness. A five-year old vulpatra child often displays intelligence comparable to a thirteen year old terran, though without the hormonal angst. That comes later, during the ninth year of life, when they rapidly develop adult sexual attributes and the lining of the ear thickens to its mature state. Reproductive urges appear months after the body has finished developing. For a vulpatra, the true marker for adulthood is appearance sexual desire, something primitive communities often celebrated with feasts, dance, and drinks.\n\n");
+	outputCodex(blockHeader("Homeworld"));
+	outputCodex("The vulpatra homeworld of Satio has an Earth-like climate with similar levels of biodiversity but no true oceans. It’s average temperatures are roughly four degrees Celsius higher than terran standard, though powerful wind currents keep the equatorial region more habitable than such temperatures would imply.");
+	outputCodex("\n\nMost homeworld vulpatra live in walled fortress cities impervious to primitive Pworfu weapons. Some tribal societies continue to live in the wilds as they always have, hiding from their larger rivals and maintaining the ancient traditions of their people. Modern vulpatra look down on them as simple fools.");
+	outputCodex("\n\nPolitically, the vulpine shortstacks have managed to avoid pledging themselves to any one corporation or group, skating the thin line between hiding from conflict and aggressively maintaining their independence. With the latest Planet Rush ongoing, the galaxy has been too focused on the spreading rim to take advantage of these petite fluffballs.\n\n");
+	CodexManager.viewedEntry("Vulpatra");
+}
+
 public function varmintCodex():void
 {
 	clearOutputCodex();
@@ -1710,7 +1752,7 @@ public function xhelarfogCodexEntry():void
 	outputCodex("\n\nTheir flesh is known to be rather sticky - a feature known to let them cling, gecko-like, to walls - though they are able to secrete a substance that prevents their exterior ‘skin’ from adhering itself to anything they touch. It should, therefore, be noted that it is extremely unwise to attempt to penetrate anything but the sexual organs or mouth of any individual, unless you have a fetish for awkward medical appointments - as separating oneself from them is known to be quite the ordeal.");
 	outputCodex("\n\n");
 	outputCodex(blockHeader("Body Composition (Scales)"));
-	outputCodex("Due to the gold-rich environment of the Xhelarfog home planet, individuals end up taking in a great amount in their diet. Rather than excrete this as waste, it has been observed that they instead organise it into clumps, which then rise to the surface of their flesh in formations that appear like, and are often referred to as rough, uneven scales.");
+	outputCodex("Due to the gold-rich environment of the Xhelarfog home planet, individuals end up taking in a great amount in their diet. Rather than excrete this as waste, it has been observed that they instead organize it into clumps, which then rise to the surface of their flesh in formations that appear like, and are often referred to as rough, uneven scales.");
 	outputCodex("\n\nThis is thought to be an unusual defense mechanism, as this process never really stops - the eldest observed Xhelarfog have been known to be almost completely covered in these ‘scales’, saving only the palms of their hands and feet, the underside of their tails and the horn-like protrusions on their head.");
 	outputCodex("\n\nIt is theorised that should a metal other than gold occur in greater proportions than it in an individual’s diet from infancy, they would instead develop scales of this metal - but no testing has been done due to the more recent discovery of the race.");
 	outputCodex("\n\n");
@@ -1842,24 +1884,24 @@ public function mimbraneCodexEntry():void
 	outputCodex("\n<b>Eyes:</b> Two tiny eyes protected by a thick portion of dermis that can act as eyelids. Round with bright sclera, thin reddish iris, with average sized pupils. The eyeballs can vary in size, sometimes changing in size as the Mimbrane integrates into a host.");
 	outputCodex("\n\n");
 	outputCodex(blockHeader("Senses"));
-	outputCodex("Mimbrane feature small fleshy mouths below and between their eyes that protrude slightly from their form, typically thicker than the rest of the creature. Their mouth is used to breathe, ingest liquids and communicate as most creatures, but if the parasite is able to latch onto a host organ with an orifice, it will ditch its normal mouth in favor of utilizing the newfound hole as its own. Without a properly sized orifice to borrow, Mimbrane will maintain their normal mouths, anxious to pass them off as small lumps with no seam. Information on how the creature feeds and breathes can be found below.");
-	outputCodex("\n\nA Mimbrane’s most important organ is its skin. Its normal appearance is a light red or pink, lighter in color the thinner the creature stretches itself and more vibrant the more dense it is. Mimbrane are smooth and free of any discolorations or imperfections. They can appear as thin square sheets, slightly moist and glistening as they glide through the air or crawl along the ground. At their largest sizes, Mimbrane are incredibly lithe and become somewhat translucent.");
+	outputCodex("Mimbranes feature small fleshy mouths below and between their eyes that protrude slightly from their form, typically thicker than the rest of the creature. Their mouth is used to breathe, ingest liquids and communicate as most creatures, but if the parasite is able to latch onto a host organ with an orifice, it will ditch its normal mouth in favor of utilizing the newfound hole as its own. Without a properly sized orifice to borrow, Mimbranes will maintain their normal mouths, anxious to pass them off as small lumps with no seam. Information on how these creatures feed and breathe can be found below.");
+	outputCodex("\n\nA Mimbrane’s most important organ is its skin. Its normal appearance is a light red or pink, lighter in color the thinner the creature stretches itself and more vibrant the more dense it is. Mimbrane are smooth and free of any discolorations or imperfections. They can appear as thin square sheets, slightly moist and glistening as they glide through the air or crawl along the ground. At their largest sizes, Mimbranes are incredibly lithe and become somewhat translucent.");
 	outputCodex("\n\nThe parasite is able to distribute its sparse mass in order to control its surface area, enabling it to not only encase its prey, but also allowing it to fly and glide with relative ease. The creature’s more well-known trait is its ability to transform and alter its epidermis, mimicking its host’s every detail. More information on this feature can be found below.");
 	outputCodex("\n\n");
 	outputCodex(blockHeader("Armor"));
-	outputCodex("Due to their lean nature, mimbranes rely more on their ability to dodge and conform to any shapes in order to help defend themselves. Sharp blades and projectiles that actually do make contact easily injure the creature. Blunt weapons are normally ineffective. A Mimbrane’s primary offense and defense lie within its lust-inducing oil and spit, explained further below."); // "Explained in section [<random numbershit to look like a reference>]"?
+	outputCodex("Due to their lean nature, Mimbranes rely more on their ability to dodge and conform to any shapes in order to help defend themselves. Sharp blades and projectiles that actually do make contact easily injure the creature. Blunt weapons are normally ineffective. A Mimbrane’s primary offense and defense lie within its lust-inducing oil and spit, explained further below."); // "Explained in section [<random numbershit to look like a reference>]"?
 	outputCodex("\n\n");
 	outputCodex(blockHeader("Typical Environments"));
-	outputCodex("Though the creatures can exist in most any habitat, Mimbrane tend to prefer natural and wooded areas, locales comprised of abundant sources of warmth and nutrients.");
+	outputCodex("Though the creatures can exist in almost any habitat, Mimbranes tend to prefer natural and wooded areas, where there are abundant sources of warmth and nutrients.");
 	outputCodex("\n\n");
 	outputCodex(blockHeader("Means of Attack"));
-	outputCodex("Mimbrane tend to be docile creatures, hiding from potential prey whenever possible. The cause of this is the extreme toll battle can take on the parasite. A single creature can take months to accumulate enough nutrients just to work up the reserves necessary to employ their lust attacks in addition to the above average energy expenditure. In other words, a Mimbrane that has decided to attack is putting its all into the effort.");
-	outputCodex("\n\nA mimbrane’s primary means of offense is to target their opponent’s carnal instincts. Its first attack is more passive, as the parasite’s skin secretes a clear oil, tinged lightly with a bright pink color. Contact with the parasite’s oily skin can wreck havoc on its opponent’s sexual craving. A byproduct of a Mimbrane’s sweat is the pungent cloud of ecstasy it produces; the parasite will periodically stress its pores and fan this gas towards their opponent. The creature’s more direct attack has it gather and concentrate its oil, spitting a particularly volatile batch of libidinal craving that bursts on contact.");
-	outputCodex("\n\nWhile Mimbrane rely primarily on their ability to drive their opponents to sexual madness, they also utilize their light form in an attempt to smother their hosts. This attack doubles the effectiveness of their oily skin as well. The few physical attacks of the parasite involve it creating tiny barbs along its surface and brushing against its opponent, as well as fairly weak attempts at tripping up an opponent.");
+	outputCodex("Mimbranes tend to be docile creatures, hiding from potential prey whenever possible. The cause of this is the extreme toll battle can take on the parasite. A single creature can take months to accumulate enough nutrients just to work up the reserves necessary to employ their lust attacks in addition to the above average energy expenditure. In other words, a Mimbrane that has decided to attack is putting its all into the effort.");
+	outputCodex("\n\nA Mimbrane’s primary means of offense is to target their opponent’s carnal instincts. Its first attack is more passive, as the parasite’s skin secretes a clear oil, tinged lightly with a bright pink color. Contact with the parasite’s oily skin can wreck havoc on its opponent’s sexual craving. A byproduct of a Mimbrane’s sweat is the pungent cloud of ecstasy it produces; the parasite will periodically stress its pores and fan this gas towards their opponent. The creature’s more direct attack has it gather and concentrate its oil, spitting a particularly volatile batch of libidinal craving that bursts on contact.");
+	outputCodex("\n\nWhile Mimbranes rely primarily on their ability to drive their opponents to sexual madness, they also utilize their light form in an attempt to smother their hosts. This attack doubles the effectiveness of their oily skin as well. The few physical attacks of the parasite involve it creating tiny barbs along its surface and brushing against its opponent, as well as fairly weak attempts at tripping up an opponent.");
 	outputCodex("\n\n");
 	outputCodex(blockHeader("Parasitism"));
 	outputCodex("A Mimbrane’s primary goal in life is to attach to a host, feed, and slowly reproduce. Once it has properly subdued a target, the parasite will work its way towards its intended body part. An interesting facet of these creatures is their inherent organ preferences, shared among the entire species. These baked-in predilections place importance on ease of acquiring liquid sustenance followed shortly thereafter by warmth and relative seclusion on the host.");
-	outputCodex("\n\nMimbranes prioritize sexual organs, preferring penises over vaginas. Should the genitalia be either non-existent or claimed by other Mimbranes, the parasite will opt for the posterior, enshrouding the entire rear end and anus to account for its less-than-optimal choice. The next option for a Mimbrane would actually be the scrotum followed by the breasts, the lower and warmer sac an easier location for remaining secluded over the typically much more exposed breasts. When all known sexual organs are unavailable, the parasite will opt for extremities, typically the hands and finally feet.");
+	outputCodex("\n\nMimbranes prioritize sexual organs, preferring penises over vaginas. Should the genitalia be either non-existent or claimed by other Mimbranes, the parasite will opt for the posterior, enshrouding the entire rear end and anus to account for its less-than-optimal choice. The next option for a Mimbrane would actually be the scrotum followed by the breasts, the lower and warmer sac an easier location for remaining secluded over the typically much more exposed breasts. When all known sexual organs are unavailable, the parasite will opt for extremities, typically the hands and finally the feet.");
 	outputCodex("\n\nThe face is actually avoided when choosing a roost as it is typically a very sensitive and hard area to maintain for the parasite. Attempts to hide anywhere on or around the head more often increase the creature’s presence to the host. As a result, a Mimbrane would rather reject a host than place themselves somewhere they believe would lead to their quick removal.");
 	outputCodex("\n\nOnce a Mimbrane has chosen an organ, it quickly goes to work encapsulating the entirety of their selection, forming a perfect seal. From this point, mimicry becomes the primary goal of the parasite. The Mimbrane’s epidermis will integrate itself with its host’s nervous system, forwarding sensations on to nerve endings and feeling as if nothing were on the organ at all. Dead skin cells and sweat are passed through the creature if they are not able to be consumed.");
 	outputCodex("\n\nThe parasite also works to visually represent its chosen target, detailing every bit of texture, coloration, hair and imperfection that they’ve covered. In only a few scant minutes, a Mimbrane’s pink, featureless, slick skin will perfectly resemble its target down to the last hair, freckle, or scar. Once the transformation is complete, a motionless Mimbrane becomes almost unperceivable to its host, save for a few telltale signs.");
@@ -1868,30 +1910,30 @@ public function mimbraneCodexEntry():void
 	outputCodex("\n\n");
 	outputCodex(blockHeader("Feeding"));
 	outputCodex("A Mimbrane can survive on sources of moisture such as plants, fruits or water, but it cannot reproduce until it has found and attached itself to a host. If it has clung to an organ that features some sort of orifice, it will dissolve its mouth in favor of substituting it with its newfound outlet. If there is no orifice, the Mimbrane will maintain its small mouth, trying its best to disguise it as an innocuous bump on its host.");
-	outputCodex("\n\nThe mouth is where a Mimbrane continues to feed and breathe. The parasite is unable to continue breathing through its epidermis when coupled as its skin is currently occupied mimicking the host. As a result, the creature will wait for moments of inactivity to move its mouth open and close, stirring fresh air around and allowing it to easily absorb and process oxygen. The sensation – whether with a claimed hole or the creature’s mouth – can very easily be felt by the host and is the most glaring reminder of the parasite’s presence.");
-	outputCodex("\n\nMimbranes ingest host secretions that pass through their borrowed mouths by absorbing them into the skin surround the opening in a manner similar to breathing. This action does not require the same amount of movement, however, and usually goes undetected by hosts. The exception goes for parasites lacking a borrowed spout, who use their natural mouths in a manner similar to all other living creatures in order to collect what they crave. When located on extremities such as hands, Mimbrane will attempt to push themselves to a visible source when hungry.");
-	outputCodex("\n\nDue to their slow and miniscule metabolism, the parasites only require a small fraction of the various discharges they can come into contact with. Most Mimbrane are unable to engorge themselves rapidly, which acts as a countermeasure from growing too large too fast, thus increasing their odds of irritating their hosts and reaching their demise.");
+	outputCodex("\n\nThe mouth is where a Mimbrane continues to feed and breathe. The parasite is unable to continue breathing through its epidermis when coupled as its skin is currently occupied mimicking the host. As a result, the creature will wait for moments of inactivity to open and shut its mouth, stirring fresh air around and allowing it to easily absorb and process oxygen. The sensation – whether with a claimed hole or the creature’s mouth – can very easily be felt by the host and is the most glaring reminder of the parasite’s presence.");
+	outputCodex("\n\nMimbranes ingest host secretions that pass through their borrowed mouths by absorbing them into the skin surround the opening in a manner similar to breathing. This action does not require the same amount of movement, however, and usually goes undetected by hosts. The exception goes for parasites lacking a borrowed spout, who use their natural mouths in a manner similar to all other living creatures in order to collect what they crave. When located on extremities such as the hands, Mimbranes will attempt to push themselves to a visible source when hungry.");
+	outputCodex("\n\nDue to their slow and minuscule metabolism, the parasites only require a small fraction of the various discharges they can come into contact with. Most Mimbranes are unable to gorge themselves rapidly; a trait that prevents the creatures from growing too large to quickly, which would increase the odds of irritating their hosts and thus hasten the parasites’ demise.");
 	outputCodex("\n\n");
 	outputCodex(blockHeader("Reproduction"));
-	outputCodex("Mimbrane store and process any and all nutrients they come into contact with once in contact with a host. As a result, the body part they’ve encapsulated can appear to swell over time. The parasite can easily grow anywhere between twenty five and fifty percent of the size of the organ it currently resides over. People with swollen penises, vaginas, asses, or anything else never feel as if their organs have been smothered with the extra weight due to the creature’s continued mimicry and faked signals it sends to the nervous system.");
-	outputCodex("\n\nOnce a Mimbrane has reached a large enough mass – roughly at least double its original mass – it will begin asexual reproduction in a form similar to binary fission. The parasite begins by preparing the host for the bizarre sensations, which are described to feel as if removing large bandages, onaholes, or other sorts of coverings after a long period of time. If it fears for its safety, the parasite will wait until the host is asleep.");
-	outputCodex("\n\nA separation begins to occur along the perimeter of the Mimbrane’s original size. Over the course of an hour or two, the parasite will center its consciousness on the skin still attached to the organ and finish severing all of the extra mass its accumulated over the course of a number of weeks. At this point, the growth will fall or merely slip off of the host, still appearing like an enlarged copy of the organ it shed from. The faux organ will convulse and spasm for a few minutes, signaling the growth of the new consciousness.");
+	outputCodex("Mimbranes store and process any and all nutrients they come into contact with once they are attached to a host. As a result, the body part they’ve encapsulated can appear to swell over time. The parasite can easily grow anywhere between twenty five and fifty percent of the size of the organ it currently resides over. People with swollen penises, vaginas, asses, or anything else never feel as if their organs have been smothered with the extra weight due to the creature’s continued mimicry and faked signals it sends to the nervous system.");
+	outputCodex("\n\nOnce a Mimbrane has reached a large enough mass – roughly at least double its original mass – it will begin asexual reproduction in a form similar to binary fission. The parasite begins by preparing the host for the bizarre sensations, which are described as an experience akin to the removal of large bandages, onaholes, or other types of coverings after a prolonged period of time. If it fears for its safety, the parasite will wait until the host is asleep.");
+	outputCodex("\n\nA separation begins to occur along the perimeter of the Mimbrane’s original surface area. Over the course of an hour or two, the parasite will center its consciousness on the skin still attached to the organ and finish severing all of the extra mass it has accumulated over the course of a number of weeks. At this point, the growth will fall or merely slip off of the host, still appearing like an enlarged copy of the organ it shed from. The faux organ will convulse and spasm for a few minutes, signaling the growth of the new consciousness.");
 	outputCodex("\n\nThe new Mimbrane can survive in this state for tens of minutes, feeding off the excess stores of nutrition left to it by its parent. Some more experienced hosts have been known to enjoy the offspring for the time it exists as an engorged copy of their body part. The new Mimbrane’s mind briefly revolves around its memories as the body part in this state.");
-	outputCodex("\n\nEventually it will settle and unravel back into its original form, flooded with the continued instincts and knowledge that is always passed down throughout the creation of the parasites. Mimbrane prefer to spread to new targets and will abandon their parents as soon as the opportunity arrives.");
+	outputCodex("\n\nEventually it will settle and unravel back into its original form, flooded with the continued instincts and knowledge that are always passed down throughout the creation of the parasites. Mimbranes prefer to spread to new targets and will abandon their parents as soon as the opportunity arrives.");
 	outputCodex("\n\n");
 	outputCodex(blockHeader("Intelligence and Behavior"));
-	outputCodex("Evolution has taught this race to be patient and polite in order to increase odds of survival. Mimbrane intelligence is just above that of common house pets, surprisingly. The parasites rely on their lust-increasing secretions to attain hosts, but they cannot afford to continue to rely on them once they are in place. This forces the creatures to interact with their host as little as possible, relying on their mimicry, downplayed movements, and slow growth to conceal themselves as long as they feel they are in danger of aggravating their host, driving them to attempt and remove them.");
-	outputCodex("\n\nOnce Mimbrane believe they’re in little harm of being forcibly removed from their perch, they may open up a little to their host. The parasite will more freely control its claimed organ in plain view of its host, responding to stimuli such as movement and sound like any other sentient creature will. The parasite will attempt to form and maintain this bond in order to help ensure its survival if it thinks it can make it work.");
-	outputCodex("\n\nAs time and trust continue to build, Mimbrane can eventually reawaken their latent capabilities used when capturing prey, helping their host by waging the same spitting and secretion-based attacks against their opponents’ sexual drive. These strikes require a good degree of the nutrients the parasite has stored from the host, nutrients that are typically reserved purely for reproduction and self-sustenance. As a result, these actions can only be used sparingly by the creature when they feel open enough to aid in combat.");
+	outputCodex("Evolution has taught this race to be patient and polite in order to increase odds of survival. Mimbrane intelligence is just above that of common house pets, surprisingly. The parasites rely on their lust-increasing secretions to attain hosts, but they cannot afford to continue to rely on them once they are in place. This forces the creatures to interact as little as possible with their host; relying instead on their mimicry, downplayed movements and slow growth to conceal themselves as long as they feel that their presence might aggravate the host, who would then attempt to remove them.");
+	outputCodex("\n\nOnce Mimbranes believe that there is little chance of being forcibly removed from their perch, they may open up a little to their host. Each parasite will freely control its claimed organ even when in plain view of the host, responding to stimuli such as movement and sound like any other sentient creature would. Mimbranes will attempt to form and maintain this bond to help ensure their survival if they believe that it can be made to work.");
+	outputCodex("\n\nAs time goes on and trust continues to build, Mimbranes can eventually reawaken their latent capabilities used when capturing prey, helping their host by waging the same spitting and secretion-based attacks against their opponents’ sexual drive. These strikes require a fair amount of the nutrients the parasite has stored from the host, nutrients that are typically reserved purely for reproduction and self-sustenance. As a result, these actions can only be used sparingly by the creature when they feel trusting enough to openly aid in combat.");
 	outputCodex("\n\nGetting a Mimbrane confident enough to act like this is quite a feat as this runs contrary to the species’ normally shy nature. A Mimbrane’s first instinct once it has attached to a host is to mimic and hide in plain sight. Even when the parasite has fully confided in its host, it will generally hide from all strangers.");
-	outputCodex("\n\nWhat they won’t hide from are their fellow parasites. Mimbrane are highly sociable among one another, and people playing host to several of them may discover just how chatty the little guys can tend to be. No matter what form they may appear in, Mimbrane will utilize their mouth to make high-pitched squeaks to communicate with one another.");
-	outputCodex("\n\nMimbrane will also come to the aid of their brethren when possible. If they discover their host is in combat with another of their kind, they will sweat the same lust-inducing oil that host-free Mimbrane use to subdue their prey. This can turn an individual’s armor against them as the parasites will use it as a pressure cooker for sexual fervor. Once the host has been humbled, existing Mimbrane already clinging to them will announce their presence and work together to signify any remaining key organs for the new parasite to claim as their own. This behavior can easily lead to an individual being overrun by the parasite if they continually encounter them.");
-	outputCodex("\n\nFinally, Mimbrane will continue to aid one another on the same host by making certain any parasites without orifices to feed from are taken care of. It isn’t uncommon for an individual with several Mimbrane to frequently lose control of much of their body as the parasites communicate and feed one another if the fear of discovery and removal is low. This group mentality is exclusive to the parasites only when a host is present; they do not typically come to one another’s aid and work together alone in the wild.");
+	outputCodex("\n\nWhat they won’t hide from are their fellow parasites. Mimbranes are highly sociable when sharing a host, and people with several parasites attached to them may discover just how chatty these little guys can be. No matter what form they may appear as, Mimbranes will utilize their mouth to make high-pitched squeaks to communicate with one another.");
+	outputCodex("\n\nMimbranes will also come to the aid of their brethren when possible. If they discover their host is in combat with another of their kind, they will sweat the same lust-inducing oil that host-free Mimbranes use to subdue their prey. This can turn an individual’s armour against them, as the parasites will use the enclosed environment as a pressure cooker to boost the host’s sexual fervor. Once the host has been humbled, existing Mimbranes already clinging to them will announce their presence and work together to point out any remaining key organs for the new parasite to claim as their own. This behavior can easily lead to an individual being overrun by the parasites if they continually encounter them.");
+	outputCodex("\n\nFinally, Mimbranes will continue to aid one another when sharing a host by making certain that any parasites without orifices to feed from are taken care of. It isn’t uncommon for an individual with several Mimbranes to frequently lose control of much of their body, as the parasites communicate and feed one another when the fear of discovery and removal is low. This group mentality is exclusive to parasites attached to a host; they do not typically come to one another’s aid or work together when alone in the wild.");
 	outputCodex("\n\n");
 	outputCodex(blockHeader("Removal"));
-	outputCodex("Mimbrane’s incredible mimicry and tendencies to aid their hosts when they aren’t avoiding their ire is simply due to the fact that they perish if they are ever removed from their host. The act of integrating into an organism’s nervous system is second nature to the parasite, but they will die of shock should they be pried away. Unaided removal is highly discouraged, as the parasite can easily utilize its connection to the host to paralyze them with signals of pain or pleasure.");
-	outputCodex("\n\nMimbrane can utilize their natural defenses in addition to anything the organ at their disposal can grant them to defend themselves against others as well. Individuals with a great number of parasites across their body can even provide a challenge for medical professionals. Caution is recommended when dealing with anyone in a situation like this; the parasites will easily wrestle control away from their host when fueled by adrenaline and defend themselves.");
-	outputCodex("\n\nContacting an anesthesiologist is the best approach to removing Mimbrane from an individual. The parasite’s need to respire makes it susceptible to being knocked out and easily removed. There is rarely any lasting damage to hosts.");
+	outputCodex("Mimbranes’ incredible mimicry and tendency to aid their hosts when they aren’t avoiding their ire is simply due to the fact that they perish if they are ever removed from their host. The act of integrating into an organism’s nervous system is second nature to the parasite, but they will die of shock should they be pried away. Unaided removal is highly discouraged, as the parasite can easily utilize its connection to the host to paralyze them with signals of pain or pleasure.");
+	outputCodex("\n\nMimbranes can utilize their natural arsenal, in addition to anything the organ at their disposal can grant them, to defend themselves against others. Individuals with a great number of parasites across their body can even provide a challenge for medical professionals. Caution is recommended when dealing with anyone in a situation like this; the parasites will easily wrestle control away from their host when fueled by adrenaline and defend themselves.");
+	outputCodex("\n\nContacting an anesthesiologist is the best approach to removing Mimbranes from an individual. The parasite’s need to breathe makes it susceptible to being knocked out and easily removed. There is rarely any lasting damage to hosts.");
 	outputCodex("\n\n");
 	CodexManager.viewedEntry("Mimbranes");
 }
@@ -2563,6 +2605,84 @@ public function cockvinesCodexEntry():void
 	outputCodex("\n\n");
 	CodexManager.viewedEntry("Cockvines");
 }
+public function zaikaCodexEntry():void
+{
+	clearOutputCodex();
+	showBust("MYSSAH");
+	outputCodex(header("Zaika"));
+	outputCodex("<i>Beneath their fae features lie keen minds and a keener thirst for milk.</i>");
+
+	outputCodex("\n<b>Sexes:</b> Hermaphrodites");
+	outputCodex("\n<b>Height:</b> 5’ to 6’ due to pollution and poor nutrition. 6’ to 7’ for the Peers.");
+	outputCodex("\n<b>Weight:</b> Between 80 and 200 terran pounds, depending on height and current cup size.");
+	outputCodex("\n<b>Eyes:</b> Their irises are typically blue, pink, or green, with sclera of a similar color but lighter tint.");
+	outputCodex("\n<b>Skin:</b> Shades of purple, which may range from pale lilac to deep wine-black. Many have white freckles scattered on cheeks, shoulders, or even all across their bodies");
+	outputCodex("\n<b>Hair:</b> White hair is their natural hue, though many use bright dyes for streaks, fringes, or total coverage.");
+	outputCodex("\n<b>Ears:</b> Long and elfin, their ears range from 6”</i> to 10”</i> and are often adorned with piercings or cybernetic augments.");
+	outputCodex("\n<b>Breasts:</b> None in the traditional sense. Instead, they have two breast-like organs on their chests which serve as repositories for sexual fluid.");
+	outputCodex("\n<b>Tails:</b> Their primary sex organ, these tend to be two inches thick and around three feet long, muscled and extremely flexible. Their bulb-like tips are bisected in two halves.");
+	outputCodex("\n<b>Lifespan:</b> 50 years, though cybernetic advances promise to increase this.\n\n");
+
+	outputCodex(blockHeader("Physiology"));
+	outputCodex("Excepting their tails, zaika are humanoid with largely terran-standard builds. Most of the zaika have lithe bodies. The common people are typically slimmer and shorter than their more indulgent Peers. Adapted to living in a low-light environment, they have universally dark skin tones, exceptionally long ears, and slightly luminescent eyes. Oriented primarily for night vision, modern zaika often struggle to see in the high-light environments most galactic races favor. For this reason, it’s not unusual to see them in glasses, shades, visors, or other screening eyewear.");
+
+	outputCodex("\n\nZaika have three fingers and a thumb on each hand but only two toes. Originally adapted for living in canyons and caves, their long legs and split-digit feet give them incredible forward speed, but limit their lateral maneuverability. To aid their balance, the tails of the zaika show a range of movement and dexterity equal to the tentacles of aquatic organisms. Modern living has largely relegated their tails to courting and reproductive activities, but some still employ the appendage as a sort of third arm.");
+
+	outputCodex("\n\nYoung zaika are bald, but their egg-laying reproduction and rapid rate of maturation means that they enjoy a relatively short period of immaturity. At puberty, they begin developing white freckles and growing similarly pale hair from their scalps at a rapid pace. If left untrimmed, this can easily reach down to their ankles. Maturity also brings the development of their faux breasts - specialized organs that serve the purpose of testes in most other races. Unlike the vulnerable gonads of other species, these pouches are cushioned by ample fatty layers, making them supple and durable against the travails of casual bumps or collisions. When full, however, the stretching pressure of their fluids leaves a zaika’s bosom extremely sensitive to even light touches.");
+
+	outputCodex("\n\nRarely, some mutations may develop in a zaika’s sexual organs. This typically takes the form of a bifurcated tail or a third breast. These individuals are marked as ‘hydras’ for their additional features and inevitably experience a significantly more intense sex drive. Hydras are no more likely to produce more hydra-offspring than any other coupling, but their wildly overabundant libido typically results in far larger families.");
+
+	outputCodex("\n\nOne curious fluke of the zaika biology is an intense reaction to breast milk. Recent contact with alien races has revealed that zaika who drink milk from other humanoids experience an intense, narcotic high as well as an inebriated giddiness. Lacking the organs to lactate, the demand for off-world milk has reached a fever pitch. This has led to the proliferation of Milk Bars for well to-do natives to enjoy freshly imported dairy - as well as milk gangs, who ambush lactating visitors and suckle the drug-like cream right from the teat.\n\n");
+
+	outputCodex(blockHeader("Reproduction"));
+
+	outputCodex("From their feminine characteristics, it is easy to mistake zaika for a race of all women. In fact, they are all hermaphrodites, equally able to fertilize as well as to birth. Their biology resembles a terran female on the surface, with two breast-like organs on their chest and a labia-lined opening between their legs. Unlike typical mammals, zaika do not produce milk and therefore do not have nipples. Their ‘breasts’ in fact serve a biological role similar to the kui-tan’s testes: producing and storing seminal fluid and sperm in a thickly padded cushion of highly elastic, fatty skin. These organs swell and ebb with arousal and release, giving sexually active zaika a highly variable cup size.");
+
+	outputCodex("\n\nThe primary sexual organ of the zaika is their tail. Heavily muscled, these appendages serve a purpose similar to the cloaca of avians or reptiles. The emotional state of the zaika determines whether their tip stiffens and contracts into a phallus or engorges and opens into a vaginal sheathe. The ‘male’ of a pairing will insert their tail into the slitted tip of the ‘female’ and eventually release their sperm. With the same supple, flexible skin as their vestigial breasts, the zaika’s tail is capable of stretching up to four times their natural diameter. Additionally, it is filled with all the sensitive nerves of normal reproductive organs, making the act of penetrating and being penetrated extremely pleasurable. The ovary contained in the base of the recipient’s tail releases a single egg on a monthly cycle and, if fertilized, this egg settles in the zaika’s oviduct to develop. A fully developed egg is typically 6”</i>-9”</i> in height, giving impregnated partners a considerably rounded appearance.");
+
+	outputCodex("\n\nDespite having a vagina-like slit between their legs, the zaika are an oviparous (egg laying) race. Their lower canal is used only for birthing fully formed eggs from their oviduct. Despite the womb-like function of this organ, any sexual activity with their egg-slit cannot result in a pregnancy. Eggs fertilized from their tails will typically develop for one month and are incubated internally for several months before finally being laid. Zaika eggs typically hatch within a month of being laid, with their offspring being considerably more developed at birth than typical mammals.\n\n");
+	outputCodex(blockHeader("Society"));
+
+	outputCodex("Even before the smog of their technological boom, the endless twilight of Dhaal’s livable equator has colored zaika culture. With no difference between day and night, they tended to flock towards group living, working round the clock in shifts unique to each pack. This tendency to stratify into cliques served them well in specializing for early social advances, but modern, urban living is fragmented between dozens of often antagonistic sub-cultures.");
+
+	outputCodex("\n\nThe biggest division on Dhaal is - as is so often the case - between the Haves (the Peers) and the Have Nots (everyone else). This dichotomy permeates just about every aspect of their culture, to the point that off-worlders may be forgiven thinking that the wealthy and the poor of Dhaal are two seperate races entirely. The Peers belong to the Zaibatsu, a triad of corporate monopolies that serve as the planet’s employers, police, and government. Though there is not an official caste system, those on top are rare to allow any social advancement or intermingling beyond the necessities of employment.");
+
+	outputCodex("\n\nThe cybernetic emphasis of their medical science is essential to the culture of the zaika. Nearly every native on Dhaal has an implant of some sort, with some of the very wealthy nearly completely augmented. Zaibatsu-sponsored augment clinics offer the widest, safest selection of procedures. For the destitute or criminals, plenty of backalley clinics exist in the Gyre, providing black market alternatives for a little extra risk. The biologically tailored particulars of their technology make it dangerous for alien races to enjoy similar treatment, though some very wealthy individuals have undergone auto-immune supplements for this very purpose.");
+
+	outputCodex("\n\nAs a sufficiently advanced culture, the zaika dress in a variety of fashions. The lower class tend toward utility and protection, while Peers tend to favor style over substance. In all cases, zaika prefer to go topless. With the curious demands of their expanding biology, properly fitting garments were rarely to be found. This is not to say that they do not have their own particular prudish hang-ups. The zaika have a unique sort of indecency: displaying bare tails in public. Due to the critical role their tails play in reproduction, all zaika are expected to wear a covering of some sort over at least the tip of their rear appendage. The styles of this stocking vary, with some making use of special socks while others favor elaborate hosiery. Additionally, nearly all zaika wear one or more rings on their tails to stop any accidental leakage when aroused. ");
+
+	outputCodex("\n\nThe hydra zaika are generally looked down on socially for their incredibly enhanced libidos. Even with ample tail rings, most hydra experience a regular flow of cum from their tails, leading to most substituting condoms for the more typical cock stockings. Their biology forces most hydras into sex-oriented professions as they are generally regarded as useless for anything else. Despite cultural discrimination, hydras typically find themselves at the head of extremely large families, often taking several mates to help soothe their unceasing passions.\n\n");
+
+	outputCodex(blockHeader("History"));
+
+	outputCodex("The history of Dhaal is also the history of the Zaibatsu. In their primitive days, small groups of several families worked in concert to achieve subsistence living for each other. Peaceful, but achieving little of lasting impact. The rapid spread of the zaika race, along the considerably narrow band of livable terrain on Dhaal eventually forced independent social units to compete with one another instead of cooperating. As traditional hunting grounds shrank, previously unknown strife acted as a crucible to quickly advance primitive technology.");
+
+	outputCodex("\n\nThe most successful groups saw the need for stability and allied to subdue their rivals and create a singular, expanding nation. To ensure that no one group gathered too much power, the Order of the Zaibatsu was laid down. In essence, it said that the three most powerful families would serve as checks to each other, allying should any one Zaibatsu grow too powerful. The dominant groups  shifted over time but the arrangement held, keeping the zaika safe from the worst excesses of tyrants and dynasties.");
+
+	outputCodex("\n\nThe natural growth of the zaika culture was upset around two hundred years ago. Though the particulars are a closely guarded secret by the Zaibatsu, it appears that a considerable cache of U.G.C. technology came to Dhaal well before the galactic rim reached out far enough to make a formal discovery of their world.  Dividing the xenotech amongst their foremost experts, the zaika were able to discern and disseminate the science behind each miraculous advancement with startling ease. A sudden infusion of exceedingly advanced tech ignited an industrial revolution the likes of which few cultures can survive.");
+
+	outputCodex("\n\nThe alien breakthroughs were divided in three sciences: Chemistry, Biology, and Psychology. Each of the Zaibatsu claimed a branch and oversaw all innovations that fell under their particular portfolio. Rather than share the fruits of their fields equally, however, the Zaibatsu found that spreading the riches internally and trickling only the barest of necessities to the others cemented their positions. Rather than policing one another as in olden times, the current Zaibatsu conspired to keep the others in power. In time, cultural groups became corporations, justifying their perpetual dominance with the variety of lifestyle improvements they offered to the masses. Informally, those belonging to the Zaibatsu and their subsidiaries became known as Peers.");
+
+	outputCodex("\n\nAs the urban sprawl has spread to every inch of habitable land, the quality of life for the poor has spiraled further and further down. Most labor-intensive jobs have been phased out with automation, while unchecked industry fills the sky with thick clouds of pollution. Eventually, the Peers established separate, private districts for themselves, taking the guards who had previously served as police. The absence of immediate authority has led to a proliferation of gangs, practically one for each city block. With the current Planet Rush underway, MegaCorps from all over the galaxy have flocked to Dhaal, and with them, rushers looking to indulge in any of the sin-centric vices that fill the dense, streets and alleys of the planet-spanning city.\n\n");
+
+	if(silly || pc.isBimbo() || pc.isCumSlut())
+	{
+		outputCodex(blockHeader("Typical Ejaculate Quantity"));
+		outputCodex("Analysis of user behavior indicates a strong desire to know about the ejaculate of other species. Since Dhaal is a developed world integrating into the UGC, data on typical reproductive loads is available in healthy supply. Zaika release enough semen during climax to reduce their cup size by one to two terran-standard letter grades. Detailed estimates below:\n\n");
+		outputCodex("\n\tA-cups: 50 mL (five times an unmodified terran standard ejaculation)");
+		outputCodex("\n\tB-cups: 250 mL");
+		outputCodex("\n\tC-cups: 1 L");
+		outputCodex("\n\tD-cups: 2.5 L (volume of terran stomach)");
+		outputCodex("\n\tDD-cups: 3 L");
+		outputCodex("\n\tE-cups: 4 L (a gallon of milk)");
+		outputCodex("\n\tF-cups: 5.5 L");
+		outputCodex("\n\tG-cups:  7 L (a basketball)");
+		outputCodex("\n\tH-cups: 9 L");
+		outputCodex("\n\tI-cups: 11 L (average backpack)");
+		outputCodex("\n\tJ-cups: 14 L (water cooler)\n\n");
+	}
+	CodexManager.viewedEntry("Zaika");
+}
 public function nyreaCodexEntry():void
 {
 	clearOutputCodex();
@@ -2808,6 +2928,35 @@ public function frostwyrmCodexEntry():void
 	outputCodex("Unknown. Wyrms are believed to be solitary creatures with no culture to speak of.");
 	outputCodex("\n\n");
 	CodexManager.viewedEntry("Frostwyrm");
+}
+public function janeriaCodexEntry():void
+{
+	clearOutputCodex();
+	showBust("JANERIA");
+	outputCodex(header("Janeria"));
+	outputCodex("<b>Name:</b> Janeria");
+	outputCodex("\n<b>Sexes:</b> None");
+	outputCodex("\n<b>Height:</b> Normal instances range from 1’-4’. Overcharged instances can rapidly exceed 40’ with no known growth cap.");
+	outputCodex("\n<b>Colors:</b> Luminous green and blue.");
+	outputCodex("\n<b>Eyes:</b> None");
+	outputCodex("\n<b>Tentacles:</b> Each janeria bears a minimum of six tentacles which hang from its underside and account for most of its height. These tentacles can elongate up to several dozen times their default length. The largest known instance bore upwards of twenty tentacles.");
+	outputCodex("\n\n");
+	outputCodex(blockHeader("Combat"));
+	outputCodex("One of Uveto’s most bizarre creatures, janeria consist of a plastic cell colony which organizes into a form strongly resembling a Terran jellyfish. The organized instance increases in size and complexity as it gains additional biomass, though maintaining that complexity requires an increasing amount of electrical energy as it grows.");
+	outputCodex("\n\nJaneria normally feed on deepsea fish and electrical discharges from ionized savicite deposits. The biomass of the prey is quickly converted into more of itself, while the prey’s neural impulses are used to contribute to the growing mental gestalt. Since the prey are normally fish, and the janeria undergoes mitosis past a certain size, this gestalt rarely amounts to much beyond allowing it to more easily stalk further prey.");
+	outputCodex("\n\nWhen provided with a plentiful source of electricity, however, the colony’s lifecycle radically alters. The mass of the overcharged instance will expand to enormous size without conducting mitosis, gaining enough biomass to become not only sapient, but powerfully psionic and far more aggressive in its behavior. This is believed to have occurred naturally on rare occasion in the past, according to native legends, but has never been seen since colonization. In any event, being unable to sustain the large amount of electricity needed to maintain itself should force the instance to collapse within minutes to hours of formation unless it can continue to feed.");
+	outputCodex("\n\n");
+	outputCodex(blockHeader("Environs"));
+	outputCodex("Native to the snowy world of Uveto, janeria dwell within the deepest recesses of the ocean floor. They are rarely if ever seen above the seabed, driven away from the surface by the extreme temperatures.");
+	outputCodex("\n\n");
+	outputCodex(blockHeader("Reproduction"));
+	outputCodex("New janeria are created via mitosis. When a colony grows too large to maintain cohesion, it splits into several chunks which then become their own individual colonies. Some amount of the original mental gestalt persists into the new instances, but the mitosis typically pushes the spawn back down well into sub-sapient levels of intellect even if the parent colony had become sapient.");
+	outputCodex("\n\nWhen a janeria has been overcharged by a powerful electrical source, it can perform mitosis in a much more controlled manner, and has been noted to possess continued mental control over its spawn. The main instance can opt to reintegrate its spawn back into itself should it require the biomass, with the memories and neural patterns of the smaller instance being added to the larger’s mental gestalt.");
+	outputCodex("\n\n");
+	outputCodex(blockHeader("Culture & Society"));
+	outputCodex("Prior to its encounter with coreworld technology at Steele Tech’s Deepsea Research Center, overcharged janeria instances are believed to have usually depleted their electrical stores within minutes to hours of reaching critical mass, resulting in the instance terminating.  As such, the creature has lacked any culture or societal structure to speak of.");
+	outputCodex("\n\n");
+	CodexManager.viewedEntry("Janeria");
 }
 public function korgonneCodexEntry():void
 {
@@ -3184,7 +3333,7 @@ public function soakCodexEntry():void
 	clearOutputCodex();
 	showBust("MITZI_NUDE");
 	outputCodex(header("Soak, AKA the Slut Thrill Pill"));
-	outputCodex("<i>“And when you first take it, your pussy feel really, really weird. Everything gets all puffy and swollen and almost rubbery looking, especially once the drooling starts. You’ll feel it happening, and you just can’t help but get wet enough to ride a tribe of raskvel.”</i> - Mitzi, Gabilani Soak junkie\n\n");
+	outputCodex("<i>“And when you first take it, your pussy feels really, really weird. Everything gets all puffy and swollen and almost rubbery looking, especially once the drooling starts. You’ll feel it happening, and you just can’t help but get wet enough to ride a tribe of raskvel.”</i> - Mitzi, Gabilani Soak junkie\n\n");
 	outputCodex(blockHeader("History"));
 	outputCodex("The Soak project started after Tamani Corp’s CEO was utterly humiliated by the JoyCo representative during an exhibit of femininity-enhancement mods. It is said that Tamani’s pink complexion turned a beet-red shade after the competitor’s representative showcased their newest product, Tittyblossom, while making a rather unsubtle reference to the Gush fiasco from a couple of years before.");
 	outputCodex("\n\nFueled by collective outrage, Tamani Corp poured inordinate amounts of resources into the creation of a product that would <i>“wipe the smirk off that bitch’s face,”</i> as the CEO herself said during a press conference, her words now immortalized in the extranet. Tamani’s choice was a pussy-enhancement mod that promised users a permanently lubricated, shapely pussy, along with increased sensitivity and fertility.");
@@ -3406,16 +3555,16 @@ public function gravCuffsCodex():void
 	clearOutputCodex();
 	showBust("9999");
 	outputCodex(header("Grav Cuffs"));
-	outputCodex("<b>Manufactured By:</b> Humphard Inc.");
+	outputCodex("<b>Manufactured By:</b> TamaniCorp");
 	outputCodex("\n\n");
 	outputCodex(blockHeader("About:"));
-	outputCodex("Grav-cuffs are the latest in space age bondage gear designed by Humphard Inc. The cuffs are packed full of features; nearly as many as some mainstream androids.");
+	outputCodex("Grav-cuffs are the latest in space age bondage gear designed by the sex-loving TamaniCorp. The cuffs are packed full of features; nearly as many as some mainstream androids.");
 	outputCodex("\n\nThe most notable quality of the cuffs is that they are mass adjustable. Once attached, one can make the cuffs (and the cuffed individual) weigh as much or as little as they want. They are also uni-directional, so they can be used to attach the cuffed person to a roof, wall, or other surface with little effort.");
 	outputCodex("\n\nPremium cuffs come with several special features, such as a magni lock feature for fastening different cuffs together, voice activation, and a vocal locking system.");
 	outputCodex("\n\nGrav-cuffs are notoriously hard to break out of.");
-	if(silly) outputCodex(" They are made out of top secret alloy that Bran Flazingan has patented as “Hardium”. The Humphard CEO claims the composition of the alloy was inspired by his erect penis, “the hardest thing in the known galaxy.”");
+	//Nope! if(silly) outputCodex(" They are made out of top secret alloy that Bran Flazingan has patented as “Hardium”. The Humphard CEO claims the composition of the alloy was inspired by his erect penis, “the hardest thing in the known galaxy.”");
 	outputCodex("\n\n");
-	CodexManager.unlockEntry("Humphard Inc.");
+	//CodexManager.unlockEntry("Humphard Inc.");
 	CodexManager.viewedEntry("Grav Cuffs");
 }
 public function holodomCodex():void
@@ -3423,16 +3572,16 @@ public function holodomCodex():void
 	clearOutputCodex();
 	showBust("9999");
 	outputCodex(header("Holodom"));
-	outputCodex("<b>Manufactured By:</b> Humphard Inc.");
+	outputCodex("<b>Manufactured By:</b> JoyCo");
 	outputCodex("\n<b>Description:</b> Hard light holographic condom, or “holodom.”");
 	outputCodex("\n\n");
 	outputCodex(blockHeader("About:"));
-	outputCodex("Holodoms were one of Humphard’s first adult products and largely considered their “first big break” in the industry. The unassuming metal ring is a one-use hardlight shield designed to be worn around the penis. Activated by a small touch sensor, it is comfortable to wear and small enough that its presence is barely felt by both parties.");
+	outputCodex("Holodoms were one of JoyCo’s first adult products and largely considered their “first big break” in the industry. The unassuming metal ring is a one-use hardlight shield designed to be worn around the penis. Activated by a small touch sensor, it is comfortable to wear and small enough that its presence is barely felt by both parties.");
 	outputCodex("\n\nBefore the holodom, galactic citizens had to rely on other less enjoyable methods of safe sex. Traditional condoms reduced sensation, body modification and implants were troublesome, and oral supplements were not always cross-species compatible. The holodom offered a quick, easy way to have sex with practically any species without worrying about impregnation or disease.");
 	outputCodex("\n\nOn the release of seed, a holodom captures it within the field and keeps it stored in a hard light bubble. For incredibly virile users, this often creates a spectacular ‘bubble’ of semen that can stress the holodom and potentially cause it to burst.");
 	outputCodex("\n\nSome seedy dealers sell fake holodoms that, while holographic, are not ‘hard light’. There are a number of customers who buy these products to dupe their sexual partners, often in a bid to get them pregnant.");
 	outputCodex("\n");
-	CodexManager.unlockEntry("Humphard Inc.");
+	//CodexManager.unlockEntry("Humphard Inc.");
 	CodexManager.viewedEntry("Holodom");
 }
 public function sumaCreamCodex():void
@@ -3688,7 +3837,8 @@ public function Bess13CodexEntry():void
 	outputCodex("\n\nBoth Bess-13 and Ben-14 units come with male and female genital attachments. They can have one, both, or neither attached at any given time.");
 	outputCodex("\n\nBoth units have the ability to equip a pussy and have it extend out from a prehensile tail growing from between their legs. This is particularly useful for users with unusual body types or for offering vaginal penetration while being pegged from behind. Some users find this ability unsettling and never make use of it.");
 	outputCodex("\n\nTheir FlexMetal bodies allows them to incorporate all but the largest of individuals in any orifice. Since Bess-13 and Ben-14 Units are marketed as breeding relief androids, they can easily take huge amounts of liquid inside of them and in a pinch swell their bodies to compensate.");
-	outputCodex("\n\nNeedless to say, these units were extremely popular with inflation fans and pregophiles across the galaxy. Bran Flazingan, the galaxy’s eighth richest man and eccentric tycoon, called the Bess-13’s and Ben-14’s “the most enticing object you’ll ever feel the need to fuck.”");
+	outputCodex("\n\nNeedless to say, these units were extremely popular with inflation fans and pregophiles across the galaxy.");
+	//" Bran Flazingan, the galaxy’s eighth richest man and eccentric tycoon, called the Bess-13’s and Ben-14’s “the most enticing object you’ll ever feel the need to fuck.”");
 	outputCodex("\n\n");
 	// Totally changable of course. Sixth might be too big a spot for this NPC.
 	outputCodex(blockHeader("History:"));
@@ -3746,7 +3896,7 @@ public function panaraCodex():void
 
 
 /* People */
-
+/*
 public function branFlazinganCodex():void
 {
 	clearOutputCodex();
@@ -3779,7 +3929,7 @@ public function branFlazinganCodex():void
 	outputCodex("\n\n");
 	// Bran Flazingan: Imagine Donald Trump + Rance (AliceSoft Games) + Ron Jeremy. The name is a play on Zap Brannigan.
 	CodexManager.viewedEntry("Bran Flazingan");
-}
+}*/
 
 
 /* Companies */
@@ -3821,6 +3971,7 @@ public function camarillaCodex():void
 	outputCodex("\n\n");
 	CodexManager.viewedEntry("Camarilla");
 }
+/*
 public function humphardIncCodex():void
 {
 	clearOutputCodex();
@@ -3849,7 +4000,8 @@ public function humphardIncCodex():void
 	CodexManager.unlockEntry("Grav Cuffs");
 	CodexManager.unlockEntry("Holodom");
 	CodexManager.viewedEntry("Humphard Inc.");
-}
+}*/
+
 public function jejuneCodex():void
 {
 	clearOutputCodex();
@@ -4006,7 +4158,7 @@ public function envyoidicsCodex():void
 	outputCodex("<b>Company Name:</b> Envyoidics LTD");
 	outputCodex("\n<b>Industry:</b> Modification, historical preservation");
 	outputCodex("\n\n");
-	outputCodex("Formed relatively recently with the increase in rushes and technological developments, Envyoidics is a boutique gene-modding company specializing in obscure, exotic morphs. Whilst relatively successful for such a small company, they remain mostly unknown to U.G.C space as their distributors and partners tend to be independant businesses operating on the frontier.");
+	outputCodex("Formed relatively recently with the increase in rushes and technological developments, Envyoidics is a boutique gene-modding company specializing in obscure, exotic morphs. Whilst relatively successful for such a small company, they remain mostly unknown to U.G.C space as their distributors and partners tend to be independent businesses operating on the frontier.");
 	outputCodex("\n\nTheir reputation is such that prominent scientists and historians, who do know about them, hold great respect for their work; and yet there is a sharp ethical divide about their business patterns: Uncovering histories of long dead civilizations and then marketing them as play toys for the rich. So far, their slow but provable growth shows that the researchers and scientists at Envyoidics know their niche: Illumorpheme in particular has taken some sectors by storm with it’s body-friendly transformations, exclusivity and pleasing end results.");
 	outputCodex("\n\n");
 	CodexManager.viewedEntry("Envyoidics");

@@ -899,7 +899,7 @@ public function talkToEmbryAboutTransitioning():void
 	output("You ask her about her transitioning. Surely it can’t be that hard to just get gender reassignment treatment?");
 	output("\n\n[embry.name] looks down at her feet, and scuffs the ground with her foot. <i>“For most folks, maybe. I’m a simii, and my species has really tough immune systems. Actually, most things don’t work on us - like viruses, transformatives, sedatives, and alcohol.”</i>");
 	output("\n\n<i>“The upside is we’re really hardy, but the downside is, medical treatment is near impossible. The drugs needed for me to transition are incredibly strong, and very expensive. They’re actually outlawed except in certain situations like mine, because they have pretty extreme effects on non-simii...”</i>");
-	output("\n\nYou ask her what kind of effects, and she explains. <i>“...Um, over-femification. Like, extreme breast tenderness and vaginal lubrication, ovulation goes through the roof, and your body over-emphasises all the feminine parts of your species.</i>");
+	output("\n\nYou ask her what kind of effects, and she explains. <i>“...Um, over-femification. Like, extreme breast tenderness and vaginal lubrication, ovulation goes through the roof, and your body over-emphasises all the feminine parts of your species.”</i>");
 	output("\n\nAll that doesn’t sound so bad, and you say so. [embry.name] then shakes her head, <i>“It’s not, but the symptom list is really long. The worst is a really bad case of estrus - mating heat - and lordosis. The latter is the part of your brain made for submitting to males for copulation, and why animals ‘present’ themselves. You know, when they p-put their butt up for a guy... to... do their thing.”</i>");
 	// This shit might be related to the Treatment, or Dumbfuck, or something. Probably doesn’t have the negative effects on her race. Left it ambiguous as to not to hijack anyone’s ideas.
 	// If no treatment done yet
@@ -1821,7 +1821,7 @@ public function kissEmbry():void
 	else output("curvy");
 	output(" body against you, desperate to get closer. You slide her into your lap, and pull her close. You and [embry.name] are a tangle of limbs on the bunkbed, your hands on her [embry.ass], and her arms around your neck.");
 	output("\n\n[embry.name]’s soft, candy-colored hair drapes across your cheek, and her floral scent electrifies your senses. Her heart is racing madly against your chest, and the warmth from her tightly-pressed body is tingling your [pc.skinFurScales]. You’re wrapped up in her, and she in you; the two of you tenderly entwined together.");
-	pc.lust(10);
+	pc.changeLust(10);
 	//Pre-transition
 	// If [embry.name] has not fully transitioned (Still has cock)
 	// Post transition version is a few pages down.
@@ -1864,7 +1864,7 @@ public function likeCockForEmbry():void
 	output("\n\n[embry.name] blinks at you several times, and her mouth hangs open for a bit. <i>“W-wha... you do? Where did you come from, and can I keep you?”</i> she’s completely flabbergasted, and subconsciously moves her hands away from the bulge.");
 	output("\n\nYou take the opportunity to commandingly slip your hand under her dress, and she lets out a surprised squeak. As your hand slides up her thigh, she bites her lip, looking nervous. When you finally begin to stroke her little bulge, she lets out a rasping moan. If she’s never been kissed before, surely <i>this</i> is an experience!");
 	processTime(2);
-	pc.lust(10);
+	pc.changeLust(10);
 	mergeSomeShitTogetherIunno(false);
 }
 
@@ -2523,7 +2523,7 @@ public function breastMassageScene4Embrah():void
 	output("\n\n<i>“I-I never knew I could cum like that... until you. You’re amazing...</i>” she breathily tells you, her cheeks flushed. <i>“...But I love this bit the most; being in your arms afterwards.”</i>");
 	processTime(52);
 	flags["SEXED_EMBRY"] = 1;
-	pc.lust(20);
+	pc.changeLust(20);
 	clearMenu();
 	addButton(0,"Next",mainGameMenu);
 }
@@ -3048,7 +3048,7 @@ public function askEmbryForHerPanties():void
 	output("\n\nYou nod and kiss her back. She beams with delight and spends some time with you, basking in your company. <b>You have aquired [embry.name]’s panties!</b>");
 	pc.createKeyItem("Panties - Embry's - Plain, girly pink panties with little hearts.");
 	processTime(2);
-	pc.lust(1);
+	pc.changeLust(1);
 	embryMenu();
 }
 
@@ -3069,6 +3069,6 @@ public function demandEmbrysPanties():void
 	output("\n\nYou’re definitely keeping these for later.\n\n<b>You have aquired [embry.name]’s panties!</b>");
 	pc.createKeyItem("Panties - Embry's - Plain, girly pink panties with little hearts.");
 	processTime(2);
-	pc.lust(1);
+	pc.changeLust(1);
 	embryMenu();
 }

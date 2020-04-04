@@ -2161,8 +2161,6 @@ public function ratsOnRatsForVoraciousFucks():void
 	clearMenu();
 	clearOutput();
 	showRats(3, true);
-	processTime(5);
-	pc.lust(pc.libido()/10+5);
 
 	output("No way you’re going to miss this chance.");
 	if (pc.isBimbo() || pc.isBro()) output(" Think of how much you would have to pay to get this kind of service anywhere else! And why else did you grow all those dicks anyway!?");
@@ -2190,6 +2188,8 @@ public function ratsOnRatsForVoraciousFucks():void
 	output("\n\nStrained moans squeeze past dry lips, breathy whispers and murmurs follow. Held horizontally by each other’s cushioning bodies, the rats try to hold themselves steady. The crisp scent in the air finalizes your self-lubrication.");
 	output("\n\nThere’s no better time to start.");
 
+	processTime(5);
+	pc.changeLust(pc.libido()/10+5);
 	addButton(0, "Next", ratsRatsRatsStackedStackedStacked);
 }
 
@@ -3763,8 +3763,8 @@ public function ratsMindfuckDone(scene:int):void
 	else output("\n\nThere’s a pregnant pause when the rodenian stares at you. A fire in her [rat0.eyeColor] eyes leaves you in mystery until you see a small sigh pass through her lips -- a squeak. The ecstatic rat-girl tackles you to the ground in a hasty approach, thrusting her tongue past your [pc.lipsChaste] in a surprise kiss. You interlock your hands around her waist, returning her desirous affections for a spell. <i>“[pc.Mister] CEO... I... I wish you didn’t go...”</i> she pulls back, moist, puppyish eyes staring down as a string of saliva beaks. <i>“Please come back soon, okay? I don’t like when you’re not here...”</i>\n\nYou rub the side of her head, simply smiling in response. The mouse finally pulls away, casting several needy glances your way before shaking her head.");
 
 	output("\n\n<i>“Alright dummies, let’s get going!”</i> the rodenian barks, waking her two friends and rousing them to action. After she puts her gear back on, she regards you one last time. <i>“See you later, " + ratsMisterCEO() + "!”</i> she shouts, pointing a tiny finger at you. <i>“Don’t forget, you’re gonna be paying up next time!”</i>");
-	if (ratsPCIsGood()) output("She nods, blowing a kiss before disappearing into the shadows. You wonder when you’ll see her again...");
-	else output("She grins and waves, bounding down the corridor into the shadows. You’ll be seeing her again, certainly...");
+	if (ratsPCIsGood()) output(" She nods, blowing a kiss before disappearing into the shadows. You wonder when you’ll see her again...");
+	else output(" She grins and waves, bounding down the corridor into the shadows. You’ll be seeing her again, certainly...");
 	
 	IncrementFlag("RATS_SEXED_EAR");
 	IncrementFlag(ratEarFlag);
