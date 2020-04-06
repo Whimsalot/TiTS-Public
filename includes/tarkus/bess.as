@@ -10,6 +10,17 @@ Wrap all the ternaries in the sex scenes because fuck debugging them ever
 Make sure up the breast size customisation stuff ties to the sex scenes properly
 */
 
+public function bessTestEvent():void
+{
+	clearOutput();
+	bessHeader();
+	
+	if (shits["SHIP"].hasShipTurrets()) output("YEEESSSSS");
+	else output("NOOOOOPE");
+	output("\n\nTurretId: " + shits["SHIP"].priciestShipTurretIndex())
+	output("\n\nTurretName: " + shits["SHIP"].inventory[shits["SHIP"].priciestShipTurretIndex()].longName)
+}
+
 public var BESS_INV_SLOT_MAX:int = 55;
 
 public function bessSexName():String
@@ -6601,7 +6612,7 @@ public function bessEventHook():Boolean
 
 		if (bessEventCheck(27) && !bessEventCheck(28) && !bEvent)
 		{
-			if (flags["BESS_DATES"] >=6 && flags["BESS_EVENT_27"] + (3.5 * 24 * 60) <= GetGameTimestamp() && bessAffection() >= 80 && (shipLocation == "SHIP HANGAR" || shipLocation == "500"))
+			if (flags["BESS_DATES"] >=6 && flags["BESS_EVENT_27"] + (3.5 * 24 * 60) <= GetGameTimestamp() && bessAffection() >= 80 && (shipLocation == "SHIP HANGAR" || shipLocation == "500") && shits["SHIP"].hasShipTurrets())
 			{
 				bessEvent28();
 				bEvent = true;
@@ -7764,7 +7775,7 @@ public function bessEvent9():void
 	clearOutput();
 	bessHeader();
 
-	output("You can’t find [bess.name] anywhere about, so you go searching around the ship. Eventually you find [bess.himHer] nestled in a corner with a small pile of books, flicking through the pages.");
+	output("You can’t find [bess.name] anywhere about, so you go searching around your " + PCShipName(true) + ". Eventually you find [bess.himHer] nestled in a corner with a small pile of books, flicking through the pages.");
 	if (bessKatana()) output(" [bess.HisHer] katana is propped against the wall; it’s never too far away.");
 	
 	output("\n\nAs you approach, [bess.name] slips a bookmark in between the pages of the book and snaps it shut. [bess.HeShe] then looks up at you, flashing a brilliant smile");
@@ -7952,7 +7963,7 @@ public function bessEvent10():void
 	clearOutput();
 	bessHeader();
 
-	output("Walking around the ship you find [bess.name] cleaning up the place. The");
+	output("Walking around the " + PCShipName() + " you find [bess.name] cleaning up the place. The");
 	if (bess.hairLength > 0) output(" [bess.hairColor] haired");
 	output(" synthetic is");
 	if (!(bess.armor is EmptySlot)) output(" wearing [bess.hisHer] [bess.armor]");
@@ -8058,7 +8069,7 @@ public function bessEvent11():void
 	{
 		flags["BESS_EVENT_11_TIMES"] = 1;
 
-		output("While [bess.name] is busy cleaning up around the ship, you find a small holopad with a list of books on it. It seems to be a site that sells cheap synth paper copies of famous literature. [bess.HeShe] is clearly interested in them, but [bess.heShe] hasn’t purchased a single thing.");
+		output("While [bess.name] is busy cleaning up around the " + PCShipName(true) + ", you find a small holopad with a list of books on it. It seems to be a site that sells cheap synth paper copies of famous literature. [bess.HeShe] is clearly interested in them, but [bess.heShe] hasn’t purchased a single thing.");
 		
 		output("\n\nIt occurs to you that since [bess.name] doesn’t earn any money, [bess.heShe] can’t buy anything for [bess.himHer]self. The idea of paying an android is a laughable concept in almost every part of the known galaxy.");
 		
@@ -8072,7 +8083,7 @@ public function bessEvent11():void
 	{
 		flags["BESS_EVENT_11_TIMES"]++;
 
-		output("You’re walking around the ship when you notice [bess.name] looking at [bess.hisHer] holopad. There’s a wistful look in [bess.hisHer] eyes. After a while, [bess.heShe] puts the pad down and walks off.");
+		output("You’re walking around the " + PCShipName(true) + ", when you notice [bess.name] looking at [bess.hisHer] holopad. There’s a wistful look in [bess.hisHer] eyes. After a while, [bess.heShe] puts the pad down and walks off.");
 		
 		output("\n\nCurious, you pick it up and take a look. It’s the same data you’ve seen before - a list of cheap, synth paper books available from an extranet bookstore. [bess.HeShe] keeps looking at them, even though [bess.heShe] doesn’t have a " + (isAprilFools() ? "dogecoin" : "credit") + " to [bess.hisHer] name.");
 		
@@ -8185,7 +8196,7 @@ public function bessEvent12():void
 	}
 	else if (flags["BESS_CREW_ROLE"] == BESS_CREWROLE_ARCHIVIST)
 	{
-		output("You run into [bess.name] stocking the ship with new holos and books, pulling them out of crates and sliding them into freshly installed retractable shelves. The shelves automatically sort the books and then close into the wall, taking up very little space. It was [bess.name]’s idea to have them installed, but now every part of your ship has become a potential bookshelf.");
+		output("You run into [bess.name] stocking the ship with new holos and books, pulling them out of crates and sliding them into freshly installed retractable shelves. The shelves automatically sort the books and then close into the wall, taking up very little space. It was [bess.name]’s idea to have them installed, but now every part of your " + PCShipName() + " has become a potential bookshelf.");
 	}
 	else if (flags["BESS_CREW_ROLE"] == BESS_CREWROLE_STEWARDESS)
 	{
@@ -9740,7 +9751,7 @@ public function bessEvent21BreakUp():void
 	clearOutput();
 	bessHeader();
 
-	output("Hearing that you don’t want to have a relationship is absolutely soul-crushing for [bess.name]; even more so since you just professed your love and slept with [bess.himHer]. There are tears and yelling - it’s a catastrophic whirlwind for a while - before [bess.heShe] starts packing up to leave the ship.");
+	output("Hearing that you don’t want to have a relationship is absolutely soul-crushing for [bess.name]; even more so since you just professed your love and slept with [bess.himHer]. There are tears and yelling - it’s a catastrophic whirlwind for a while - before [bess.heShe] starts packing up to leave your " + PCShipName(true) + ".");
 	
 	output("\n\nBefore you know it, there’s silence, and [bess.name] has left to who knows where. You have no idea where [bess.heShe] went, or if you’ll ever see [bess.himHer] again.");
 	
@@ -9907,7 +9918,7 @@ public function bessEvent25():void
 	clearOutput();
 	bessHeader();
 
-	output("Even though [bess.heShe] has been putting up a brave face, you know [bess.name] is still devastated about what happened on Ekurana. The incident at the Galyesha-Tsui has certainly left its mark. [bess.HeShe]’s slow to respond to questions and seems detached from everything around [bess.himHer]. You repeatedly find [bess.himHer] wandering around the ship with no direction in mind as if in a trance.");
+	output("Even though [bess.heShe] has been putting up a brave face, you know [bess.name] is still devastated about what happened on Ekurana. The incident at the Galyesha-Tsui has certainly left its mark. [bess.HeShe]’s slow to respond to questions and seems detached from everything around [bess.himHer]. You repeatedly find [bess.himHer] wandering around your " + PCShipName(true) + " with no direction in mind as if in a trance.");
 
 	if (celiseIsCrew())
 	{
@@ -10126,7 +10137,7 @@ public function bessEvent28():void
 	clearOutput();
 	bessHeader();
 
-	output("When you look around the ship, [bess.name] is nowhere to be found. You swore [bess.heShe] was here when you left, but now [bess.heShe]’s nowhere to be seen.");
+	output("When you look around the " + PCShipName() + ", [bess.name] is nowhere to be found. You swore [bess.heShe] was here when you left, but now [bess.heShe]’s nowhere to be seen.");
 
 	if (celiseIsCrew())
 	{
@@ -10185,7 +10196,7 @@ public function bessEvent28GoAfter():void
 	clearOutput();
 	bessHeader();
 
-	output("You fly the ship to right near the distress beacon. The ship is picking up a small craft in a clearing. You manage to get a visual, and what you see is an old junker of a spaceship without any weapons to speak of.");
+	output("You fly your " + PCShipName(true) + " to right near the distress beacon. The ship is picking up a small craft in a clearing. You manage to get a visual, and what you see is an old junker of a spaceship without any weapons to speak of.");
 	
 	output("\n\nWhat you also see is [bess.name] tied up with [bess.hisHer] arms behind [bess.hisHer] back and legs bound. There are three people standing around [bess.himHer] with guns cocked at [bess.hisHer] head. It seems they are waiting for you - you can’t really shoot them down without hitting [bess.name] as well.");
 	
@@ -10342,11 +10353,11 @@ public function bessEvent28ShipMerge():void
 {
 	if (pc.PQ() >= 25)
 	{
-		output("\n\nYou untie [bess.name] and hold [bess.himHer] as [bess.heShe] trembles in your arms. You then pick [bess.himHer] up in your arms and carry [bess.himHer] back to the ship. [bess.HeShe] shakes the entire time, the experience was incredibly traumatic. Once you get back inside the ship, you gently place [bess.himHer] on your bed.");
+		output("\n\nYou untie [bess.name] and hold [bess.himHer] as [bess.heShe] trembles in your arms. You then pick [bess.himHer] up in your arms and carry [bess.himHer] back to the " + PCShipName() + ". [bess.HeShe] shakes the entire time, the experience was incredibly traumatic. Once you get back inside the ship, you gently place [bess.himHer] on your bed.");
 	}
 	else
 	{
-		output("\n\nYou untie [bess.name] and hold [bess.himHer] as [bess.heShe] trembles in your arms. You then help [bess.himHer] get back to the ship as [bess.heShe] struggles to walk - you have to stop a few times so [bess.heShe] can calm [bess.hisHer] nerves. Once you get back inside the ship, you bring [bess.himHer] to your bed and get [bess.himHer] to lie down.");
+		output("\n\nYou untie [bess.name] and hold [bess.himHer] as [bess.heShe] trembles in your arms. You then help [bess.himHer] get back to the " + PCShipName() + " as [bess.heShe] struggles to walk - you have to stop a few times so [bess.heShe] can calm [bess.hisHer] nerves. Once you get back inside the ship, you bring [bess.himHer] to your bed and get [bess.himHer] to lie down.");
 	}
 
 	output("\n\n[bess.name] curls up and looks at you. If you hadn’t shown up, or if [bess.hisHer] kidnappers had gotten their way, [bess.heShe] would have been the sex toy of an entire pirate base by now. It seems [bess.heShe]’s in a state of shock, quietly reaching out to grab your hand and press [bess.hisHer] cheek against it.");
@@ -10494,7 +10505,7 @@ public function bessDate2():void
 	clearOutput();
 	bessHeader();
 
-	output("For your next date, you head to a nearby water planet called Brelia. You park the ship on one of the small islands dotting the planet and walk out across the obsidian sand. The ocean quietly laps up the beach - once again it feels like you’ve got the entire planet to yourselves.");
+	output("For your next date, you head to a nearby water planet called Brelia. You park your " + PCShipName(true) + " on one of the small islands dotting the planet and walk out across the obsidian sand. The ocean quietly laps up the beach - once again it feels like you’ve got the entire planet to yourselves.");
 	
 	output("\n\n[bess.name] pulls out the trusty food hamper and a beach ball - apparently that’s another thing [bess.heShe] wants to experience - as well as a pair of snorkels. The scans showed there weren’t too many nasty things in the water, so it was safe for human habitation. Then again, so was Mhen’ga.");
 	
@@ -10624,7 +10635,7 @@ public function bessDate4p2(bSnowballs:Boolean):void
 		
 		output("\n\n<i>“You know what I like most about Orios?”</i> [bess.HeShe] asks, [bess.hisHer] [bess.eyeColor] eyes gleaming.");
 		
-		output("\n\nYou shake your head, and [bess.heShe] kisses your cheek softly. <i>“...That you and I are on it together.”</i> You kiss [bess.himHer], and soon you realize it’s snowing. You’re both so drenched you’re going to need to go back in the ship.");
+		output("\n\nYou shake your head, and [bess.heShe] kisses your cheek softly. <i>“...That you and I are on it together.”</i> You kiss [bess.himHer], and soon you realize it’s snowing. You’re both so drenched you’re going to need to go back in your " + PCShipName(true) + ".");
 		
 		output("\n\n<i>“Warm shower?”</i> [bess.name] suggests as you two get up, intertwining [bess.hisHer] fingers with your own. It sounds like a great idea as you walk back to the ship hand in hand and soaked from head to foot.");
 	}
@@ -10642,7 +10653,7 @@ public function bessDate4p2(bSnowballs:Boolean):void
 		
 		output("\n\nIt continues to catch fish and spears each one on the points of its horns, until it has at least a dozen. <i>“Oh I get it, the horns are for carrying the fish. Maybe it has a family?”</i> [bess.name] theorizes as it runs off, startled by a nearby noise.");
 		
-		output("\n\nAfter the strange spectacle, you both decide to head back to the ship. <i>“Warm shower?”</i> [bess.name] suggests as you two walk back, intertwining [bess.hisHer] fingers with your own. It sounds like a great idea as you walk back to the ship hand in hand.");
+		output("\n\nAfter the strange spectacle, you both decide to head back to your" + PCShipName(true) + ". <i>“Warm shower?”</i> [bess.name] suggests as you two walk back, intertwining [bess.hisHer] fingers with your own. It sounds like a great idea as you walk back to the ship hand in hand.");
 	}
 
 	processTime(440 + rand(80));
@@ -10681,7 +10692,7 @@ public function bessDate5p2(bGown:Boolean):void
 	else output(" suave black and white formal suit. [bess.HisHer] silk lapel jacket fits [bess.himHer] form perfectly and [bess.heShe] looks quite dashing in it.");
 	if (bess.hairLength > 0) output(" [bess.HisHer] [bess.hairColor] hair, styled in "+ bessHairStyle() +", has been given a chic edge to match [bess.hisHer] outfit.");
 	
-	output("\n\n[bess.HeShe] kisses your cheek as the ship comes down to land in one of the city’s many public landing zones. It seems Ekurana is fairly lax when it comes to visitors and red tape, which probably means it has a thriving black market. A planetary official checks your details when you walk out, but otherwise you’re free to walk right off your ship and into the city proper.");
+	output("\n\n[bess.HeShe] kisses your cheek as your " + PCShipName(true) + " comes down to land in one of the city’s many public landing zones. It seems Ekurana is fairly lax when it comes to visitors and red tape, which probably means it has a thriving black market. A planetary official checks your details when you walk out, but otherwise you’re free to walk right off your ship and into the city proper.");
 	
 	output("\n\nThe city really is a melting pot of different cultures - you can see countless species walking about in all kinds of wild clothing. No two buildings seem to be built the same way - all of them look as if they were shipped in from different planets. For all you know, they could have been.");
 	

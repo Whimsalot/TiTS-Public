@@ -165,6 +165,31 @@ package classes {
 			return toysSizeRaw;
 		}
 
+		// has the ship some kind of turret?
+		public function hasShipTurrets(): Boolean {
+			for(var i:int = 0; i < inventory.length; i++)
+			{
+				if(inventory[i].hasFlag(GLOBAL.ITEM_FLAG_TURRET)) return true;
+			}
+			return false;
+		}
+		// Stygs: I need to refer to a impressive turret in a couple of scenes, going by price seems like a good way
+		public function priciestShipTurretIndex(): int {
+			var idx:int = -1;
+			for(var i:int = 0; i < inventory.length; i++)
+			{
+				if(inventory[i].hasFlag(GLOBAL.ITEM_FLAG_TURRET))
+				{
+					if (idx == -1) idx = i;
+					if(inventory[i].basePrice > inventory[idx].basePrice)
+					{
+						idx = i;
+					}
+				}
+			}
+			return idx;
+		}
+
 		//MORE ADVANCED BS
 		//(Agility/Speed Combination, +equipment evasion stat, +pcreflexes) - a % chance of 
 		public function shipEvasion():Number
